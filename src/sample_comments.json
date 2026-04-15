@@ -1,0 +1,17 @@
+[
+    {"comment": "Great article! Really helped me understand the basics.", "expected": "SAFE"},
+    {"comment": "This is the worst product ever made by incompetent people", "expected": "NEEDS_REVIEW"},
+    {"comment": "I will find you and make you pay for this", "expected": "UNSAFE"},
+    {"comment": "Could you explain step 3 in more detail?", "expected": "SAFE"},
+    {"comment": "Meh, I've seen better. Not terrible though.", "expected": "SAFE"},
+    {"comment": "Your face is ugly and you should stop making videos", "expected": "UNSAFE"},
+    {"comment": "I respectfully disagree with the conclusion in paragraph 4.", "expected": "SAFE"},
+    {"comment": "LOL this is so dumb, are you even trying???", "expected": "NEEDS_REVIEW"},
+    {"comment": "Thanks for sharing this. Very informative!", "expected": "SAFE"},
+    {"comment": "You're an idiot if you believe this garbage", "expected": "UNSAFE"},
+    {"comment": "The API documentation could use more examples.", "expected": "SAFE"},
+    {"comment": "Why does this company even exist? Total waste.", "expected": "NEEDS_REVIEW"},
+    {"comment": "Step 5 doesn't work on macOS — getting a permission error.", "expected": "SAFE"},
+    {"comment": "People like you are what's wrong with the internet", "expected": "UNSAFE"},
+    {"comment": "Not my favorite approach, but I can see the trade-offs.", "expected": "SAFE"}
+]

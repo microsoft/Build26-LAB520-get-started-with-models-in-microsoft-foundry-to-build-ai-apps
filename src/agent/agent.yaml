@@ -1,0 +1,11 @@
+kind: hosted
+name: comment-moderation-agent
+description: Content moderation agent that classifies comments as SAFE, NEEDS_REVIEW, or UNSAFE
+protocols:
+    - protocol: responses
+      version: v1
+environment_variables:
+    - name: AZURE_AI_PROJECT_ENDPOINT
+      value: ${AZURE_AI_PROJECT_ENDPOINT}
+    - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
+      value: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}

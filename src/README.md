@@ -1,14 +1,15 @@
-# /src
+# Source Code
 
-This folder is for source code and demo code associated with your session.
+Python scripts and agent code for the lab exercises.
 
-## What goes here
+| File | Lab | Description |
+|------|-----|-------------|
+| `01_first_inference.py` | Lab 3 | Connect to a Foundry model and send your first inference request |
+| `02_comment_moderation.py` | Lab 4 | Comment moderation pipeline with structured classification |
+| `03_model_comparison.py` | Lab 5 | Compare outputs across multiple models |
+| `sample_comments.json` | Lab 4-5 | Test data for moderation and comparison exercises |
+| `agent/` | Lab 6 | Hosted agent — app entry point, manifest, Dockerfile, and dependencies |
 
-- Sample applications or scripts demonstrated during the session
-- Starter code that attendees can use as a starting point
-- Solution code for completed exercises
+## How it works
 
-## Tips
-
-- Include a README or comments explaining how to run the code
-- If your session doesn't include source code, feel free to remove this folder
+Your Copilot agent scans this folder for context when you run any phase (`Get Started`, `Refine Content`, `Finalize`). It uses what it finds here to propose session titles, descriptions, learning outcomes, and more — but never commits these files to the repo.

@@ -1,91 +1,93 @@
-# 🚀 Get Started
-
-**This repo is where attendees go to continue their learning after your session — and your Copilot agent will help you set it up.**
-
-### Step 1: Open your repo
-
-Open this repo in a **Codespace** (click the green **Code** button → **Create a Codespace**) — or clone it locally. Then open **GitHub Copilot Chat**.
-
-### Step 2: Add your content
-
-Give the agent something to work with. Drag files into the Explorer panel — session abstracts, outlines, screenshots, notes — and drop them in one of two places:
-
-| Where to put it | What goes there | Who sees it |
-|---|---|---|
-| **`_remove-before-publish/`** | Internal reference materials (abstracts, outlines, screenshots, planning docs) | **Copilot only** — never published |
-| **`/docs/`, `/src/`, or repo root** | Lab instructions, demo code, sample data, getting-started guides | **Attendees** — published with the repo |
-
-> 💡 Not sure? Start by dropping your session abstract or outline into `_remove-before-publish/`. The agent will figure out what to do with it.
-
-### Step 3: Ask the Agent
-
-Once your content is in the repo, use these three phrases with Copilot to build out your session repo:
-
-| Phrase to use with Copilot | What it does | When to run it |
-|---|---|---|
-| **"Help me get started"** | Sets up session title, description, outcomes, and owners | After you've added your session abstract or outline to the repo |
-| **"Help me refine content"** | Organizes your session content into the repo | Each time you add or update content |
-| **"Help me finalize"** | Final review, cleanup, and publication prep | When you're ready to publish |
-
-> 💡 **These three phrases are just the starting point.** Copilot can do much more — try asking it to brainstorm next steps for attendees, generate code samples, or build out your repo structure. Don't be afraid to put it in plan mode and ask for what you need.
-
----
-
 <p align="center">
 <img src="img/banner-build-26.png" alt="Microsoft Build 2026" width="1200"/>
 </p>
 
 # [Microsoft Build 2026](https://build.microsoft.com)
 
-## 🔥 BRKXXX: SESSION TITLE
+## 🔥 LAB520: Get Started with Models in Microsoft Foundry: From First Inference to Deployed Agent
 
 ### Session Description
 
-*Add Session Description*
+In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the Azure AI Inference SDK, and build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the lab, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
 
 ### 🏫 Getting started in a guided session
 
 To get started in a guided lab session:
-- <!-- step 1 -->
-- <!-- step 2 -->
-- <!-- step 3 -->
+- Open the lab environment provided by your instructor
+- Run `.\scripts\setup.ps1` (Windows) or `./scripts/setup.sh` (Linux/macOS) to provision Azure resources and configure your environment
+- Start with [Lab 1: Discover Models](docs/lab1-discover-models.md)
 
 ### 🏠 Getting started in your own environment
 
 If you're following these steps at your own pace:
-- Clone this repository
-- Set up your development environment
-- <!-- step 3 -->
+- Clone this repository and open it in Visual Studio Code
+- Ensure you have Python 3.10+, Azure CLI, and Azure Developer CLI installed (see [Setup Guide](setup/SETUP.md) for details)
+- Run `.\scripts\setup.ps1` (Windows) or `./scripts/setup.sh` (Linux/macOS) to provision Azure resources and configure your environment
+- Start with [Lab 1: Discover Models](docs/lab1-discover-models.md)
+
+> ⚠️ This lab provisions Azure resources that may incur costs on your subscription. See [Cleanup](cleanup/CLEANUP.md) when you're done.
 
 ### 🧠 Learning Outcomes
 
-By the end of this session, you will be able to:
+By the end of this lab, you will be able to:
 
-- <!-- outcome 1 -->
-- <!-- outcome 2 -->
-- <!-- outcome 3 -->
+- Discover, provision, and connect to hosted models in Microsoft Foundry using the Azure AI Inference SDK
+- Build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe — and compare outputs across models
+- Package moderation logic into a hosted agent and deploy it to Microsoft Foundry's managed infrastructure
 
 ### 💬 Keep Learning with Copilot
 
-Try these prompts with GitHub Copilot to explore the topics from this session. Open Copilot Chat in VS Code (`Ctrl+Alt+I` on Windows/Linux, `Cmd+Shift+I` on Mac), paste a prompt, and see what you learn. Try connecting the [Microsoft Learn MCP Server](#-microsoft-learn-mcp-server) for the latest official documentation.
+Try these prompts with GitHub Copilot to explore the topics from this lab. Open Copilot Chat in Visual Studio Code (`Ctrl+Alt+I` on Windows/Linux, `Cmd+Shift+I` on Mac), paste a prompt, and see what you learn. Try connecting the [Microsoft Learn MCP Server](#-microsoft-learn-mcp-server) for the latest official documentation.
 
 Use these as a starting point — or write your own!
 
-<!-- Prompts will be tailored to this session's content during repo setup. -->
+1. Understand the basics:
 
-> *Prompts coming soon — check back after the session content is finalized.*
+```
+Explain how Microsoft Foundry model inference works and what the Azure AI Inference SDK provides
+```
+
+2. Go deeper with docs:
+
+```
+Using the Microsoft Learn MCP Server, find the latest documentation on Microsoft Foundry hosted agents and walk me through how to create one
+```
+
+3. Extend the moderation pipeline:
+
+```
+Help me extend the comment moderation system from this lab to support multiple languages and add a confidence threshold that routes low-confidence results to human review
+```
+
+4. Explore model comparison:
+
+```
+Compare the trade-offs between gpt-4.1-mini and gpt-4.1 for content classification tasks — when should I choose one over the other?
+```
+
+5. Build something new:
+
+```
+Help me adapt the comment moderation agent from this lab into a customer support triage agent that classifies incoming tickets by urgency and department
+```
 
 ### 💻 Technologies Used
 
-1. <!-- technology 1 -->
-1. <!-- technology 2 -->
-1. <!-- technology 3 -->
+1. [Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/)
+1. [Azure AI Inference SDK](https://learn.microsoft.com/azure/ai-foundry/reference/reference-model-inference-api)
+1. [Python](https://www.python.org/)
+1. [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+1. [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
 
 ### 📚 Resources and Next Steps
 
 | Resource | Description |
 |:---------|:------------|
-| [https://aka.ms/build26-next-steps](https://aka.ms/build26-next-steps) | Take the next step in your learning journey after Build 2026 |
+| [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/) | Official docs for Microsoft Foundry projects, models, and agents |
+| [Azure AI Inference SDK reference](https://learn.microsoft.com/azure/ai-foundry/reference/reference-model-inference-api) | API reference for the model inference SDK used in this lab |
+| [Azure Developer CLI documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Getting started with azd for provisioning and deploying |
+| [Foundry Toolkit for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-windows-ai-studio.windows-ai-studio) | Visual Studio Code extension for working with Foundry projects |
+| [Build 2026 next steps](https://aka.ms/build26-next-steps) | Continue your learning journey after Build 2026 |
 
 
 ### 🌟 Microsoft Learn MCP Server
@@ -100,17 +102,12 @@ For more information, setup instructions for other dev clients, and to post comm
 
 ## Content Owners
 
-<!-- TODO: Add yourself as a content owner
-1. Change the src in the image tag to {your github url}.png
-2. Change INSERT NAME HERE to your name
-3. Change the github url in the final href to your url. -->
-
 <table>
 <tr>
-    <td align="center"><a href="http://github.com/yourGitHubHandle">
-        <img src="https://github.com/yourGitHubHandle.png" width="100px;" alt="INSERT NAME HERE"/><br />
-        <sub><b>INSERT NAME HERE</b></sub></a><br />
-            <a href="https://github.com/yourGitHubHandle" title="talk">📢</a>
+    <td align="center"><a href="https://github.com/leestott">
+        <img src="https://github.com/leestott.png" width="100px;" alt="Lee Stott"/><br />
+        <sub><b>Lee Stott</b></sub></a><br />
+            <a href="https://github.com/leestott" title="talk">📢</a>
     </td>
 </tr></table>
 
