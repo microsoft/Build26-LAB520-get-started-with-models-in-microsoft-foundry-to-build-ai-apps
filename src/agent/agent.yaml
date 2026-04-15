@@ -1,6 +1,6 @@
 kind: hosted
-name: comment-moderation-agent
-description: Content moderation agent that classifies comments as SAFE, NEEDS_REVIEW, or UNSAFE
+name: zava-review-moderation-agent
+description: Product review moderation agent for Zava that classifies customer reviews as SAFE, NEEDS_REVIEW, or UNSAFE
 protocols:
     - protocol: responses
       version: v1

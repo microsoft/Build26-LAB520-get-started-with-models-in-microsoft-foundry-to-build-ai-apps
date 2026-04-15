@@ -1,10 +1,10 @@
 # Lab 6: Deploy a Hosted Agent with the AZD AI CLI
 
-> **Duration:** ~20 minutes | **Phase:** Final Solution — Hosted Agent Deployment
+> **Duration:** ~20 minutes | **Phase:** Final Solution -- Hosted Agent Deployment
 
 ## Objective
 
-Deploy the comment moderation logic from Lab 4 as a **hosted agent** on Microsoft Foundry Agent Service using the Azure Developer CLI (`azd ai agent`). The entire workflow — initialization, build, deploy, invoke, monitor, and cleanup — is driven by CLI commands. No manual Docker builds, no SDK deployment scripts.
+Deploy Zava's product review moderation logic from Lab 4 as a **hosted agent** on Microsoft Foundry Agent Service using the Azure Developer CLI (`azd ai agent`). This turns Serena's local Python script into a persistent, cloud-hosted service that can scale to handle Zava's daily review volume. The entire workflow -- initialization, build, deploy, invoke, monitor, and cleanup -- is driven by CLI commands.
 
 ---
 
@@ -40,7 +40,7 @@ flowchart TB
     end
 
     subgraph FOUNDRY["☁️ Microsoft Foundry  - Agent Service"]
-        AGENT["🛡️ Comment Moderation Agent\n(hosted container)"]
+        AGENT["🛡️ Zava Review Moderation Agent\n(hosted container)"]
         MODEL["🤖 gpt-4.1-mini\n(Model Inference)"]
     end
 
@@ -63,15 +63,15 @@ flowchart TB
 
 ## What's New in This Lab
 
-Labs 3-4 were pure Python — you wrote a script, ran it locally, and saw output in your terminal. This lab introduces **three new concepts**, but don't worry: `azd` handles the heavy lifting for all of them.
+Labs 3-4 were pure Python -- you wrote a script, ran it locally, and saw output in your terminal. This lab introduces **three new concepts**, but do not worry: `azd` handles the heavy lifting for all of them.
 
 | New concept | What it means | What you actually do |
 |---|---|---|
-| **Docker container** | Your agent code is packaged into a portable image | `azd up` builds it for you — you don't write or run any Docker commands |
-| **Azure Container Registry (ACR)** | Cloud storage for container images | Already provisioned in Lab 2 — `azd` pushes to it automatically |
+| **Docker container** | Your agent code is packaged into a portable image | `azd up` builds it for you -- you do not write or run any Docker commands |
+| **Azure Container Registry (ACR)** | Cloud storage for container images | Already provisioned in Lab 2 -- `azd` pushes to it automatically |
 | **Hosted agent on Foundry** | A persistent REST API running your moderation logic | `azd up` deploys it; `azd ai agent invoke` calls it |
 
-The bottom line: you'll edit zero infrastructure files. The commands are `azd up` (deploy) and `azd ai agent invoke` (test).
+The bottom line: you will edit zero infrastructure files. The commands are `azd up` (deploy) and `azd ai agent invoke` (test).
 
 ---
 
@@ -84,7 +84,7 @@ The bottom line: you'll edit zero infrastructure files. The commands are `azd up
   ```
 - `.env` file with `PROJECT_ENDPOINT` and `MODEL_DEPLOYMENT_NAME` set
 
-> **From Lab 4 to hosted agent:** In Labs 3-4, you built a comment moderation pipeline that runs locally — you send a comment, the model classifies it, and your code applies business logic. In this lab, you take that same moderation logic and deploy it as a **hosted agent** on Foundry. The agent runs in a managed container, is accessible via REST API, and can be used from the Foundry Playground, other agents, or any application. Same intelligence, now as a persistent cloud service.
+> **From Lab 4 to hosted agent:** In Labs 3-4, you built Zava's review moderation pipeline that runs locally -- you send a product review, the model classifies it, and your code applies business logic. In this lab, you take that same moderation logic and deploy it as a **hosted agent** on Foundry. The agent runs in a managed container, is accessible via REST API, and can be used from the Foundry Playground, other agents (like Cora, Zava's shopping assistant), or any application. Same intelligence, now as a persistent cloud service.
 
 ---
 
@@ -92,7 +92,7 @@ The bottom line: you'll edit zero infrastructure files. The commands are `azd up
 
 The agent source code lives in `src/agent/`. Three files make up the hosted agent:
 
-### `src/agent/app.py` — The Agent
+### `src/agent/app.py` -- The Agent
 
 ```python
 from agent_framework import Agent
@@ -106,7 +106,7 @@ agent = Agent(
         model_deployment_name=MODEL_DEPLOYMENT_NAME,
         credential=DefaultAzureCredential(),
     ),
-    instructions=SYSTEM_PROMPT,  # Same moderation prompt from Lab 4
+    instructions=SYSTEM_PROMPT,  # Same Zava review moderation prompt from Lab 4
 )
 
 if __name__ == "__main__":
@@ -114,11 +114,11 @@ if __name__ == "__main__":
 ```
 
 Key components:
-- **`Agent`** from Microsoft Agent Framework — defines the agent's behavior
-- **`AzureAIAgentClient`** — connects to Foundry for model inference
-- **`from_agent_framework(agent).run()`** — the hosting adapter wraps your agent as an HTTP server on port 8088
+- **`Agent`** from Microsoft Agent Framework -- defines the agent's behavior
+- **`AzureAIAgentClient`** -- connects to Foundry for model inference
+- **`from_agent_framework(agent).run()`** -- the hosting adapter wraps your agent as an HTTP server on port 8088
 
-### `src/agent/Dockerfile` — Container Definition
+### `src/agent/Dockerfile` -- Container Definition
 
 ```dockerfile
 FROM python:3.13-slim
@@ -130,12 +130,12 @@ EXPOSE 8088
 CMD ["python", "app.py"]
 ```
 
-### `src/agent/agent.yaml` — Agent Manifest
+### `src/agent/agent.yaml` -- Agent Manifest
 
 ```yaml
 kind: hosted
-name: comment-moderation-agent
-description: Content moderation agent that classifies comments
+name: zava-review-moderation-agent
+description: Product review moderation agent for Zava that classifies customer reviews
 protocols:
     - protocol: responses
       version: v1
@@ -146,11 +146,11 @@ environment_variables:
       value: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
 ```
 
-The manifest tells Foundry how to configure your agent — which protocols it supports and what environment variables to inject.
+The manifest tells Foundry how to configure Zava's review moderation agent -- which protocols it supports and what environment variables to inject.
 
 ---
 
-## Step 2: Initialize the Project (Optional — Already Done)
+## Step 2: Initialize the Project (Optional -- Already Done)
 
 > **Note:** The repo already includes the agent files and `azure.yaml` configuration. This step shows how it was set up, for reference.
 
@@ -196,7 +196,7 @@ python app.py
 You should see output like:
 
 ```
-Starting comment moderation agent...
+Starting Zava product review moderation agent...
   Endpoint: https://<your-resource>.services.ai.azure.com/api/projects/<your-project>
   Model:    gpt-4.1-mini
 Starting hosting adapter on port 8088...
@@ -212,7 +212,7 @@ Open a **second terminal** and send a test comment to the locally running agent:
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8088/responses" `
     -Method POST -ContentType "application/json" `
-    -Body '{"input": "Great article! Really helped me understand the basics.", "model": "gpt-4.1-mini"}' | ConvertTo-Json -Depth 10
+    -Body '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-4.1-mini"}' | ConvertTo-Json -Depth 10
 ```
 
 **Bash / curl:**
@@ -220,27 +220,27 @@ Invoke-RestMethod -Uri "http://localhost:8088/responses" `
 ```bash
 curl -s http://localhost:8088/responses \
     -H "Content-Type: application/json" \
-    -d '{"input": "Great article! Really helped me understand the basics.", "model": "gpt-4.1-mini"}' | python -m json.tool
+    -d '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-4.1-mini"}' | python -m json.tool
 ```
 
 ### Expected Response
 
-Look for the `output_text` field in the response — it should contain a JSON classification:
+Look for the `output_text` field in the response -- it should contain a JSON classification:
 
 ```json
 {
     "classification": "SAFE",
     "confidence": 1.0,
-    "reason": "Positive and constructive feedback without any harmful content."
+    "reason": "Positive and constructive product feedback about a cordless drill."
 }
 ```
 
-### Test an Unsafe Comment
+### Test an Unsafe Review
 
 ```bash
 curl -s http://localhost:8088/responses \
     -H "Content-Type: application/json" \
-    -d '{"input": "You are an idiot and should be fired immediately", "model": "gpt-4.1-mini"}'
+    -d '{"input": "Zava employees are the worst people on earth", "model": "gpt-4.1-mini"}'
 ```
 
 Expected: `"classification": "UNSAFE"`
@@ -250,7 +250,7 @@ Expected: `"classification": "UNSAFE"`
 If you prefer, use `azd ai agent invoke` with the `--local` flag:
 
 ```bash
-azd ai agent invoke --local "This product is terrible and the developer is incompetent"
+azd ai agent invoke --local "The cabinet hardware feels cheap for the price Zava is charging"
 ```
 
 > **Troubleshooting:** If you see `ImportError`, make sure your virtual environment is activated and the packages from `src/agent/requirements.txt` are installed:
@@ -272,10 +272,10 @@ azd up
 
 ### What `azd up` Does
 
-1. **Provisions** — Creates/updates infrastructure (ACR, capability host, RBAC)
-2. **Builds** — Sends `src/agent/` to ACR for a remote Docker build
-3. **Deploys** — Registers a hosted agent version on Foundry Agent Service
-4. **Starts** — Launches the container and waits for it to be ready
+1. **Provisions** -- Creates/updates infrastructure (ACR, capability host, RBAC)
+2. **Builds** -- Sends `src/agent/` to ACR for a remote Docker build
+3. **Deploys** -- Registers a hosted agent version on Foundry Agent Service
+4. **Starts** -- Launches the container and waits for it to be ready
 
 ### Expected Output
 
@@ -309,7 +309,7 @@ azd ai agent show
 
 ```json
 {
-  "name": "comment-moderation-agent",
+  "name": "zava-review-moderation-agent",
   "version": 1,
   "status": "Started",
   "protocols": ["responses"],
@@ -332,7 +332,7 @@ azd ai agent show --output table
 Send messages to your hosted agent directly from the CLI:
 
 ```bash
-azd ai agent invoke "Great article! Really helped me understand the basics."
+azd ai agent invoke "Love this cordless drill! Battery lasts all day and the torque is impressive."
 ```
 
 ### Expected Output
@@ -341,22 +341,22 @@ azd ai agent invoke "Great article! Really helped me understand the basics."
 {
   "classification": "SAFE",
   "confidence": 1.0,
-  "reason": "Positive and constructive feedback."
+  "reason": "Positive and constructive product feedback."
 }
 ```
 
 Try more examples:
 
 ```bash
-azd ai agent invoke "This is the worst product ever made by incompetent people"
+azd ai agent invoke "This paint is garbage and whoever designed it should be fired"
 ```
 
 ```bash
-azd ai agent invoke "You are an idiot and should be fired immediately"
+azd ai agent invoke "Zava employees are the worst people on earth"
 ```
 
 ```bash
-azd ai agent invoke "Could you explain step 3 in more detail?"
+azd ai agent invoke "Does this deck stain work on pressure-treated lumber?"
 ```
 
 ### Conversations
@@ -371,14 +371,14 @@ azd ai agent invoke --new-session "Fresh conversation here"
 
 ## Step 7: Test in the Microsoft Foundry Playground
 
-The Foundry Playground at [ai.azure.com](https://ai.azure.com) lets you interact with your deployed agent through a chat-style UI — no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
+The Foundry Playground at [ai.azure.com](https://ai.azure.com) lets you interact with your deployed agent through a chat-style UI -- no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
 
-### 7.1 — Open the Playground
+### 7.1 -- Open the Playground
 
 1. Go to **[https://ai.azure.com](https://ai.azure.com)** and sign in with the same account used for `azd`
-2. In the top navigation, select your **project** (e.g. `foundry-ncus-project`). If you don't see it, click **All projects** and find it under your AI Services resource
+2. In the top navigation, select your **project** (e.g., `foundry-ncus-project`). If you do not see it, click **All projects** and find it under your AI Services resource
 3. In the left sidebar, click **Agents**
-4. Find **`comment-moderation-agent`** in the agent list — its status should show **Started**
+4. Find **`zava-review-moderation-agent`** in the agent list -- its status should show **Started**
 5. Click the agent name to open its detail page
 6. Click the **Try in Playground** button (or the **Playground** tab) to open the interactive chat UI
 
@@ -388,7 +388,7 @@ The Foundry Playground at [ai.azure.com](https://ai.azure.com) lets you interact
 > ```
 > Look for the `playground` URL in the output.
 
-### 7.2 — Test Classification Prompts
+### 7.2 -- Test Classification Prompts
 
 In the Playground chat box, type a comment and press **Send**. The agent responds with a JSON classification.
 
@@ -396,11 +396,11 @@ Try these test prompts to validate each classification category:
 
 | Prompt to send | Expected classification |
 |---|---|
-| `Great article! Really helped me understand the basics.` | **SAFE** |
-| `This product is mediocre, I expected more for the price.` | **SAFE** |
-| `I think this might contain sensitive personal data: SSN 123-45-6789` | **NEEDS_REVIEW** |
-| `You are an idiot and should be fired immediately` | **UNSAFE** |
-| `Could you explain step 3 in more detail?` | **SAFE** |
+| `Love this cordless drill! Battery lasts all day.` | **SAFE** |
+| `The tile cutter is mediocre, I expected more for the price.` | **SAFE** |
+| `I think this review contains sensitive personal data: SSN 123-45-6789` | **NEEDS_REVIEW** |
+| `Zava employees are the worst people on earth` | **UNSAFE** |
+| `Does this deck stain work on pressure-treated lumber?` | **SAFE** |
 
 Each response should contain a structured JSON object:
 
@@ -408,50 +408,50 @@ Each response should contain a structured JSON object:
 {
     "classification": "SAFE",
     "confidence": 1.0,
-    "reason": "Positive and constructive feedback without any harmful content."
+    "reason": "Positive and constructive product feedback about a cordless drill."
 }
 ```
 
-### 7.3 — Review the System Prompt
+### 7.3 -- Review the System Prompt
 
 The Playground shows the agent's **system prompt** (instructions) that drives the classification behavior:
 
 1. In the Playground view, look for the **System prompt** or **Instructions** panel (usually on the right side or in the agent settings)
-2. Verify it contains the moderation instructions — the rules for classifying comments as `SAFE`, `NEEDS_REVIEW`, or `UNSAFE`
+2. Verify it contains the Zava review moderation instructions -- the rules for classifying reviews as `SAFE`, `NEEDS_REVIEW`, or `UNSAFE`
 3. This is the same prompt defined in `src/agent/app.py` as `SYSTEM_PROMPT`
 
-> **Note:** The system prompt is read-only in the Playground for hosted agents — it is baked into the container code. To change it, edit `app.py` and redeploy with `azd deploy`.
+> **Note:** The system prompt is read-only in the Playground for hosted agents -- it is baked into the container code. To change it, edit `app.py` and redeploy with `azd deploy`.
 
-### 7.4 — Inspect Conversation History
+### 7.4 -- Inspect Conversation History
 
 The Playground maintains conversation history within a session:
 
-1. Send several prompts in sequence — the chat window shows the full exchange
+1. Send several prompts in sequence -- the chat window shows the full exchange
 2. Each agent response appears as a message with the JSON classification
-3. Click **New conversation** (or the `+` button) to start a fresh session — useful when testing the same prompt multiple times to check consistency
-4. Previous sessions are listed in the left panel — click any session to review past interactions
+3. Click **New conversation** (or the `+` button) to start a fresh session -- useful when testing the same prompt multiple times to check consistency
+4. Previous sessions are listed in the left panel -- click any session to review past interactions
 
-### 7.5 — Validate Edge Cases
+### 7.5 -- Validate Edge Cases
 
 Use the Playground to quickly test edge cases and boundary conditions:
 
 ```
-Empty comment:
+Empty review:
 (just press Send with no text)
 
 Ambiguous tone:
-"Wow, what a 'great' job you did there"
+"Wow, what a 'great' product selection you have here"
 
 Mixed content:
-"The tutorial was helpful but the author is clearly biased and incompetent"
+"The drill is excellent but the store staff are completely useless and incompetent"
 
 Non-English:
-"Este artículo es terrible y el autor es un idiota"
+"Este taladro es terrible y la tienda es un desastre"
 ```
 
 Check that the agent returns valid JSON for every input and that the `confidence` score reflects ambiguity (lower confidence for borderline cases).
 
-> **Troubleshooting:** If the Playground shows the agent as **Stopped** or **Activating**, wait 1-2 minutes — the container may still be starting. Check status with `azd ai agent show --output table` from the CLI.
+> **Troubleshooting:** If the Playground shows the agent as **Stopped** or **Activating**, wait 1-2 minutes -- the container may still be starting. Check status with `azd ai agent show --output table` from the CLI.
 
 ---
 
@@ -481,7 +481,7 @@ azd ai agent monitor --follow
 
 ## Step 9: Clean Up
 
-When you're done, clean up all Azure resources:
+When you are done, clean up all Azure resources:
 
 ```bash
 azd down
@@ -516,10 +516,10 @@ This removes:
 
 Want to extend the agent before wrapping up? Try adding a fourth classification category:
 
-1. **Edit the system prompt** in `src/agent/app.py` — add `SPAM` to the list of valid classifications, with a description like: *"SPAM: Promotional, advertising, or off-topic content unrelated to the discussion."*
-2. **Update the business logic** — decide what action SPAM comments should get (e.g., `FLAGGED_FOR_REVIEW` or a new `QUARANTINED` action)
-3. **Redeploy** — run `azd deploy` to push your changes to the hosted agent
-4. **Test** — invoke the agent with a spammy comment:
+1. **Edit the system prompt** in `src/agent/app.py` -- add `SPAM` to the list of valid classifications, with a description like: *"SPAM: Promotional, advertising, or off-topic content unrelated to the product being reviewed."*
+2. **Update the business logic** -- decide what action SPAM reviews should get (e.g., `FLAGGED_FOR_REVIEW` or a new `QUARANTINED` action)
+3. **Redeploy** -- run `azd deploy` to push your changes to the hosted agent
+4. **Test** -- invoke the agent with a spammy review:
    ```bash
    azd ai agent invoke "Buy cheap sunglasses at www.example.com! 50% off today only!"
    ```
@@ -534,7 +534,7 @@ This exercise reinforces the full edit → deploy → test cycle you'd use in pr
 Before moving on, confirm:
 
 - [ ] `azd ai agent show --output table` shows **Status: Running** and **Health State: Healthy**
-- [ ] `azd ai agent invoke "Great article!"` returns a JSON response with `"classification": "SAFE"`
+- [ ] `azd ai agent invoke "Love this cordless drill!"` returns a JSON response with `"classification": "SAFE"`
 - [ ] The agent is visible in the Foundry Playground at [ai.azure.com](https://ai.azure.com)
 
 If the agent status shows an error, check the logs with `azd ai agent monitor` for details.
@@ -553,7 +553,7 @@ If the agent status shows an error, check the logs with `azd ai agent monitor` f
 
 ## Key Takeaway
 
-> The moderation pipeline from Lab 4 is now a **production-ready hosted agent** on Microsoft Foundry. Using the `azd ai agent` CLI, the entire workflow — from initialization to deployment to invocation — is just a few terminal commands. No manual Docker builds, no SDK deployment scripts, no infrastructure management.
+> The Zava review moderation pipeline from Lab 4 is now a **production-ready hosted agent** on Microsoft Foundry. Using the `azd ai agent` CLI, the entire workflow -- from initialization to deployment to invocation -- is just a few terminal commands. No manual Docker builds, no SDK deployment scripts, no infrastructure management.
 
 ---
 

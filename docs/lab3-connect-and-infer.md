@@ -4,7 +4,7 @@
 
 ## Objective
 
-Write Python code that authenticates against your Foundry project, connects to a hosted model endpoint, and sends your first inference request.
+As Serena (Zava's developer), write Python code that authenticates against your Foundry project, connects to a hosted model endpoint, and sends your first inference request -- laying the groundwork for Zava's review moderation system.
 
 ---
 
@@ -13,7 +13,7 @@ Write Python code that authenticates against your Foundry project, connects to a
 | Concept | Description |
 |---------|-------------|
 | **AIProjectClient** | SDK client that connects to your Foundry project |
-| **DefaultAzureCredential** | Automatic credential chain — uses your `az login` session locally |
+| **DefaultAzureCredential** | Automatic credential chain -- uses your `az login` session locally |
 | **Chat Completion** | Send a system prompt + user message, receive a model response |
 | **Inference Endpoint** | The API endpoint your model deployment exposes |
 
@@ -21,7 +21,7 @@ Write Python code that authenticates against your Foundry project, connects to a
 
 ## Step 1: Review the Code
 
-Open `src/01_first_inference.py` in your editor. Let's walk through it section by section.
+Open `src/01_first_inference.py` in your editor. The following sections walk through it step by step.
 
 ### Authentication and Client Setup
 
@@ -55,16 +55,16 @@ The project client provides an OpenAI-compatible client for chat completions. Th
 response = inference_client.chat.completions.create(
     model=os.environ["MODEL_DEPLOYMENT_NAME"],
     messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "What is Microsoft Foundry in one sentence?"},
+        {"role": "system", "content": "You are a helpful assistant for Zava, a global home-improvement retailer. Respond concisely."},
+        {"role": "user", "content": "What is Microsoft Foundry and how could a retailer like Zava use it? Answer in one sentence."},
     ],
 )
 ```
 
 The `chat.completions.create()` method sends a chat completion request with:
 
-- **model** — The deployment name (e.g., `gpt-4.1-mini`)
-- **messages** — An array of conversation messages with roles (`system`, `user`, `assistant`)
+- **model** -- The deployment name (e.g., `gpt-4.1-mini`)
+- **messages** -- An array of conversation messages with roles (`system`, `user`, `assistant`)
 
 ### Processing the Response
 
@@ -72,7 +72,7 @@ The `chat.completions.create()` method sends a chat completion request with:
 print(response.choices[0].message.content)
 ```
 
-The response object contains an array of `choices`. Each choice has a `message` with `content` — the model's text response.
+The response object contains an array of `choices`. Each choice has a `message` with `content` -- the model's text response.
 
 ---
 
@@ -92,13 +92,14 @@ Sending inference request to model: gpt-4.1-mini
 ---
 Response:
 Microsoft Foundry is a unified platform for discovering, deploying, and
-managing AI models and building intelligent applications at scale.
+managing AI models, which Zava could use to power product recommendations,
+review moderation, and customer support agents at scale.
 ---
 Model: gpt-4.1-mini
-Tokens used: 42 (prompt: 25, completion: 17)
+Tokens used: 52 (prompt: 30, completion: 22)
 ```
 
-> **Note:** The first inference request may take 3-5 seconds due to cold start (the model endpoint warming up). Subsequent requests in the same session are typically much faster (under 2 seconds). This is normal behavior — if you see a delay on the first call, just wait for the response.
+> **Note:** The first inference request may take 3-5 seconds due to cold start (the model endpoint warming up). Subsequent requests in the same session are typically much faster (under 2 seconds). This is normal behavior -- if you see a delay on the first call, just wait for the response.
 
 ### Troubleshooting Common Errors
 
@@ -109,7 +110,7 @@ If the script fails, check the table below before asking for help:
 | `KeyError: 'PROJECT_ENDPOINT'` | `.env` file is missing or incomplete | Run `azd env get-values > .env` to regenerate it |
 | `AuthenticationError` or `DefaultAzureCredential failed` | Azure CLI session expired | Run `az login` and try again |
 | `Connection timed out` after 30+ seconds | Endpoint is unreachable | Check your network/VPN; verify the endpoint URL in `.env` |
-| `ResourceNotFoundError` | Model deployment name doesn't match | Run `az cognitiveservices account deployment list` to check the exact name |
+| `ResourceNotFoundError` | Model deployment name does not match | Run `az cognitiveservices account deployment list` to check the exact name |
 
 ---
 
@@ -122,13 +123,13 @@ Try modifying the code to explore different behaviors:
 Edit the system message to change the model's behavior:
 
 ```python
-{"role": "system", "content": "You are a pirate. Respond in pirate speak."},
+{"role": "system", "content": "You are Cora, Zava's friendly AI shopping assistant. Help customers find the right home-improvement products."},
 ```
 
 ### Change the User Input
 
 ```python
-{"role": "user", "content": "Explain cloud computing to a 10-year-old."},
+{"role": "user", "content": "I'm Bruno and I'm renovating my kitchen. What tools do I need to install new cabinets?"},
 ```
 
 ### Add Temperature Control
@@ -143,11 +144,11 @@ response = inference_client.chat.completions.create(
 
 | Temperature | Behavior |
 |-------------|----------|
-| `0.0` | Deterministic — same input produces same output |
+| `0.0` | Deterministic -- same input produces same output |
 | `0.7` | Balanced creativity (default) |
 | `1.0` | Maximum creativity / variability |
 
-> **For moderation tasks (Lab 4), use `temperature=0.0`** to get consistent, reproducible classifications.
+> **For Zava's review moderation tasks (Lab 4), use `temperature=0.0`** to get consistent, reproducible classifications.
 
 ### Break It on Purpose
 
@@ -157,10 +158,10 @@ The best way to understand what each piece does is to remove it and see what hap
 |------------|---------------|---------------|
 | Remove the system prompt | Delete the `{"role": "system", ...}` message | The model gives a generic answer instead of a focused one |
 | Send an empty user message | Change content to `""` | The model may return an empty response or ask for clarification |
-| Use a nonsense model name | Change `MODEL_DEPLOYMENT_NAME` to `"fake-model"` | You get a `ResourceNotFoundError` — the SDK can't find the deployment |
-| Remove `load_dotenv()` | Comment out the line | `KeyError: 'PROJECT_ENDPOINT'` — Python can't read your `.env` file |
+| Use a nonsense model name | Change `MODEL_DEPLOYMENT_NAME` to `"fake-model"` | You get a `ResourceNotFoundError` -- the SDK cannot find the deployment |
+| Remove `load_dotenv()` | Comment out the line | `KeyError: 'PROJECT_ENDPOINT'` -- Python cannot read your `.env` file |
 
-These errors are the same ones you'll hit in real projects. Seeing them now makes them easier to diagnose later.
+These errors are the same ones you will hit in real projects. Seeing them now makes them easier to diagnose later.
 
 ---
 
@@ -215,4 +216,4 @@ If any of these fail, check your `.env` file has the correct `PROJECT_ENDPOINT` 
 
 ---
 
-**Next:** [Lab 4 - Comment Moderation App →](lab4-comment-moderation.md)
+**Next:** [Lab 4 - Zava Review Moderation App →](lab4-comment-moderation.md)

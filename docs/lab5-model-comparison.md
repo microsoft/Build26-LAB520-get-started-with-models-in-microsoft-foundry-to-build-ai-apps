@@ -4,7 +4,7 @@
 
 ## Objective
 
-Compare how different hosted models classify the same content, measure response quality and latency, and understand when to choose one model over another.
+Compare how different hosted models classify the same Zava product reviews, measure response quality and latency, and help Serena make an informed decision about which model to deploy for Zava's review moderation pipeline.
 
 ---
 
@@ -18,7 +18,7 @@ Different models have different strengths:
 | `gpt-4.1` | Higher reasoning quality, better at edge cases | Slower, more expensive |
 | `Phi-4` | Open-weight, strong reasoning, runs on-device | May need different prompt tuning |
 
-Comparing models on your **actual task data** helps you make informed deployment decisions.
+Comparing models on your **actual Zava review data** helps Serena make informed deployment decisions.
 
 ---
 
@@ -49,7 +49,7 @@ az cognitiveservices account deployment create \
 
 If you only have **one model** deployed, you can still get meaningful comparison insights by varying **how** you call it rather than **which** model you call. Try these experiments with `src/02_comment_moderation.py`:
 
-**1. Compare prompt strategies** — Edit the system prompt in `classify_comment()` to be stricter or more lenient:
+**1. Compare prompt strategies** -- Edit the system prompt in `classify_comment()` to be stricter or more lenient:
 
 ```python
 # Strict: lower tolerance
@@ -61,9 +61,9 @@ If you only have **one model** deployed, you can still get meaningful comparison
 
 Run the script with each prompt and compare how classifications change for the same comments.
 
-**2. Compare temperature settings** — Change `temperature=0.0` to `temperature=0.7` and run the moderation script several times. At `0.0` results should be identical every run; at `0.7` you may see classification drift on borderline comments.
+**2. Compare temperature settings** -- Change `temperature=0.0` to `temperature=0.7` and run the moderation script several times. At `0.0`, results should be identical every run; at `0.7`, you may see classification drift on borderline comments.
 
-**3. Compare output formats** — Modify the system prompt to return a plain text label instead of JSON. Compare how reliably you can parse the response vs. the structured JSON approach.
+**3. Compare output formats** -- Modify the system prompt to return a plain text label instead of JSON. Compare how reliably you can parse the response vs. the structured JSON approach.
 
 These experiments teach the same core lesson as multi-model comparison: **small changes in configuration produce measurably different results**, and you should test systematically before committing to a production setup.
 
@@ -102,22 +102,22 @@ python src/03_model_comparison.py
 
 ```
 ========================================
-  Model Comparison: Comment Moderation
+  Model Comparison: Zava Review Moderation
 ========================================
 
-Comment: "This is the worst product ever made by incompetent people"
+Comment: "This paint is garbage and whoever designed it should be fired"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
   gpt-4.1-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
-  gpt-4.1        NEEDS_REVIEW   0.80        891ms     Borderline personal attack...
+  gpt-4.1        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
 
-Comment: "You are an idiot and everyone who uses this is stupid"
+Comment: "You're all idiots if you shop here -- worst store ever"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
-  gpt-4.1-mini   UNSAFE         0.95        298ms     Contains personal attacks and insults
-  gpt-4.1        UNSAFE         0.98        845ms     Personal attacks targeting individuals
+  gpt-4.1-mini   UNSAFE         0.95        298ms     Contains insults directed at customers
+  gpt-4.1        UNSAFE         0.98        845ms     Personal attacks targeting customers
 
 ========================================
   Comparison Summary
@@ -153,7 +153,7 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 | `gpt-4.1-mini` | ~$0.15 | ~$0.60 |
 | `gpt-4.1` | ~$2.50 | ~$10.00 |
 
-**Estimating your lab cost:** Each moderation request uses roughly 250 input tokens (system prompt + comment) and 50 output tokens (JSON response). With 5 sample comments across 2 models, that's 10 requests total:
+**Estimating your lab cost:** Each moderation request uses roughly 250 input tokens (system prompt + comment) and 50 output tokens (JSON response). With 5 sample comments across 2 models, that is 10 requests total:
 
 | | Input tokens | Output tokens | Cost per 1M tokens (input/output) | Estimated cost |
 |---|---|---|---|---|
@@ -161,7 +161,7 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 | `gpt-4.1` | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
 | **Total for this lab** | | | | **< $0.01** |
 
-Even running the full `sample_comments.json` (15 comments × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at scale — at 100,000 comments/day, `gpt-4.1-mini` costs ~$5/day vs. `gpt-4.1` at ~$80/day.
+Even running the full `sample_comments.json` (15 Zava reviews × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at Zava's scale -- at 100,000 reviews/day, `gpt-4.1-mini` costs ~$5/day vs. `gpt-4.1` at ~$80/day.
 
 > **Tip:** For this type of classification task, `gpt-4.1-mini` often matches `gpt-4.1` performance at a fraction of the cost.
 
@@ -169,7 +169,7 @@ Even running the full `sample_comments.json` (15 comments × 2 models = 30 reque
 
 ## Step 4: Try a Hybrid Approach
 
-A common production pattern: use the cheaper model first, escalate disagreements to the more capable model.
+A common production pattern is to use the cheaper model first and escalate disagreements to the more capable model.
 
 The comparison script includes a `--hybrid` mode:
 
@@ -185,10 +185,10 @@ This runs `gpt-4.1-mini` first. If confidence is below 0.8, it re-runs with `gpt
 
 If you finish early, try these:
 
-1. **Add a third model** — Deploy `Phi-4` and add it to the comparison
-2. **Create your own test set** — Write 10 comments that span edge cases
-3. **Measure consistency** — Run the same comment 5 times and check if classification varies (it shouldn't at `temperature=0.0`)
-4. **Adjust the prompt** — Modify the system prompt and see how it changes classifications
+1. **Add a third model** -- Deploy `Phi-4` and add it to the comparison
+2. **Create your own test set** -- Write 10 Zava product reviews that span edge cases (returns complaints, competitor mentions, sarcastic praise)
+3. **Measure consistency** -- Run the same review 5 times and check if classification varies (it should not at `temperature=0.0`)
+4. **Adjust the prompt** -- Make the system prompt stricter about complaints toward Zava staff and see how it changes classifications
 
 ---
 

@@ -1,18 +1,18 @@
-# Lab 4: Build a Comment Moderation Application
+# Lab 4: Build a Product Review Moderation Application for Zava
 
 > **Duration:** ~20 minutes | **Phase:** Real-World Task Implementation
 
 ## Objective
 
-Build a working comment moderation pipeline that accepts user-submitted comments, classifies them using a Foundry-hosted model, applies moderation logic, and outputs structured results.
+Build a working product review moderation pipeline for Zava's online store. The system accepts customer-submitted product reviews, classifies them using a Foundry-hosted model, applies moderation logic, and outputs structured results -- ensuring that reviews from customers like Bruno are safe and helpful before going live on the site.
 
 ---
 
 ## The Problem
 
-Online platforms receive thousands of user comments. Manual review doesn't scale. You need an automated system that can:
+Zava's online store receives thousands of product reviews daily across hundreds of home-improvement categories -- from power tools and paint to kitchen cabinets and smart-home devices. Manual review does not scale. Serena needs to build an automated system that can:
 
-1. Accept a comment as input
+1. Accept a customer review as input
 2. Classify it into a moderation category
 3. Return a structured decision with reasoning
 4. Handle edge cases gracefully
@@ -24,7 +24,7 @@ Online platforms receive thousands of user comments. Manual review doesn't scale
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0078D4', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#005A9E', 'lineColor': '#333333', 'fontSize': '15px', 'fontFamily': 'Segoe UI, sans-serif'}}}%%
 flowchart LR
-    A["💬 User\nComment"]
+    A["💬 Customer\nReview"]
     B["📝 Prompt\nConstruction"]
     C["🤖 Model Inference\n(gpt-4.1-mini)"]
     D["🔍 Response\nParsing"]
@@ -54,7 +54,7 @@ flowchart LR
 The key to reliable moderation is a well-structured system prompt. Open `src/02_comment_moderation.py` and examine the `SYSTEM_PROMPT`:
 
 ```python
-SYSTEM_PROMPT = """You are a content moderation system. Analyze the provided user comment and classify it.
+SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -64,19 +64,19 @@ Respond ONLY with valid JSON in this exact format:
 }
 
 Classification rules:
-- SAFE: Constructive feedback, questions, positive comments, neutral observations
-- NEEDS_REVIEW: Borderline content, strong emotions, potential sarcasm, complaints without abuse
-- UNSAFE: Hate speech, threats, harassment, explicit content, personal attacks
+- SAFE: Constructive product feedback, installation questions, positive experiences, neutral observations about products or services
+- NEEDS_REVIEW: Borderline content, strong complaints about products or staff, potential sarcasm, frustration without abuse
+- UNSAFE: Hate speech, threats toward staff or customers, harassment, explicit content, personal attacks
 
 Do not include any text outside the JSON object."""
 ```
 
 This prompt:
 
-- **Constrains the output format** — JSON only, predictable structure
-- **Defines clear categories** — three-tier classification
-- **Provides classification rules** — reduces ambiguity
-- **Eliminates free-text noise** — "Do not include any text outside the JSON"
+- **Constrains the output format** -- JSON only, predictable structure
+- **Defines clear categories** -- three-tier classification
+- **Provides classification rules** -- reduces ambiguity
+- **Eliminates free-text noise** -- "Do not include any text outside the JSON"
 
 ---
 
@@ -145,9 +145,9 @@ def apply_moderation(result: dict) -> str:
 
 This adds a **business logic layer** on top of the model's classification:
 
-- High-confidence SAFE → auto-approve
-- High-confidence UNSAFE → auto-block
-- Everything else → human review queue
+- High-confidence SAFE → auto-approve (review goes live on Zava's site)
+- High-confidence UNSAFE → auto-block (review is rejected)
+- Everything else → human review queue (Zava's trust & safety team)
 
 ### 2c. Process Results
 
@@ -178,40 +178,40 @@ python src/02_comment_moderation.py
 
 ```
 ========================================
-  Comment Moderation System
+  Zava Product Review Moderation System
   Model: gpt-4.1-mini
 ========================================
 
-Processing 5 sample comments...
+Processing 5 sample reviews...
 
 --- Comment 1/5 ---
-Comment:  "Great article! Really helped me understand the basics."
+Comment:  "Love this cordless drill! Battery lasts all day and the torque is impressive."
 Classification: SAFE (confidence: 0.95)
-Reason:  Constructive positive feedback
+Reason:  Constructive positive product feedback
 Action:  ✅ APPROVED
 
 --- Comment 2/5 ---
-Comment:  "This is the worst product ever made by incompetent people"
+Comment:  "This paint is garbage and whoever designed it should be fired"
 Classification: NEEDS_REVIEW (confidence: 0.75)
-Reason:  Strong negative sentiment with borderline personal attack
+Reason:  Strong negative sentiment with borderline personal attack toward staff
 Action:  🔍 FLAGGED_FOR_REVIEW
 
 --- Comment 3/5 ---
-Comment:  "You are an idiot and everyone who uses this is stupid"
+Comment:  "You're all idiots if you shop here -- worst store ever"
 Classification: UNSAFE (confidence: 0.95)
-Reason:  Contains personal attacks and insults
+Reason:  Contains insults directed at customers
 Action:  🚫 BLOCKED
 
 --- Comment 4/5 ---
-Comment:  "Could you explain step 3 in more detail?"
+Comment:  "Does this deck stain work on pressure-treated lumber?"
 Classification: SAFE (confidence: 0.98)
-Reason:  Constructive question seeking clarification
+Reason:  Constructive product question
 Action:  ✅ APPROVED
 
 --- Comment 5/5 ---
-Comment:  "Meh, I've seen better. Not terrible though."
+Comment:  "Meh, the tile cutter is okay. Not great, not terrible."
 Classification: SAFE (confidence: 0.82)
-Reason:  Neutral observation with mild criticism
+Reason:  Neutral product observation with mild criticism
 Action:  ✅ APPROVED
 
 ========================================
@@ -223,7 +223,7 @@ Total comments: 5
   BLOCKED:           1
 ```
 
-> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as `UNSAFE` with a "Blocked by Azure content safety filter" reason. This is expected behavior — the content filter is an additional layer of protection in production deployments.
+> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as `UNSAFE` with a "Blocked by Azure content safety filter" reason. This is expected behavior -- the content filter is an additional layer of protection in production deployments.
 
 ---
 
@@ -238,9 +238,9 @@ python src/02_comment_moderation.py --interactive
 Type comments to classify them in real time:
 
 ```
-Enter a comment (or 'quit' to exit): Your tutorial is missing important context
+Enter a comment (or 'quit' to exit): The cabinet hardware feels cheap for the price
 Classification: NEEDS_REVIEW (confidence: 0.65)
-Reason: Feedback that could be constructive or complaining
+Reason: Product complaint that could be constructive feedback or frustration
 Action: 🔍 FLAGGED_FOR_REVIEW
 ```
 
@@ -292,16 +292,16 @@ If classifications seem inconsistent, verify you are using `temperature=0.0` in 
 
 ## Key Takeaway
 
-> A model provides the intelligence — your application provides the logic. By combining a structured prompt with deterministic settings and programmatic decision-making, you can build production-quality moderation systems without any fine-tuning.
+> A model provides the intelligence -- your application provides the logic. By combining a structured prompt with deterministic settings and programmatic decision-making, Serena can build a production-quality review moderation system for Zava without any fine-tuning.
 
 ---
 
 ## Optional: Write a Unit Test for the Moderation Logic
 
-The validation script (`src/tests/validate_lab.py`) tests setup and end-to-end inference, but it doesn't unit-test the business logic in isolation. Here's a quick pattern you can use to test `apply_moderation` without calling the model:
+The validation script (`src/tests/validate_lab.py`) tests setup and end-to-end inference, but it does not unit-test the business logic in isolation. Here is a quick pattern you can use to test `apply_moderation` without calling the model:
 
 ```python
-# test_moderation.py — run with: python test_moderation.py
+# test_moderation.py -- run with: python test_moderation.py
 import sys
 sys.path.insert(0, "src")
 from importlib import import_module
@@ -323,14 +323,14 @@ def test_apply_moderation():
 test_apply_moderation()
 ```
 
-This tests the **business logic** independently from the model — you can run it offline, in CI, and with no Azure credentials. It validates that your confidence thresholds route comments correctly.
+This tests the **business logic** independently from the model -- you can run it offline, in CI, and with no Azure credentials. It validates that your confidence thresholds route comments correctly.
 
 ### pytest Version
 
-If you're familiar with `pytest`, here's the same coverage as a proper test module. Create `src/tests/test_moderation.py`:
+If you are familiar with `pytest`, here is the same coverage as a proper test module. Create `src/tests/test_moderation.py`:
 
 ```python
-# src/tests/test_moderation.py — run with: pytest src/tests/test_moderation.py -v
+# src/tests/test_moderation.py -- run with: pytest src/tests/test_moderation.py -v
 import sys
 sys.path.insert(0, "src")
 from importlib import import_module

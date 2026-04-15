@@ -19,13 +19,13 @@ A Foundry **project** is the organizational unit within Microsoft Foundry that g
 
 Projects are created within a **Foundry account** (Azure AI Services resource) and provide the endpoint your application code connects to.
 
-**Why do you need one?** A Foundry project acts as a single connection point for all your AI resources — models, agents, evaluations, and data — so your code only needs one endpoint and one set of credentials to access everything.
+**Why do you need one?** A Foundry project acts as a single connection point for all your AI resources -- models, agents, evaluations, and data -- so your code only needs one endpoint and one set of credentials to access everything.
 
 > [Learn more: Create a project in Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/how-to/create-projects)
 
 ---
 
-> **Which option should I pick?** Use **Option A** — it runs one script and does everything for you. Option B below covers the same steps manually, one at a time. It's there for reference or troubleshooting, not something you need to follow. **If you're unsure, choose Option A.**
+> **Which option should I pick?** Use **Option A** -- it runs one script and does everything for you. Option B below covers the same steps manually, one at a time. It is there for reference or troubleshooting, not something you need to follow. **If you are unsure, choose Option A.**
 
 ## Option A: One-Command Setup (Recommended)
 
@@ -108,7 +108,7 @@ You should see `(.venv)` in your terminal prompt. Install the lab dependencies:
 pip install -r requirements.txt
 ```
 
-> **Tip:** Visual Studio Code can activate the venv automatically — when prompted, select the Python interpreter inside `.venv`.
+> **Tip:** Visual Studio Code can activate the venv automatically -- when prompted, select the Python interpreter inside `.venv`.
 
 ### Step 3: Configure the Azure Region
 
@@ -172,7 +172,7 @@ SUCCESS: Your application was provisioned in Azure in XX minutes XX seconds.
 
 After provisioning, the **post-provision hook** automatically creates your `.env` file. Verify it:
 
-> **What is a `.env` file?** It's a plain text file that stores configuration values (like your project endpoint and model name) as `KEY=VALUE` pairs. The `python-dotenv` package loads these into your Python scripts automatically via `load_dotenv()`, so you never hardcode secrets or endpoints in your source code.
+> **What is a `.env` file?** It is a plain text file that stores configuration values (like your project endpoint and model name) as `KEY=VALUE` pairs. The `python-dotenv` package loads these into your Python scripts automatically via `load_dotenv()`, so you never hardcode secrets or endpoints in your source code.
 
 ```bash
 azd env get-values
@@ -267,7 +267,7 @@ Before moving on, confirm all of the following:
 - [ ] `azd env get-values` shows your project endpoint and resource group
 - [ ] Your Foundry project is visible at [ai.azure.com](https://ai.azure.com)
 
-If validation fails, check the failure messages — common issues include missing `.env` values or incomplete provisioning.
+If validation fails, check the failure messages -- common issues include missing `.env` values or incomplete provisioning.
 
 ---
 

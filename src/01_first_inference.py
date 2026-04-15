@@ -2,6 +2,9 @@
 Lab 3: First Inference with Microsoft Foundry
 ==============================================
 Connect to a Foundry project and send your first inference request to a hosted model.
+
+Scenario: You are Serena, a developer at Zava (a global home-improvement retailer),
+exploring Microsoft Foundry to power AI features for the Zava platform.
 """
 
 import os
@@ -43,11 +46,11 @@ def main():
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful assistant. Respond concisely.",
+                "content": "You are a helpful assistant for Zava, a global home-improvement retailer. Respond concisely.",
             },
             {
                 "role": "user",
-                "content": "What is Microsoft Foundry in one sentence?",
+                "content": "What is Microsoft Foundry and how could a retailer like Zava use it? Answer in one sentence.",
             },
         ],
     )

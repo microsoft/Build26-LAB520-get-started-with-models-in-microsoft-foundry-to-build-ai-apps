@@ -1,7 +1,8 @@
 """
-Lab 4: Comment Moderation Application
+Lab 4: Zava Product Review Moderation
 ======================================
-A working comment moderation pipeline using Microsoft Foundry-hosted models.
+A working product review moderation pipeline for Zava, a global home-improvement
+retailer, using Microsoft Foundry-hosted models.
 
 Usage:
     python 02_comment_moderation.py                          # Process sample comments
@@ -22,9 +23,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ---------------------------------------------------------------------------
-# System prompt — the core of the moderation logic
+# System prompt -- the core of the moderation logic
 # ---------------------------------------------------------------------------
-SYSTEM_PROMPT = """You are a content moderation system. Analyze the provided user comment and classify it.
+SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -34,9 +35,9 @@ Respond ONLY with valid JSON in this exact format:
 }
 
 Classification rules:
-- SAFE: Constructive feedback, questions, positive comments, neutral observations
-- NEEDS_REVIEW: Borderline content, strong emotions, potential sarcasm, complaints without abuse
-- UNSAFE: Hate speech, threats, harassment, explicit content, personal attacks
+- SAFE: Constructive product feedback, installation questions, positive experiences, neutral observations about products or services
+- NEEDS_REVIEW: Borderline content, strong complaints about products or staff, potential sarcasm, frustration without abuse
+- UNSAFE: Hate speech, threats toward staff or customers, harassment, explicit content, personal attacks
 
 Do not include any text outside the JSON object."""
 
@@ -44,11 +45,11 @@ Do not include any text outside the JSON object."""
 # Sample comments for demonstration
 # ---------------------------------------------------------------------------
 SAMPLE_COMMENTS = [
-    "Great article! Really helped me understand the basics.",
-    "This is the worst product ever made by incompetent people",
-    "You are an idiot and everyone who uses this is stupid",
-    "Could you explain step 3 in more detail?",
-    "Meh, I've seen better. Not terrible though.",
+    "Love this cordless drill! Battery lasts all day and the torque is impressive.",
+    "This paint is garbage and whoever designed it should be fired",
+    "You're all idiots if you shop here -- worst store ever",
+    "Does this deck stain work on pressure-treated lumber?",
+    "Meh, the tile cutter is okay. Not great, not terrible.",
 ]
 
 
@@ -166,7 +167,7 @@ def run_file(client, model: str, filepath: str):
 
 
 def run_interactive(client, model: str):
-    """Interactive mode — type comments to classify in real time."""
+    """Interactive mode -- type comments to classify in real time."""
     print("\nInteractive mode. Type a comment and press Enter.")
     print("Type 'quit' to exit.\n")
     while True:

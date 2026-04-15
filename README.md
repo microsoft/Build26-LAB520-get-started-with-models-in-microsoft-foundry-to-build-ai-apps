@@ -6,9 +6,13 @@
 
 ## 🔥 LAB520: Get Started with Models in Microsoft Foundry: From First Inference to Deployed Agent
 
+### Scenario: Zava
+
+**Zava** is a fictional global home-improvement retailer used across Microsoft demos and labs to provide a consistent, realistic enterprise narrative. In this lab, you play the role of **Serena**, a developer at Zava, tasked with building an automated product review moderation system. Customers like **Bruno** -- who is renovating his kitchen -- leave reviews on Zava's online store, and your system must classify them as safe, needs review, or unsafe before they go live. The moderation agent you build could eventually work alongside **Cora**, Zava's AI shopping assistant.
+
 ### Session Description
 
-In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the Azure AI Inference SDK, and build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the lab, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
+In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the Azure AI Inference SDK, and build a complete product review moderation pipeline for Zava that classifies customer-submitted reviews as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the lab, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
 
 ### 🏫 Getting started in a guided session
 
@@ -19,27 +23,27 @@ To get started in a guided lab session:
 
 ### 🏠 Getting started in your own environment
 
-If you're following these steps at your own pace:
+If you are following these steps at your own pace:
 - Clone this repository and open it in Visual Studio Code
 - Ensure you have Python 3.10+, Azure CLI, and Azure Developer CLI installed (see [Setup Guide](setup/SETUP.md) for details)
 - Run `.\scripts\setup.ps1` (Windows) or `./scripts/setup.sh` (Linux/macOS) to provision Azure resources and configure your environment
 - Start with [Lab 1: Discover Models](docs/lab1-discover-models.md)
 
-> ⚠️ This lab provisions Azure resources that may incur costs on your subscription. See [Cleanup](cleanup/CLEANUP.md) when you're done.
+> ⚠️ This lab provisions Azure resources that may incur costs on your subscription. See [Cleanup](cleanup/CLEANUP.md) when you are done.
 
 ### 🧠 Learning Outcomes
 
 By the end of this lab, you will be able to:
 
 - Discover, provision, and connect to hosted models in Microsoft Foundry using the Azure AI Inference SDK
-- Build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe — and compare outputs across models
+- Build a complete product review moderation pipeline for Zava that classifies customer reviews as safe, needs review, or unsafe -- and compare outputs across models
 - Package moderation logic into a hosted agent and deploy it to Microsoft Foundry's managed infrastructure
 
 ### 💬 Keep Learning with Copilot
 
 Try these prompts with GitHub Copilot to explore the topics from this lab. Open Copilot Chat in Visual Studio Code (`Ctrl+Alt+I` on Windows/Linux, `Cmd+Shift+I` on Mac), paste a prompt, and see what you learn. Try connecting the [Microsoft Learn MCP Server](#-microsoft-learn-mcp-server) for the latest official documentation.
 
-Use these as a starting point — or write your own!
+Use these as a starting point -- or write your own!
 
 1. Understand the basics:
 
@@ -56,19 +60,19 @@ Using the Microsoft Learn MCP Server, find the latest documentation on Microsoft
 3. Extend the moderation pipeline:
 
 ```
-Help me extend the comment moderation system from this lab to support multiple languages and add a confidence threshold that routes low-confidence results to human review
+Help me extend Zava's product review moderation system from this lab to support multiple languages and add a confidence threshold that routes low-confidence results to human review
 ```
 
 4. Explore model comparison:
 
 ```
-Compare the trade-offs between gpt-4.1-mini and gpt-4.1 for content classification tasks — when should I choose one over the other?
+Compare the trade-offs between gpt-4.1-mini and gpt-4.1 for product review classification tasks at Zava's scale -- when should I choose one over the other?
 ```
 
 5. Build something new:
 
 ```
-Help me adapt the comment moderation agent from this lab into a customer support triage agent that classifies incoming tickets by urgency and department
+Help me adapt the Zava review moderation agent from this lab into a customer support triage agent that classifies incoming tickets by urgency and department
 ```
 
 ### 💻 Technologies Used

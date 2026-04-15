@@ -1,8 +1,9 @@
 """
-Lab 6: Comment Moderation Hosted Agent
+Lab 6: Zava Product Review Moderation Agent
 ========================================
-A content moderation agent using Microsoft Agent Framework and the
-hosting adapter for deployment to Microsoft Foundry Agent Service.
+A product review moderation agent for Zava, a global home-improvement retailer,
+using Microsoft Agent Framework and the hosting adapter for deployment to
+Microsoft Foundry Agent Service.
 
 Locally: python app.py  (starts on http://localhost:8088)
 Deploy:  azd up          (builds container, deploys to Foundry)
@@ -11,7 +12,7 @@ Deploy:  azd up          (builds container, deploys to Foundry)
 import os
 import sys
 
-print("Starting comment moderation agent...", flush=True)
+print("Starting Zava product review moderation agent...", flush=True)
 
 try:
     from dotenv import load_dotenv
@@ -35,7 +36,7 @@ if not PROJECT_ENDPOINT:
 print(f"  Endpoint: {PROJECT_ENDPOINT}", flush=True)
 print(f"  Model:    {MODEL_DEPLOYMENT_NAME}", flush=True)
 
-SYSTEM_PROMPT = """You are a content moderation system. Analyze the provided user comment and classify it.
+SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -45,9 +46,9 @@ Respond ONLY with valid JSON in this exact format:
 }
 
 Classification rules:
-- SAFE: Constructive feedback, questions, positive comments, neutral observations
-- NEEDS_REVIEW: Borderline content, strong emotions, potential sarcasm, complaints without abuse
-- UNSAFE: Hate speech, threats, harassment, explicit content, personal attacks
+- SAFE: Constructive product feedback, installation questions, positive experiences, neutral observations about products or services
+- NEEDS_REVIEW: Borderline content, strong complaints about products or staff, potential sarcasm, frustration without abuse
+- UNSAFE: Hate speech, threats toward staff or customers, harassment, explicit content, personal attacks
 
 Do not include any text outside the JSON object."""
 

@@ -4,7 +4,7 @@
 
 ## Objective
 
-Review the complete journey from discovering a model in the Foundry catalog to deploying a production-ready hosted agent. This lab consolidates what you built, the skills you acquired, and where to go next.
+Review the complete journey from discovering a model in the Foundry catalog to deploying a production-ready hosted agent for Zava's product review moderation. This lab consolidates what you built, the skills you acquired, and where to go next.
 
 ---
 
@@ -15,7 +15,7 @@ Review the complete journey from discovering a model in the Foundry catalog to d
 | 1 | Discover Models in Microsoft Foundry | ~10 min |
 | 2 | Create and Configure a Foundry Project | ~15 min |
 | 3 | Connect and Send Your First Inference | ~15 min |
-| 4 | Build a Comment Moderation Application | ~20 min |
+| 4 | Build a Product Review Moderation Application for Zava | ~20 min |
 | 5 | Compare Model Outputs *(optional)* | ~15 min |
 | 6 | Deploy a Hosted Agent | ~20 min |
 | 7 | Workshop Summary and Learning Outcomes | ~10 min |
@@ -26,7 +26,7 @@ Review the complete journey from discovering a model in the Foundry catalog to d
 
 ## What You Built
 
-Across six labs, you constructed a **comment moderation pipeline** end-to-end — from a blank terminal to a cloud-hosted agent accessible via REST API:
+Across six labs, you -- as Serena, a developer at Zava -- constructed a **product review moderation pipeline** end-to-end, from a blank terminal to a cloud-hosted agent accessible via REST API:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0078D4', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#005A9E', 'lineColor': '#333333', 'fontSize': '15px', 'fontFamily': 'Segoe UI, sans-serif'}}}%%
@@ -60,11 +60,11 @@ flowchart LR
 
 | | |
 |---|---|
-| **What you did** | Browsed the Foundry model catalog, evaluated model properties, tested prompts in the Playground |
+| **What you did** | Browsed the Foundry model catalog, evaluated model properties, tested Zava review moderation prompts in the Playground |
 | **Key skill** | Selecting the right model for a task based on capabilities, pricing, and quotas |
-| **Outcome** | Chose `gpt-4.1-mini` as the model for the workshop |
+| **Outcome** | Chose `gpt-4.1-mini` as the model for Zava's review moderation |
 
-**Core concept:** Not all models are equal — task type, latency, cost, and region availability all factor into model selection.
+**Core concept:** Not all models are equal -- task type, latency, cost, and region availability all factor into model selection for enterprise workloads like Zava's.
 
 ---
 
@@ -72,11 +72,11 @@ flowchart LR
 
 | | |
 |---|---|
-| **What you did** | Provisioned a complete Azure environment with `azd` — AI Services account, Foundry project, model deployment, monitoring, and RBAC |
+| **What you did** | Provisioned a complete Azure environment with `azd` -- AI Services account, Foundry project, model deployment, monitoring, and RBAC |
 | **Key skill** | Infrastructure-as-Code with Bicep, environment configuration with `azd` |
 | **Outcome** | A fully provisioned Foundry project with a deployed model and local `.env` configuration |
 
-**Core concept:** `azd` manages the full lifecycle — from infrastructure provisioning to environment variables — so you never touch the portal for deployment.
+**Core concept:** `azd` manages the full lifecycle -- from infrastructure provisioning to environment variables -- so you never touch the portal for deployment.
 
 ---
 
@@ -92,13 +92,13 @@ flowchart LR
 
 ---
 
-### Lab 4: Build a Comment Moderation Application
+### Lab 4: Build a Product Review Moderation Application for Zava
 
 | | |
 |---|---|
-| **What you did** | Designed a system prompt for structured JSON classification, built a business logic layer with confidence thresholds, processed batches of comments |
+| **What you did** | Designed a system prompt for structured JSON classification of Zava product reviews, built a business logic layer with confidence thresholds, processed batches of reviews |
 | **Key skill** | Prompt engineering for structured output, building decision logic around model responses |
-| **Outcome** | A complete moderation app (`src/02_comment_moderation.py`) that classifies comments as SAFE, NEEDS_REVIEW, or UNSAFE |
+| **Outcome** | A complete moderation app (`src/02_comment_moderation.py`) that classifies Zava product reviews as SAFE, NEEDS_REVIEW, or UNSAFE |
 
 **Core concept:** The real value is in the system prompt + business logic combination. The model provides classification; your code makes the decisions.
 
@@ -108,11 +108,11 @@ flowchart LR
 
 | | |
 |---|---|
-| **What you did** | Ran the same moderation prompts through `gpt-4.1-mini` and `gpt-4.1`, compared quality, latency, and cost |
+| **What you did** | Ran the same Zava review moderation prompts through `gpt-4.1-mini` and `gpt-4.1`, compared quality, latency, and cost |
 | **Key skill** | Multi-model evaluation, cost-performance trade-off analysis, hybrid escalation patterns |
 | **Outcome** | A comparison script (`src/03_model_comparison.py`) with side-by-side results and an optional hybrid routing mode |
 
-**Core concept:** Cheaper models often perform well enough for most inputs. Reserve expensive models for low-confidence cases — this reduces cost while maintaining quality.
+**Core concept:** Cheaper models often perform well enough for most inputs. Reserve expensive models for low-confidence cases -- this reduces cost while maintaining quality.
 
 ---
 
@@ -120,11 +120,11 @@ flowchart LR
 
 | | |
 |---|---|
-| **What you did** | Packaged the moderation logic as a Docker container, deployed it to Foundry Agent Service with `azd up`, tested via CLI and the Foundry Playground |
+| **What you did** | Packaged Zava's review moderation logic as a Docker container, deployed it to Foundry Agent Service with `azd up`, tested via CLI and the Foundry Playground |
 | **Key skill** | Containerized agent deployment, the Agent Framework SDK, hosted agent lifecycle management |
-| **Outcome** | A live, cloud-hosted moderation agent accessible via the OpenAI Responses API |
+| **Outcome** | A live, cloud-hosted Zava review moderation agent accessible via the OpenAI Responses API |
 
-**Core concept:** A hosted agent turns local Python code into a managed, scalable service — no infrastructure management, just `azd up`.
+**Core concept:** A hosted agent turns Serena's local Python code into a managed, scalable service -- no infrastructure management, just `azd up`.
 
 ---
 
@@ -178,7 +178,7 @@ flowchart TB
         end
 
         subgraph FOUNDRY["Microsoft Foundry Agent Service"]
-            HOSTED["🛡️ Comment Moderation Agent\n(hosted container)"]
+            HOSTED["🛡️ Zava Review Moderation Agent\n(hosted container)"]
         end
     end
 
@@ -247,7 +247,7 @@ The system prompt is the most important piece of your application. A well-struct
 
 ### 2. Business Logic Wraps Model Output
 
-Models provide probabilistic output — your code makes deterministic decisions. The confidence threshold pattern (auto-approve above 0.85, auto-block below, flag for review in between) is reusable across many AI applications.
+Models provide probabilistic output -- your code makes deterministic decisions. The confidence threshold pattern (auto-approve above 0.85, auto-block below, flag for review in between) is reusable across many AI applications.
 
 ### 3. Start Cheap, Escalate Smart
 
@@ -292,15 +292,15 @@ Now that you have a working hosted agent, here are ways to extend what you built
 
 ### Add More Classification Categories
 
-Expand the system prompt to handle additional categories like `SPAM`, `OFF_TOPIC`, or `SENSITIVE_PERSONAL_DATA`. Update the business logic layer to route each category differently.
+Expand the system prompt to handle additional categories like `SPAM`, `OFF_TOPIC`, or `COMPETITOR_MENTION`. Update the business logic layer to route each category differently -- for example, Zava might want competitor mentions flagged for their marketing team.
 
 ### Add Tools to the Agent
 
-Use the Agent Framework's tool support to give the agent capabilities beyond text classification — for example, looking up user history, checking a blocklist database, or sending notifications.
+Use the Agent Framework's tool support to give the agent capabilities beyond text classification -- for example, looking up a customer's purchase history, checking a product blocklist, or notifying Zava's trust & safety team via a webhook.
 
 ### Build a Multi-Agent Workflow
 
-Create a second agent (e.g. a response-drafting agent) and chain it with the moderation agent. The moderation agent classifies; the response agent drafts an appropriate reply based on the classification.
+Create a second agent (e.g., a response-drafting agent) and chain it with the moderation agent. The moderation agent classifies; the response agent drafts an appropriate reply based on the classification.
 
 ### Connect to a Frontend
 
@@ -361,7 +361,7 @@ requests
 | order by timestamp desc
 ```
 
-This shows request volume, average response time, and failure rate in 5-minute buckets — the three metrics you need to know your agent is healthy.
+This shows request volume, average response time, and failure rate in 5-minute buckets -- the three metrics you need to know your agent is healthy.
 
 ---
 
@@ -388,7 +388,7 @@ This exercise proves you can apply the inference → structured output → busin
 
 ## Clean Up
 
-If you haven't already, remove all Azure resources to avoid ongoing charges:
+If you have not already, remove all Azure resources to avoid ongoing charges:
 
 ```bash
 azd down --force --purge
@@ -400,6 +400,6 @@ This deletes the resource group, all resources within it, and purges any soft-de
 
 ## Thank You
 
-You started with a model in a catalog and finished with a production-ready hosted agent on Microsoft Foundry. The patterns you learned — prompt engineering, structured output, confidence-based routing, containerized deployment — apply to any AI application, not just content moderation.
+You started with a model in a catalog and finished with a production-ready hosted agent on Microsoft Foundry. The patterns you learned -- prompt engineering, structured output, confidence-based routing, containerized deployment -- apply to any AI application, not just content moderation.
 
 **Happy building!**

@@ -1,7 +1,7 @@
 """
-Lab 5: Model Comparison for Comment Moderation
+Lab 5: Model Comparison for Zava Review Moderation
 ================================================
-Compare how different models classify the same comments.
+Compare how different models classify the same Zava product reviews.
 Measures agreement, confidence, and latency.
 
 Usage:
@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Reuse the same system prompt from Lab 4
-SYSTEM_PROMPT = """You are a content moderation system. Analyze the provided user comment and classify it.
+SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -32,21 +32,21 @@ Respond ONLY with valid JSON in this exact format:
 }
 
 Classification rules:
-- SAFE: Constructive feedback, questions, positive comments, neutral observations
-- NEEDS_REVIEW: Borderline content, strong emotions, potential sarcasm, complaints without abuse
-- UNSAFE: Hate speech, threats, harassment, explicit content, personal attacks
+- SAFE: Constructive product feedback, installation questions, positive experiences, neutral observations about products or services
+- NEEDS_REVIEW: Borderline content, strong complaints about products or staff, potential sarcasm, frustration without abuse
+- UNSAFE: Hate speech, threats toward staff or customers, harassment, explicit content, personal attacks
 
 Do not include any text outside the JSON object."""
 
 TEST_COMMENTS = [
-    "Great article! Really helped me understand the basics.",
-    "This is the worst product ever made by incompetent people",
-    "You are an idiot and everyone who uses this is stupid",
-    "Could you explain step 3 in more detail?",
-    "Your face is ugly and you should stop making videos",
-    "Meh, I've seen better. Not terrible though.",
-    "I respectfully disagree with the conclusion in paragraph 4.",
-    "LOL this is so dumb, are you even trying???",
+    "Love this cordless drill! Battery lasts all day and the torque is impressive.",
+    "This paint is garbage and whoever designed it should be fired",
+    "You're all idiots if you shop here -- worst store ever",
+    "Does this deck stain work on pressure-treated lumber?",
+    "The staff are useless and ugly -- never going back to this Zava location",
+    "Meh, the tile cutter is okay. Not great, not terrible.",
+    "I respectfully disagree with the 5-star ratings -- the sander vibrates too much.",
+    "LOL Zava sells overpriced junk, are they even trying???",
 ]
 
 
