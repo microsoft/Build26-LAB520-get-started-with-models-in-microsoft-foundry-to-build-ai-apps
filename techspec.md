@@ -38,7 +38,7 @@ Pre-install these so attendees don't wait for marketplace downloads:
 
 - [ ] **Python** (`ms-python.python`)
 - [ ] **Pylance** (`ms-python.vscode-pylance`)
-- [ ] **Foundry Toolkit** (`ms-windows-ai-studio.windows-ai-studio`)
+- [ ] **Microsoft Foundry Toolkit Extension** (`ms-windows-ai-studio.windows-ai-studio`)
 
 Install via CLI:
 
