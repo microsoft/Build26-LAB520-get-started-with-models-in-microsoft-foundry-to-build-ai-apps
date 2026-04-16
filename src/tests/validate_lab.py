@@ -481,7 +481,6 @@ def test_dependencies():
 
     required_packages = [
         ("azure.ai.projects", "azure-ai-projects"),
-        ("azure.ai.inference", "azure-ai-inference"),
         ("azure.identity", "azure-identity"),
         ("openai", "openai"),
         ("dotenv", "python-dotenv"),

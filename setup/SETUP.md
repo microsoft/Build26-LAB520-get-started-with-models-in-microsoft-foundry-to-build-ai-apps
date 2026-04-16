@@ -195,7 +195,7 @@ This installs:
 | Package | Purpose |
 |---------|---------|
 | `azure-ai-projects` | Foundry project client |
-| `azure-ai-inference` | Model inference SDK |
+
 | `azure-identity` | Azure authentication (DefaultAzureCredential) |
 | `openai` | OpenAI-compatible API client |
 | `python-dotenv` | Environment variable management |

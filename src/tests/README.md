@@ -4,7 +4,7 @@
 
 ## Abstract
 
-In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the Azure AI Inference SDK, and build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the session, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
+In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the OpenAI SDK (through the Azure AI Projects client), and build a complete comment moderation pipeline that classifies user-generated content as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the session, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
 
 ---
 
@@ -218,7 +218,7 @@ The workshop is considered successful when participants can:
 
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [Create a Foundry Project](https://learn.microsoft.com/azure/ai-foundry/how-to/create-projects)
-- [Azure AI Inference SDK](https://learn.microsoft.com/python/api/overview/azure/ai-inference-readme)
+- [OpenAI SDK migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration)
 - [Foundry Samples on GitHub](https://github.com/azure-ai-foundry/foundry-samples)
 
 ---

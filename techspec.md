@@ -83,8 +83,7 @@ pip install -r src\agent\requirements.txt
 
 | Package | Min Version | Purpose |
 |---------|-------------|---------|
-| `azure-ai-projects` | 1.0.0b7 | Foundry project client |
-| `azure-ai-inference` | 1.0.0b9 | Model inference SDK |
+| `azure-ai-projects` | 1.0.0b7 | Foundry project client (provides OpenAI-compatible inference client) |
 | `azure-identity` | 1.19.0 | Azure authentication (DefaultAzureCredential) |
 | `openai` | 1.60.0 | OpenAI-compatible API client |
 | `python-dotenv` | 1.0.1 | Environment variable management |

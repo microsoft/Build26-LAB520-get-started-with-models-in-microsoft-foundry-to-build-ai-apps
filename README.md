@@ -12,7 +12,7 @@
 
 ### Session Description
 
-In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the Azure AI Inference SDK, and build a complete product review moderation pipeline for Zava that classifies customer-submitted reviews as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the lab, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
+In this hands-on lab, you will go from zero to a production-ready application using Microsoft Foundry, with no fine-tuning or deep ML expertise required. Starting with the Foundry model catalog, you will provision a project, connect to a hosted model via the OpenAI SDK (through the Azure AI Projects client), and build a complete product review moderation pipeline for Zava that classifies customer-submitted reviews as safe, needs review, or unsafe. You will compare outputs across models to make informed deployment decisions, then package your moderation logic into a hosted agent running on Foundry's managed infrastructure. By the end of the lab, you will have working Python code, a deployed agent accessible via the OpenAI Responses API, and the confidence to integrate production-ready models into your own applications.
 
 ### 🏫 Getting started in a guided session
 
@@ -35,7 +35,7 @@ If you are following these steps at your own pace:
 
 By the end of this lab, you will be able to:
 
-- Discover, provision, and connect to hosted models in Microsoft Foundry using the Azure AI Inference SDK
+- Discover, provision, and connect to hosted models in Microsoft Foundry using the Azure AI Projects SDK and OpenAI client
 - Build a complete product review moderation pipeline for Zava that classifies customer reviews as safe, needs review, or unsafe -- and compare outputs across models
 - Package moderation logic into a hosted agent and deploy it to Microsoft Foundry's managed infrastructure
 
@@ -48,7 +48,7 @@ Use these as a starting point -- or write your own!
 1. Understand the basics:
 
 ```
-Explain how Microsoft Foundry model inference works and what the Azure AI Inference SDK provides
+Explain how Microsoft Foundry model inference works and how the Azure AI Projects SDK provides an OpenAI-compatible client
 ```
 
 2. Go deeper with docs:
@@ -78,7 +78,7 @@ Help me adapt the Zava review moderation agent from this lab into a customer sup
 ### 💻 Technologies Used
 
 1. [Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/)
-1. [Azure AI Inference SDK](https://learn.microsoft.com/azure/ai-foundry/reference/reference-model-inference-api)
+1. [OpenAI SDK](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration) (via Azure AI Projects client)
 1. [Python](https://www.python.org/)
 1. [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 1. [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
@@ -88,7 +88,7 @@ Help me adapt the Zava review moderation agent from this lab into a customer sup
 | Resource | Description |
 |:---------|:------------|
 | [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/) | Official docs for Microsoft Foundry projects, models, and agents |
-| [Azure AI Inference SDK reference](https://learn.microsoft.com/azure/ai-foundry/reference/reference-model-inference-api) | API reference for the model inference SDK used in this lab |
+| [OpenAI SDK migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration) | Migration guide and reference for the OpenAI SDK used in this lab |
 | [Azure Developer CLI documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Getting started with azd for provisioning and deploying |
 | [Foundry Toolkit for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-windows-ai-studio.windows-ai-studio) | Visual Studio Code extension for working with Foundry projects |
 | [Build 2026 next steps](https://aka.ms/build26-next-steps) | Continue your learning journey after Build 2026 |
