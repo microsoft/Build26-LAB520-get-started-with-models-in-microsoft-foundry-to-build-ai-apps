@@ -16,21 +16,27 @@ print("Starting Zava product review moderation agent...", flush=True)
 
 try:
     from dotenv import load_dotenv
-    load_dotenv(override=True)
+    load_dotenv(override=False)
 except ImportError:
     pass  # dotenv is optional in container
 
 from agent_framework import Agent
-from agent_framework.azure import AzureAIAgentClient
-from azure.ai.agentserver.agentframework import from_agent_framework
+from agent_framework_foundry import FoundryChatClient
+from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.identity import DefaultAzureCredential
 
 # These are injected as environment variables by azd / agent.yaml
-PROJECT_ENDPOINT = os.getenv("AZURE_AI_PROJECT_ENDPOINT") or os.getenv("PROJECT_ENDPOINT")
-MODEL_DEPLOYMENT_NAME = os.getenv("AZURE_AI_MODEL_DEPLOYMENT_NAME") or os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1-mini")
+PROJECT_ENDPOINT = (
+    os.getenv("AZURE_AI_PROJECT_ENDPOINT")
+    or os.getenv("PROJECT_ENDPOINT")
+)
+MODEL_DEPLOYMENT_NAME = (
+    os.getenv("AZURE_AI_MODEL_DEPLOYMENT_NAME")
+    or os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1-mini")
+)
 
 if not PROJECT_ENDPOINT:
-    print("ERROR: AZURE_AI_PROJECT_ENDPOINT not set", flush=True)
+    print("ERROR: AZURE_AI_PROJECT_ENDPOINT or PROJECT_ENDPOINT not set", flush=True)
     sys.exit(1)
 
 print(f"  Endpoint: {PROJECT_ENDPOINT}", flush=True)
@@ -53,14 +59,15 @@ Classification rules:
 Do not include any text outside the JSON object."""
 
 agent = Agent(
-    client=AzureAIAgentClient(
+    client=FoundryChatClient(
         project_endpoint=PROJECT_ENDPOINT,
-        model_deployment_name=MODEL_DEPLOYMENT_NAME,
+        model=MODEL_DEPLOYMENT_NAME,
         credential=DefaultAzureCredential(),
     ),
+    name="zava-review-moderation-agent",
     instructions=SYSTEM_PROMPT,
 )
 
 if __name__ == "__main__":
     print("Starting hosting adapter on port 8088...", flush=True)
-    from_agent_framework(agent).run()
+    ResponsesHostServer(agent).run(port=8088)

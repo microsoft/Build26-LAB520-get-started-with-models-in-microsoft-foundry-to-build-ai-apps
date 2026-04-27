@@ -146,7 +146,7 @@ By completing this workshop, you gained hands-on experience with:
 - Comparing multiple models on identical tasks
 
 ### Agent Development & Deployment
-- Using the Microsoft Agent Framework (`Agent`, `AzureAIAgentClient`)
+- Using the Microsoft Agent Framework (`Agent`, `FoundryChatClient`)
 - Writing a `Dockerfile` and `agent.yaml` manifest
 - Local testing before cloud deployment
 - Deploying containerized agents to Foundry Agent Service

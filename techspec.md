@@ -19,6 +19,8 @@ All software below must be installed and available on `PATH` before the attendee
   `winget install -e --id Python.Python.3.13`  
   Ensure `python` and `pip` are on PATH. Verify: `python --version`
 
+  > The Lab 6 hosted-agent container uses `python:3.12-slim` in its Dockerfile for Foundry runtime compatibility. The attendee VM can still use Python 3.13 for local lab execution.
+
 - [ ] **Azure CLI** — v2.67.0 or later  
   `winget install -e --id Microsoft.AzureCLI`  
   Verify: `az version`
@@ -83,22 +85,25 @@ pip install -r src\agent\requirements.txt
 
 | Package | Min Version | Purpose |
 |---------|-------------|---------|
-| `azure-ai-projects` | 1.0.0b7 | Foundry project client (provides OpenAI-compatible inference client) |
-| `azure-identity` | 1.19.0 | Azure authentication (DefaultAzureCredential) |
-| `openai` | 1.60.0 | OpenAI-compatible API client |
-| `python-dotenv` | 1.0.1 | Environment variable management |
-| `pytest` | 8.0.0 | Test framework (Lab 4 unit tests) |
+| `azure-ai-projects` | 2.1.0 | Foundry project client (provides OpenAI-compatible inference client) |
+| `azure-identity` | 1.25.3 | Azure authentication (DefaultAzureCredential) |
+| `openai` | 2.32.0 | OpenAI-compatible API client |
+| `python-dotenv` | 1.2.2 | Environment variable management |
+| `pytest` | 9.0.3 | Test framework (Lab 4 unit tests) |
 
 ### Python Packages — Agent (`src/agent/requirements.txt`)
 
 | Package | Min Version | Purpose |
 |---------|-------------|---------|
-| `agent-framework-core` | 1.0.0rc3 | Microsoft Agent Framework core |
-| `agent-framework-azure-ai` | 1.0.0rc3 | Agent Framework Azure AI integration |
-| `azure-ai-agentserver-agentframework` | 1.0.0b17 | Hosted agent server adapter |
-| `azure-ai-agentserver-core` | 1.0.0b17 | Agent server core runtime |
-| `azure-identity` | 1.19.0 | Azure authentication |
-| `python-dotenv` | 1.0.1 | Environment variable management |
+| `agent-framework-core` | 1.2.0 | Microsoft Agent Framework core package |
+| `agent-framework-foundry` | 1.2.0 | Foundry chat client integration |
+| `agent-framework-openai` | 1.2.0 | OpenAI-compatible chat client support |
+| `agent-framework-foundry-hosting` | 1.0.0a260424 | Foundry Responses hosting adapter |
+| `agent-dev-cli` | 0.0.1b260427 | Local agent development and inspection CLI |
+| `azure-ai-projects` | 2.1.0 | Foundry project client |
+| `azure-identity` | 1.25.3 | Azure authentication |
+| `openai` | 2.32.0 | OpenAI-compatible API client |
+| `python-dotenv` | 1.2.2 | Environment variable management |
 
 ---
 

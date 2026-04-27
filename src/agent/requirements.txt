@@ -1,6 +1,11 @@
-agent-framework-core==1.0.0rc3
-agent-framework-azure-ai==1.0.0rc3
-azure-ai-agentserver-agentframework==1.0.0b17
-azure-ai-agentserver-core==1.0.0b17
-azure-identity>=1.19.0
-python-dotenv>=1.0.1
+# Hosted-agent packages are preview and version-sensitive. These pins match the
+# current Agent Framework Foundry hosting sample pattern.
+agent-framework-core==1.2.0
+agent-framework-foundry==1.2.0
+agent-framework-openai==1.2.0
+agent-framework-foundry-hosting==1.0.0a260424
+agent-dev-cli==0.0.1b260427
+azure-ai-projects>=2.1.0
+azure-identity>=1.25.3
+openai>=2.32.0
+python-dotenv>=1.2.2

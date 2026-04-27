@@ -81,6 +81,7 @@ The bottom line: you will edit zero infrastructure files. The commands are `azd 
 - Azure Developer CLI installed with the `ai agent` extension:
   ```bash
   azd ext install azure.ai.agents
+  azd ext upgrade azure.ai.agents
   ```
 - `.env` file with `PROJECT_ENDPOINT` and `MODEL_DEPLOYMENT_NAME` set
 
@@ -96,38 +97,39 @@ The agent source code lives in `src/agent/`. Three files make up the hosted agen
 
 ```python
 from agent_framework import Agent
-from agent_framework.azure import AzureAIAgentClient
-from azure.ai.agentserver.agentframework import from_agent_framework
+from agent_framework_foundry import FoundryChatClient
+from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.identity import DefaultAzureCredential
 
 agent = Agent(
-    client=AzureAIAgentClient(
+    client=FoundryChatClient(
         project_endpoint=PROJECT_ENDPOINT,
-        model_deployment_name=MODEL_DEPLOYMENT_NAME,
+        model=MODEL_DEPLOYMENT_NAME,
         credential=DefaultAzureCredential(),
     ),
+    name="zava-review-moderation-agent",
     instructions=SYSTEM_PROMPT,  # Same Zava review moderation prompt from Lab 4
 )
 
 if __name__ == "__main__":
-    from_agent_framework(agent).run()
+    ResponsesHostServer(agent).run(port=8088)
 ```
 
 Key components:
 - **`Agent`** from Microsoft Agent Framework -- defines the agent's behavior
-- **`AzureAIAgentClient`** -- connects to Foundry for model inference
-- **`from_agent_framework(agent).run()`** -- the hosting adapter wraps your agent as an HTTP server on port 8088
+- **`FoundryChatClient`** -- connects to Foundry for model inference using the current Agent Framework sample pattern
+- **`ResponsesHostServer(agent).run(port=8088)`** -- the Foundry hosting adapter wraps your agent as an HTTP server on port 8088
 
 ### `src/agent/Dockerfile` -- Container Definition
 
 ```dockerfile
-FROM python:3.13-slim
+FROM python:3.12-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8088
-CMD ["python", "app.py"]
+CMD ["python", "-u", "app.py"]
 ```
 
 ### `src/agent/agent.yaml` -- Agent Manifest
@@ -138,12 +140,12 @@ name: zava-review-moderation-agent
 description: Product review moderation agent for Zava that classifies customer reviews
 protocols:
     - protocol: responses
-      version: v1
+      version: "1.0.0"
 environment_variables:
     - name: AZURE_AI_PROJECT_ENDPOINT
       value: ${AZURE_AI_PROJECT_ENDPOINT}
     - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
-      value: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
+      value: ${MODEL_DEPLOYMENT_NAME}
 ```
 
 The manifest tells Foundry how to configure Zava's review moderation agent -- which protocols it supports and what environment variables to inject.
@@ -305,24 +307,20 @@ Verify the agent is running:
 azd ai agent show
 ```
 
-### Expected Output (JSON)
-
-```json
-{
-  "name": "zava-review-moderation-agent",
-  "version": 1,
-  "status": "Started",
-  "protocols": ["responses"],
-  "cpu": "0.25",
-  "memory": "0.5Gi",
-  "replicas": { "min": 1, "max": 1 }
-}
-```
-
-Or use table format:
+Use table format for the clearest status view:
 
 ```bash
 azd ai agent show --output table
+```
+
+Expected output includes:
+
+```text
+FIELD    VALUE
+-----    -----
+Name     zava-review-moderation-agent
+Version  <latest-version>
+Status   active
 ```
 
 ---
@@ -533,7 +531,7 @@ This exercise reinforces the full edit → deploy → test cycle you'd use in pr
 
 Before moving on, confirm:
 
-- [ ] `azd ai agent show --output table` shows **Status: Running** and **Health State: Healthy**
+- [ ] `azd ai agent show --output table` shows **Status: active**
 - [ ] `azd ai agent invoke "Love this cordless drill!"` returns a JSON response with `"classification": "SAFE"`
 - [ ] The agent is visible in the Foundry Playground at [ai.azure.com](https://ai.azure.com)
 
@@ -544,7 +542,7 @@ If the agent status shows an error, check the logs with `azd ai agent monitor` f
 ## What You Learned
 
 - ✅ How hosted agents package your code as managed containers on Foundry
-- ✅ How the hosting adapter (`from_agent_framework`) turns your agent into an API
+- ✅ How the Foundry hosting adapter (`ResponsesHostServer`) turns your agent into an API
 - ✅ How `azd ai agent init` scaffolds and configures a hosted agent project
 - ✅ How `azd up` handles the entire build → deploy → start lifecycle
 - ✅ How to invoke, monitor, and manage hosted agents via the CLI

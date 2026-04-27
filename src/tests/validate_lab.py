@@ -360,14 +360,14 @@ def test_agent_service():
             record("app.py uses Agent", "PASS")
         else:
             record("app.py uses Agent", "FAIL")
-        if "from_agent_framework" in content:
+        if "ResponsesHostServer" in content:
             record("app.py uses hosting adapter", "PASS")
         else:
             record("app.py uses hosting adapter", "FAIL")
-        if "AzureAIAgentClient" in content:
-            record("app.py uses AzureAIAgentClient", "PASS")
+        if "FoundryChatClient" in content:
+            record("app.py uses FoundryChatClient", "PASS")
         else:
-            record("app.py uses AzureAIAgentClient", "FAIL")
+            record("app.py uses FoundryChatClient", "FAIL")
     except FileNotFoundError:
         record("app.py exists", "FAIL")
 
@@ -398,14 +398,18 @@ def test_agent_service():
             record("agent.yaml protocol: responses", "PASS")
         else:
             record("agent.yaml protocol: responses", "FAIL")
+        if "      version: \"1.0.0\"" in content or "      version: '1.0.0'" in content:
+            record("agent.yaml responses version: 1.0.0", "PASS")
+        else:
+            record("agent.yaml responses version: 1.0.0", "FAIL")
     except FileNotFoundError:
         record("agent.yaml exists", "FAIL")
 
-    # Check requirements.txt has hosting adapter packages
+    # Check agent requirements have hosting adapter and framework packages
     req_path = REPO_ROOT / "src/agent/requirements.txt"
     try:
         content = req_path.read_text(encoding="utf-8")
-        if "azure-ai-agentserver" in content:
+        if "agent-framework-foundry-hosting" in content:
             record("requirements.txt includes hosting adapter", "PASS")
         else:
             record("requirements.txt includes hosting adapter", "FAIL")

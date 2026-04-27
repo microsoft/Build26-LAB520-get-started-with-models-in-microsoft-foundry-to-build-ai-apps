@@ -4,7 +4,7 @@ name: get-started-foundry-models
 metadata:
     template: get-started-foundry-models@0.1.0
 services:
-    get-started-with-models-microsoft-foundry:
+    zava-review-moderation-agent:
         project: src/agent
         host: azure.ai.agent
         language: docker
@@ -15,8 +15,6 @@ services:
                 resources:
                     cpu: "1.0"
                     memory: 2.0Gi
-                scale:
-                    maxReplicas: 1
             deployments:
                 - model:
                     format: OpenAI
