@@ -1,3 +1,7 @@
+## Welcome to Your Lab Environment
+
+To begin, log into the virtual machine using the following credentials: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
+
 # Lab 1: Discover Models in Microsoft Foundry
 
 > **Duration:** ~10 minutes | **Phase:** Orientation (UI)
@@ -16,16 +20,31 @@ Explore the Microsoft Foundry portal to discover available hosted models, unders
 
 ## Step 1: Open Microsoft Foundry Portal
 
-Navigate to **[https://ai.azure.com](https://ai.azure.com)** and sign in with your Azure credentials.
+Open, Microsoft Foundry Portal https://ai.azure.com and sign in with the following Azure credentials:
+
+Login with your Microsoft Foundry Username and password
+
 
 You will land on the Foundry home page. This is the central hub for managing AI projects, models, and deployments.
+
+Ensure the new foundry switch at the top of the screen is turned on. 
+
+![newfoundry.png](./images/newfoundry.png)
+
+You will also have to update the current project to the latest Foundry version. Select the project listed to update.
+![selectproject.png](./images/selectproject.png) 
+
 
 ---
 
 ## Step 2: Explore the Model Catalog
 
-1. In the left navigation, click **Model catalog**
-2. Browse the available models -- these are production-ready, hosted models you can use without fine-tuning
+1. In the main windows, click **Find models** or select **discover** from the top menu.
+2. In the top menu navigation you will now be in **discover**
+3. In the main window browse the available models -- these are production-ready, hosted models you can use without fine-tuning
+4. You can use the filters models within the model select page, filter for model types **capabilities**, **Inference task**, **Chat Completition**, **Image Analysis** etc This allow you to quickly filter models based on a specific task or requirement.
+
+Select a Model to view the Model Card
 
 Take note of the following for each model:
 
@@ -35,6 +54,8 @@ Take note of the following for each model:
 | **Task type** | Chat completion, text generation, embeddings |
 | **Deployment options** | Serverless API, managed compute |
 | **Pricing tier** | Pay-as-you-go, free playground |
+| **Benchmarks** | Model performance and stats|
+| **Responsible AI** | Prompts and completions are passed through a default configuration of Azure AI Content Safety classification models |
 
 ---
 
@@ -46,11 +67,11 @@ For this workshop, you need a model that supports **chat completion** -- the abi
 
 | Model | Publisher | Why |
 |-------|-----------|-----|
-| `gpt-4.1-mini` | OpenAI | Fast, cost-efficient, excellent for classification |
-| `gpt-4.1` | OpenAI | Higher quality, good for complex moderation |
-| `Phi-4` | Microsoft | Strong reasoning, open-weight |
+| gpt-4.1-mini | OpenAI | Fast, cost-efficient, excellent for classification |
+| gpt-4.1 | OpenAI | Higher quality, good for complex moderation |
+| Phi-4 | Microsoft | Strong reasoning, open-weight |
 
-> **Tip:** `gpt-4.1-mini` is the best choice for this lab -- it is fast, inexpensive, and well-suited for moderation and classification tasks.
+> **Tip:** gpt-4.1-mini is the best choice for this lab -- it is fast, inexpensive, and well-suited for moderation and classification tasks.
 
 ---
 
@@ -58,38 +79,27 @@ For this workshop, you need a model that supports **chat completion** -- the abi
 
 Click on your chosen model (e.g., **gpt-4.1-mini**) to view its detail page:
 
-1. **Overview** -- Read the model description and capabilities
+1. **Details** Read the model description and capabilities
+2. **Deployments** -- Deployment options
 2. **Benchmarks** -- Review performance metrics
-3. **Try it** -- Use the playground to send a test prompt (optional)
+3. **License** -- The Model License
 
-> You will deploy this model programmatically in Lab 2. For now, just confirm it is available in the catalog.
-
----
-
-## Step 5: Review Quota Availability
-
-1. Navigate to **Management** → **Quota** in the left navigation
-2. Verify you have available quota for the model you selected
-3. Note the **region** where your quota is allocated
-
-If you do not have quota for your chosen model:
-
-- Select a different model with available quota
-- Or request a quota increase (this may take time -- for this lab, choose an available model)
+> You will deploy this model programmatically in Lab 2. For now, just confirm it is available in the catalog and you can see the model card details.
 
 ---
 
-## Step 6: Explore the Playground (Optional)
+
+## Step 5: Explore the Playground (Optional)
 
 1. Return to the model detail page
-2. Click **Try in Playground** or **Deploy** → **Playground**
-3. In the system message, enter:
+2. Select **Deploy** → Select "gpt-4.1-mini" under Use an existing deployment, which then brings you to the **playground** for the model deployment.
+3. In the **instructions**, enter:
 
 ```
 You are a product review moderator for Zava, a home-improvement retailer. Classify the following customer review as SAFE, NEEDS_REVIEW, or UNSAFE. Respond with only the classification label.
 ```
 
-4. In the user message, enter:
+4. In the chat with model window, enter:
 
 ```
 This paint is garbage and whoever designed it should be fired
@@ -117,4 +127,5 @@ This is a preview of the inference pattern you will implement in code during Lab
 
 ---
 
-**Next:** [Lab 2 - Project Setup →](lab2-project-setup.md)
+**Next:** [Lab 2 - Verify your Microsoft Foundry Project](./lab2-verifysetup.md) 
+

@@ -277,4 +277,4 @@ If validation fails, check the failure messages -- common issues include missing
 
 ---
 
-**Next:** [Lab 3 - Connect & Infer →](lab3-connect-and-infer.md)
+**Next:** [Lab 1 - Discover Modesl →](./lab1-discover-models.md)

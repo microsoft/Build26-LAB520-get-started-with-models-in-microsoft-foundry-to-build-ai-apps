@@ -21,37 +21,13 @@ Zava's online store receives thousands of product reviews daily across hundreds 
 
 ## Architecture
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0078D4', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#005A9E', 'lineColor': '#333333', 'fontSize': '15px', 'fontFamily': 'Segoe UI, sans-serif'}}}%%
-flowchart LR
-    A["💬 Customer\nReview"]
-    B["📝 Prompt\nConstruction"]
-    C["🤖 Model Inference\n(gpt-4.1-mini)"]
-    D["🔍 Response\nParsing"]
-    E["🛡️ Moderation\nDecision"]
-
-    A -->|"input text"| B
-    B -->|"system + user prompt"| C
-    C -->|"JSON response"| D
-    D -->|"structured result"| E
-
-    subgraph FOUNDRY["☁️ Foundry-Hosted"]
-        C
-    end
-
-    style A fill:#0078D4,stroke:#005A9E,color:#FFFFFF,stroke-width:2px
-    style B fill:#107C10,stroke:#0B5E0B,color:#FFFFFF,stroke-width:2px
-    style C fill:#7B61FF,stroke:#6248CC,color:#FFFFFF,stroke-width:2px
-    style D fill:#FF8C00,stroke:#CC7000,color:#FFFFFF,stroke-width:2px
-    style E fill:#E81123,stroke:#B80D1A,color:#FFFFFF,stroke-width:2px
-    style FOUNDRY fill:#F5F5F5,stroke:#7B61FF,color:#333333,stroke-width:2px
-```
+![architecture_lab520.png](./images/architecture_lab520.png)
 
 ---
 
 ## Step 1: Review the System Prompt
 
-The key to reliable moderation is a well-structured system prompt. Open `src/02_comment_moderation.py` and examine the `SYSTEM_PROMPT`:
+The key to reliable moderation is a well-structured system prompt. Open src/02_comment_moderation.py and examine the SYSTEM_PROMPT:
 
 ```python
 SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
@@ -122,11 +98,11 @@ Key design decisions:
 
 | Decision | Rationale |
 |----------|-----------|
-| `temperature=0.0` | Same comment always gets the same classification |
+| temperature=0.0 | Same comment always gets the same classification |
 | JSON output format | Machine-parseable, no regex needed |
 | Structured system prompt | Reliable, consistent categorization |
-| `try/except` around inference | Catches Azure content safety filter blocks gracefully |
-| `try/except` around `json.loads()` | Falls back to `NEEDS_REVIEW` if the model returns malformed output |
+| try/except around inference | Catches Azure content safety filter blocks gracefully |
+| try/except around json.loads() | Falls back to NEEDS_REVIEW if the model returns malformed output |
 
 ### 2b. Apply Moderation Logic
 
@@ -164,7 +140,7 @@ def moderate_comment(client, model: str, comment: str) -> dict:
     }
 ```
 
-> **Note:** The `classify_comment` function uses `json.loads()` to parse the model's response. Because we set `temperature=0.0` and use a structured system prompt, the model reliably returns valid JSON. If you modify the prompt and see `json.JSONDecodeError`, check that your system prompt still instructs the model to respond in JSON format.
+> **Note:** The classify_comment function uses json.loads() to parse the model's response. Because we set temperature=0.0 and use a structured system prompt, the model reliably returns valid JSON. If you modify the prompt and see json.JSONDecodeError, check that your system prompt still instructs the model to respond in JSON format.
 
 ---
 
@@ -174,7 +150,7 @@ def moderate_comment(client, model: str, comment: str) -> dict:
 python src/02_comment_moderation.py
 ```
 
-### Expected Output
+### Expected Output ((You are using a LLM non determistic solution so the output will not 100% match, simply validate message and format))
 
 ```
 ========================================
@@ -223,13 +199,13 @@ Total comments: 5
   BLOCKED:           1
 ```
 
-> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as `UNSAFE` with a "Blocked by Azure content safety filter" reason. This is expected behavior -- the content filter is an additional layer of protection in production deployments.
+> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as UNSAFE with a "Blocked by Azure content safety filter" reason. This is expected behavior -- the content filter is an additional layer of protection in production deployments.
 
 ---
 
 ## Step 4: Test with Custom Comments
 
-The application also accepts interactive input. Run it with the `--interactive` flag:
+The application also accepts interactive input. Run it with the --interactive flag:
 
 ```bash
 python src/02_comment_moderation.py --interactive
@@ -248,7 +224,7 @@ Action: 🔍 FLAGGED_FOR_REVIEW
 
 ## Step 5: Test with the Sample Dataset
 
-The `src/sample_comments.json` file contains a broader set of test comments. Run the batch test:
+The src/sample_comments.json file contains a broader set of test comments. Run the batch test:
 
 ```bash
 python src/02_comment_moderation.py --file src/sample_comments.json
@@ -258,7 +234,7 @@ python src/02_comment_moderation.py --file src/sample_comments.json
 
 ## Step 6: Customize the Moderation Logic
 
-Try adjusting the confidence thresholds in the `apply_moderation` function:
+Try adjusting the confidence thresholds in the apply_moderation function:
 
 | Threshold Change | Effect |
 |-----------------|--------|
@@ -282,11 +258,11 @@ Try adjusting the confidence thresholds in the `apply_moderation` function:
 
 Before moving on, confirm:
 
-- [ ] `python src/02_comment_moderation.py` classifies all 5 sample comments without errors
+- [ ] python src/02_comment_moderation.py classifies all 5 sample comments without errors
 - [ ] You see all three action types: APPROVED, FLAGGED_FOR_REVIEW, and BLOCKED
-- [ ] `python src/02_comment_moderation.py --file src/sample_comments.json` processes all 15 comments
+- [ ] python src/02_comment_moderation.py --file src/sample_comments.json processes all 15 comments
 
-If classifications seem inconsistent, verify you are using `temperature=0.0` in your requests.
+If classifications seem inconsistent, verify you are using temperature=0.0 in your requests.
 
 ---
 
@@ -298,7 +274,7 @@ If classifications seem inconsistent, verify you are using `temperature=0.0` in 
 
 ## Optional: Write a Unit Test for the Moderation Logic
 
-The validation script (`src/tests/validate_lab.py`) tests setup and end-to-end inference, but it does not unit-test the business logic in isolation. Here is a quick pattern you can use to test `apply_moderation` without calling the model:
+The validation script (src/tests/validate_lab.py) tests setup and end-to-end inference, but it does not unit-test the business logic in isolation. Here is a quick pattern you can use to test apply_moderation without calling the model:
 
 ```python
 # test_moderation.py -- run with: python test_moderation.py
@@ -327,7 +303,7 @@ This tests the **business logic** independently from the model -- you can run it
 
 ### pytest Version
 
-If you are familiar with `pytest`, here is the same coverage as a proper test module. Create `src/tests/test_moderation.py`:
+If you are familiar with pytest, here is the same coverage as a proper test module. Create src/tests/test_moderation.py:
 
 ```python
 # src/tests/test_moderation.py -- run with: pytest src/tests/test_moderation.py -v
@@ -387,8 +363,10 @@ src/tests/test_moderation.py::TestApplyModeration::test_safe_at_threshold_approv
 9 passed in 0.02s
 ```
 
-> **Why pytest?** It discovers tests automatically, gives clear failure diffs, and integrates with CI pipelines (GitHub Actions, Azure DevOps). The standalone script above is simpler to run; `pytest` is what you'd use in a real project.
+> **Why pytest?** It discovers tests automatically, gives clear failure diffs, and integrates with CI pipelines (GitHub Actions, Azure DevOps). The standalone script above is simpler to run; pytest is what you'd use in a real project.
 
 ---
 
-**Next:** [Lab 5 - Model Comparison (Optional Extension) →](lab5-model-comparison.md)
+**Next:** [Lab 5 - Model Comparison (Optional Extension)](./lab5-model-comparison.md)
+
+
