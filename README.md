@@ -94,6 +94,11 @@ Help me adapt the Zava review moderation agent from this lab into a customer sup
 | [Build 2026 next steps](https://aka.ms/build26-next-steps) | Continue your learning journey after Build 2026 |
 
 
+Find other developers, like you, building on Microsoft Foundry in Discord 
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/bSC7dqjAU5)
+
+
 ### 🌟 Microsoft Learn MCP Server
 
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Microsoft_Docs_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect/mcp/install?name=microsoft.docs.mcp&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Flearn.microsoft.com%2Fapi%2Fmcp%22%7D)
