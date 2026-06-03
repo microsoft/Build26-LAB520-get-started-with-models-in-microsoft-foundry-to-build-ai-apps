@@ -28,7 +28,7 @@ Review the complete journey from discovering a model in the Foundry catalog to d
 
 Across six labs, you -- as Serena, a developer at Zava -- constructed a **product review moderation pipeline** end-to-end, from a blank terminal to a cloud-hosted agent accessible via REST API:
 
-![mermaid_diagram3.png](./images/mermaid_diagram3.png)
+![mermaid_diagram3.png](./images/mermaid_diagram2.png)
 
 ---
 
