@@ -372,7 +372,7 @@ The Foundry Playground at +++https://ai.azure.com+++ lets you interact with your
 ### 7.1 -- Open the Playground
 
 1. Open in the browser +++https://ai.azure.com+++ and sign in with the same account used for **azd**
-2. In the top navigation, select your **project**. If you do not see it, click **All projects** and find it under your AI Services resource
+2. In the top navigation, select your **build**. If you do not see it, click **All projects** and find it under your AI Services resource
 3. In the left sidebar, click **Agents**
 4. Find **zava-review-moderation-agent** in the agent list -- its status should show **Started**
 5. Click the agent name to open its detail page
