@@ -305,7 +305,36 @@ print("User:", user_input)
 print("Temperature:", temperature)
 print("Response:\n", response.choices[0].message.content)
 ```
+**NOTE** The debug snippet references user_input and temperature, which don't exist in 01_first_inference.py today - the user message is inlined and no temperature is passed. So you'd need to extract them into variables first, then print them.
 
+Here's the minimal change. Replace the inference request block (around lines 42-55) of 01_first_inference.py
+
+```Python
+    # --- Send inference request ---
+    user_input = "What is Microsoft Foundry and how could a retailer like Zava use it? Answer in one sentence."
+    temperature = 0.7
+
+    print(f"Sending inference request to model: {model}")
+    response = inference_client.chat.completions.create(
+        model=model,
+        temperature=temperature,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant for Zava, a global home-improvement retailer. Respond concisely.",
+            },
+            {
+                "role": "user",
+                "content": user_input,
+            },
+        ],
+    )
+
+    # --- Debug output (compare runs) ---
+    print("User:", user_input)
+    print("Temperature:", temperature)
+    print("Response:\n", response.choices[0].message.content)
+```
 
 ### Break It on Purpose
 

@@ -26,7 +26,24 @@ Comparing models on your **actual Zava review data** helps Serena make informed 
 
 Login to your Azure Subscription 
 
+```Powershell
+az login 
+```
+This will open a login screen 'login with a work or school account'
+
+Ensure your subscription is set to your subscription by running add your Azure Subscription ID
+
+# Replace <@lab.CloudSubscription.Id> with your own subscription ID find it with: 
+
+```Powershell
+az account show --query id -o tsv)
+```
+
+Then run the command 
+
+```Powershell
 az account set --subscription "<@lab.CloudSubscription.Id>"
+```
 
 This step is important to make sure all deployments and commands are executed against the correct Azure subscription where your Foundry resource is provisioned.
 
