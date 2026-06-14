@@ -246,4 +246,4 @@ Se você terminar cedo, tente estes:
 
 ---
 
-**Próximo:** [Lab 6 - Implantar Agente](./lab6-deploy-agent.md)
+**Próximo:** [Lab 6 - Implantar Agente](./lab6-deploy-agent-pt-br.md)

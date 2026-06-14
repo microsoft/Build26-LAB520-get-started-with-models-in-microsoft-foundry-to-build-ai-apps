@@ -14,7 +14,7 @@ Um **agente hospedado** é uma aplicação contêinerizada que executa na infrae
 
 | Propriedade | Descrição |
 |-------------|-----------|
-| **Tempo de execução** | Seu código em um contentor Docker, gerenciado pelo Foundry |
+| **Tempo de execução** | Seu código em um conteiner Docker, gerenciado pelo Foundry |
 | **Adaptador** | Adaptador de hospedagem expõe seu agente como API REST |
 | **Protocolo** | Compatível com API de Respostas do OpenAI |
 | **Dimensionamento** | Automático (réplicas mín/máx configuráveis) |
@@ -37,8 +37,8 @@ Labs 3-4 foram Python puro -- você escreveu um script, o executou localmente e 
 
 | Novo conceito | O que significa | O que você realmente faz |
 |---|---|---|
-| **Contentor Docker** | Seu código do agente é empacotado em uma imagem portátil | **azd up** o constrói para você -- você não escreve ou executa nenhum comando Docker |
-| **Registro de Contentor do Azure (ACR)** | Armazenamento em nuvem para imagens de contêiner | Já foi provisionado no Lab 0 -- azd o pressiona automaticamente |
+| **Conteiner Docker** | Seu código do agente é empacotado em uma imagem portátil | **azd up** o constrói para você -- você não escreve ou executa nenhum comando Docker |
+| **Registro de Conteiner do Azure (ACR)** | Armazenamento em nuvem para imagens de contêiner | Já foi provisionado no Lab 0 -- azd o pressiona automaticamente |
 | **Agente hospedado no Foundry** | Uma API REST persistente executando sua lógica de moderação | **azd up** o implanta; **azd ai agent invoke** o chama |
 
 O resultado final: você editará zero arquivos de infraestrutura. Os comandos são **azd up** (implantar) e **azd ai agent invoke** (testar).
@@ -55,7 +55,7 @@ O resultado final: você editará zero arquivos de infraestrutura. Os comandos s
   ```
 - Arquivo .env com PROJECT_ENDPOINT e MODEL_DEPLOYMENT_NAME definidos
 
-> **Do Lab 4 ao agente hospedado:** Nos Labs 3-4, você construiu o pipeline de moderação de avaliações da Zava que executa localmente -- você envia uma avaliação de produto, o modelo a classifica e seu código aplica lógica de negócios. Neste lab, você pega essa mesma lógica de moderação e a implanta como um **agente hospedado** no Foundry. O agente executa em um contentor gerenciado, é acessível via API REST e pode ser usado no Playground Foundry, outros agentes (como Cora, a assistente de compras da Zava) ou qualquer aplicação. Mesma inteligência, agora como um serviço em nuvem persistente.
+> **Do Lab 4 ao agente hospedado:** Nos Labs 3-4, você construiu o pipeline de moderação de avaliações da Zava que executa localmente -- você envia uma avaliação de produto, o modelo a classifica e seu código aplica lógica de negócios. Neste lab, você pega essa mesma lógica de moderação e a implanta como um **agente hospedado** no Foundry. O agente executa em um conteiner gerenciado, é acessível via API REST e pode ser usado no Playground Foundry, outros agentes (como Cora, a assistente de compras da Zava) ou qualquer aplicação. Mesma inteligência, agora como um serviço em nuvem persistente.
 
 ---
 
@@ -93,7 +93,7 @@ Componentes-chave:
 - **FoundryChatClient** -- se conecta ao Foundry para inferência de modelo usando o padrão de amostra atual do Agent Framework
 - **ResponsesHostServer(agent).run(port=8088)** -- o adaptador de hospedagem do Foundry envolve seu agente como um servidor HTTP na porta 8088
 
-### src/agent/Dockerfile -- Definição de Contentor
+### src/agent/Dockerfile -- Definição de Conteiner
 
 ```dockerfile
 FROM python:3.12-slim
@@ -251,7 +251,7 @@ Uma vez que você confirmou que o agente funciona localmente, pressione **Ctrl+C
 
 ## Passo 4: Implantar o Agente
 
-Construa a imagem de contentor em ACR e implante o agente hospedado no Foundry:
+Construa a imagem de conteiner em ACR e implante o agente hospedado no Foundry:
 
 ```bash
 azd up
@@ -275,7 +275,7 @@ azd up
 1. **Provisiona** -- Cria/atualiza infraestrutura (ACR, host de capacidade, RBAC)
 2. **Constrói** -- Envia src/agent/ para ACR para uma construção remota de Docker
 3. **Implanta** -- Registra uma versão de agente hospedado no Serviço de Agente Foundry
-4. **Inicia** -- Inicia o contentor e aguarda estar pronto
+4. **Inicia** -- Inicia o conteiner e aguarda estar pronto
 
 ### Saída Esperada
 
@@ -301,4 +301,4 @@ SUCCESS: Your application was provisioned and deployed to Azure.
 
 Se a implantação foi bem-sucedida, seu agente está agora hospedado no Foundry. Verifique o status:
 
-**Próximo:** [Lab 7 - Resumo do Workshop](./lab7-summary.md)
+**Próximo:** [Lab 7 - Resumo do Workshop](./lab7-summary-pt-br.md)

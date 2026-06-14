@@ -367,4 +367,4 @@ src/tests/test_moderation.py::TestApplyModeration::test_safe_at_threshold_approv
 
 ---
 
-**Próximo:** [Lab 5 - Comparação de Modelos (Extensão Opcional)](./lab5-model-comparison.md)
+**Próximo:** [Lab 5 - Comparação de Modelos (Extensão Opcional)](./lab5-model-comparison-pt-br.md)

@@ -98,7 +98,7 @@ Ao longo de seis labs, você -- como Serena, uma desenvolvedora na Zava -- const
 
 | | |
 |---|---|
-| **O que você fez** | Empacotou a lógica de moderação de avaliações da Zava como um contentor Docker, implantou no Serviço de Agente Foundry com **azd up**, testou via CLI e Playground Foundry |
+| **O que você fez** | Empacotou a lógica de moderação de avaliações da Zava como um conteiner Docker, implantou no Serviço de Agente Foundry com **azd up**, testou via CLI e Playground Foundry |
 | **Habilidade-chave** | Implantação de agente contêinerizado, SDK do Agent Framework, gerenciamento de ciclo de vida de agente hospedado |
 | **Resultado** | Um agente de moderação de avaliações da Zava ao vivo hospedado na nuvem acessível via API de Respostas do OpenAI |
 
@@ -150,7 +150,7 @@ O sistema final que você construiu abrange desenvolvimento local e serviços em
 | src/03_model_comparison.py | Avaliação lado-a-lado de modelos | Lab 5 |
 | src/agent/app.py | Agente hospedado com SDK do Agent Framework | Lab 6 |
 | src/agent/agent.yaml | Manifesto de agente (protocolos, variáveis env) | Lab 6 |
-| src/agent/Dockerfile | Definição de contentor para o agente | Lab 6 |
+| src/agent/Dockerfile | Definição de conteiner para o agente | Lab 6 |
 | src/agent/requirements.txt | Dependências Python para o agente | Lab 6 |
 | .env | Configuração de ambiente local | Lab 2 |
 | azure.yaml | Configuração de projeto azd | Lab 2 |

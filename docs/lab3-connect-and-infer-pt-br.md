@@ -299,3 +299,5 @@ Após executar esses experimentos, você deve entender:
 ## Dica
 
 Próximas seções
+
+**Próxima:** [Lab 4 - Zava Review Moderation App](./lab4-comment-moderation-pt-br.md)
