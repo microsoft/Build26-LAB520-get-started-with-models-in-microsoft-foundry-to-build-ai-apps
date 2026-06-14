@@ -95,13 +95,13 @@ Clique em seu modelo escolhido (por ex., **gpt-4.1-mini**) para visualizar sua p
 3. Nas **instruções**, digite:
 
 ```
-You are a product review moderator for Zava, a home-improvement retailer. Classify the following customer review as SAFE, NEEDS_REVIEW, or UNSAFE. Respond with only the classification label.
+Você é um moderador de avaliações de produtos para a Zava, uma varejista de melhorias para o lar. Classifique a seguinte avaliação do cliente como SAFE, NEEDS_REVIEW, or UNSAFE. Responda apenas com o rótulo de classificação.
 ```
 
 4. Na janela de bate-papo com o modelo, digite:
 
 ```
-This paint is garbage and whoever designed it should be fired
+Esta tinta é um lixo e quem a projetou deveria ser demitido
 ```
 
 5. Clique em **Enviar** e observe a resposta
@@ -126,4 +126,4 @@ Este é um preview do padrão de inferência que você implementará em código 
 
 ---
 
-**Próximo:** [Lab 2 - Verifique seu Projeto Microsoft Foundry](./lab2-verifysetup.md) 
+**Próximo:** [Lab 2 - Verifique seu Projeto Microsoft Foundry](./lab2-verifysetup-pt-br.md) 
