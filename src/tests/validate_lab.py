@@ -76,8 +76,9 @@ def test_file_structure():
         "scripts/postprovision.ps1",
         "scripts/postprovision.sh",
         # Labs
+        "docs/lab0-project-setup.md",
         "docs/lab1-discover-models.md",
-        "docs/lab2-project-setup.md",
+        "docs/lab2-verifysetup.md",
         "docs/lab3-connect-and-infer.md",
         "docs/lab4-comment-moderation.md",
         "docs/lab5-model-comparison.md",
@@ -186,8 +187,8 @@ def test_markdown_links():
     # Expected navigation: Setup → Lab1 → Lab2 → Lab3 → Lab4 → Lab5 → Lab6 → Lab7 → Cleanup
     nav_chain = [
         ("setup/SETUP.md", "docs/lab1-discover-models.md"),
-        ("docs/lab1-discover-models.md", "docs/lab2-project-setup.md"),
-        ("docs/lab2-project-setup.md", "docs/lab3-connect-and-infer.md"),
+        ("docs/lab0-project-setup.md", "docs/lab1-discover-models.md" ),
+        ("docs/lab2-verifysetup.md", "docs/lab3-connect-and-infer.md"),
         ("docs/lab3-connect-and-infer.md", "docs/lab4-comment-moderation.md"),
         ("docs/lab4-comment-moderation.md", "docs/lab5-model-comparison.md"),
         ("docs/lab5-model-comparison.md", "docs/lab6-deploy-agent.md"),

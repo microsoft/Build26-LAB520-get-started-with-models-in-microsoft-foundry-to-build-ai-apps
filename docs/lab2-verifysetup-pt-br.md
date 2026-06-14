@@ -40,7 +40,7 @@ Clique com o botão direito na pasta e escolha Abrir com Code (se instalado)
 
 ## Passo 3: Confiar no espaço de trabalho
 
-![trust.png](.images/trust.png)
+![trust.png](./images/trust.png)
 
 Quando solicitado com "Você confia nos autores dos arquivos nesta pasta?"
 Clique Sim, confio nos autores
@@ -56,7 +56,6 @@ Nenhum aviso de modo restrito é exibido
 ---
 
 ## Passo 4. Validar que seu .env foi criado e preenchido
-
 
 Certifique-se de que o arquivo .env foi criado na raiz de seu projeto.
 
@@ -133,7 +132,7 @@ Se alguma verificação falhar, a saída diz exatamente o que corrigir. Problema
 | Falha | Solução |
 |------|---------|
 | Arquivo faltando | Revise a saída do azd provision para erros |
-| CLI não encontrada | Instale a ferramenta faltante (veja [SETUP.md](../setup/SETUP.md)) |
+| CLI não encontrada | Instale a ferramenta faltante (veja [SETUP.md](../setup/SETUP-pt-br.md)) |
 | Pacote não instalado | Execute pip install -r requirements.txt dentro de seu .venv |
 | .env não configurado | Copie .env.sample para .env e preencha seu endpoint |
 
@@ -166,4 +165,4 @@ Se a validação falhar, verifique as mensagens de falha -- problemas comuns inc
 > Um projeto Foundry é seu espaço de trabalho para organizar recursos de IA. O endpoint do projeto é o único ponto de conexão que seu código de aplicação precisa para acessar qualquer modelo implantado dentro dele.
 
 ---
-**Próximo:** [Lab 3 - Conectar e Inferência](./lab3-connect-and-infer.md)
+**Próximo:** [Lab 3 - Conectar e Inferência](./lab3-connect-and-infer-pt-br.md)
