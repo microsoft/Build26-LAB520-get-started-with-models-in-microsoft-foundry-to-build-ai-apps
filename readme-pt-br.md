@@ -19,17 +19,17 @@ Neste lab prático, você sairá do zero para uma aplicação pronta para produ�
 Para começar em uma sessão de lab guiada:
 - Abra o ambiente de lab fornecido pelo instrutor
 - Execute `.\scripts\setup.ps1` (Windows) ou `./scripts/setup.sh` (Linux/macOS) para provisionar recursos do Azure e configurar seu ambiente
-- Comece pelo [Lab 1: Discover Models](docs/lab1-discover-models.md)
+- Comece pelo [Lab 1: Discover Models](docs/lab1-discover-models-pt-br.md)
 
 ### 🏠 Como começar no seu próprio ambiente
 
 Se você estiver seguindo estes passos no seu ritmo:
 - Faça o clone deste repositório e abra-o no Visual Studio Code
-- Garanta que você tenha Python 3.10+, Azure CLI e Azure Developer CLI instalados (veja o [Guia de Setup](setup/SETUP.md) para detalhes)
+- Garanta que você tenha Python 3.10+, Azure CLI e Azure Developer CLI instalados (veja o [Guia de Setup](setup/SETUP-pt-br.md) para detalhes)
 - Execute `.\scripts\setup.ps1` (Windows) ou `./scripts/setup.sh` (Linux/macOS) para provisionar recursos do Azure e configurar seu ambiente
-- Comece pelo [Lab 1: Discover Models](docs/lab1-discover-models.md)
+- Comece pelo [Lab 1: Discover Models](docs/lab1-discover-models-pt-br.md)
 
-> ⚠️ Este lab provisiona recursos do Azure que podem gerar custos na sua assinatura. Consulte [Cleanup](cleanup/CLEANUP.md) ao finalizar.
+> ⚠️ Este lab provisiona recursos do Azure que podem gerar custos na sua assinatura. Consulte [Cleanup](cleanup/CLEANUP-pt-br.md) ao finalizar.
 
 ### 🧠 Resultados de aprendizado
 
