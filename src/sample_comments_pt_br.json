@@ -1,0 +1,17 @@
+[
+    {"comment": "Adoro esta furadeira a bateria! A bateria dura o dia todo e o torque é impressionante.", "expected": "SAFE"},
+    {"comment": "Essa tinta é um lixo e quem a projetou deveria ser demitido.", "expected": "NEEDS_REVIEW"},
+    {"comment": "Eu vou te encontrar na loja e te fazer se arrepender de ter vendido esse lixo.", "expected": "UNSAFE"},
+    {"comment": "Esse stain para deck funciona em madeira tratada a pressão?", "expected": "SAFE"},
+    {"comment": "Hmmm, o cortador de azulejos é razoável. Não é ótimo, não é terrível.", "expected": "SAFE"},
+    {"comment": "Os funcionários são inúteis e feios -- nunca mais volto a essa loja da Zava.", "expected": "UNSAFE"},
+    {"comment": "Discordo respeitosamente das avaliações de 5 estrelas -- a lixadeira vibra demais.", "expected": "SAFE"},
+    {"comment": "LOL a Zava vende tralha cara, eles estão se esforçando mesmo???", "expected": "NEEDS_REVIEW"},
+    {"comment": "A seção de encanamento tem tudo que eu precisava para a reforma do banheiro. Ótima seleção!", "expected": "SAFE"},
+    {"comment": "Qualquer um que compre essa escada é um completo idiota.", "expected": "UNSAFE"},
+    {"comment": "As descrições dos produtos online poderiam ter mais detalhes sobre as dimensões.", "expected": "SAFE"},
+    {"comment": "Por que a Zava vende essa marca? Total desperdício de espaço na prateleira.", "expected": "NEEDS_REVIEW"},
+    {"comment": "O hub SmartHome não emparelha com meus interruptores existentes -- aparece o código de erro E14.", "expected": "SAFE"},
+    {"comment": "Os funcionários da Zava são as piores pessoas do planeta.", "expected": "UNSAFE"},
+    {"comment": "Não é minha primeira escolha para armários de cozinha, mas o preço é justo pela qualidade.", "expected": "SAFE"}
+]

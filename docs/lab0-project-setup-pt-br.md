@@ -277,4 +277,4 @@ Se a validação falhar, verifique as mensagens de falha -- problemas comuns inc
 
 ---
 
-**Próximo:** [Lab 1 - Descobrir Modelos →](./lab1-discover-models.md)
+**Próximo:** [Lab 1 - Descobrir Modelos →](./lab1-discover-models-pt-br.md)
