@@ -72,9 +72,9 @@ Install-IfMissing "az"     "Azure CLI"           "winget install -e --id Microso
 Install-IfMissing "azd"    "Azure Developer CLI" "winget install -e --id Microsoft.Azd --accept-source-agreements --accept-package-agreements"        "https://aka.ms/azure-dev/install"
 Install-IfMissing "python" "Python"              "winget install -e --id Python.Python.3.12 --accept-source-agreements --accept-package-agreements"   "https://www.python.org/downloads/"
 
-# Docker is optional (Lab 6 Option B) — inform but don't fail
+# Docker is optional (Lab 6 Option B) - inform but don't fail
 if (-not (Get-Command "docker" -ErrorAction SilentlyContinue)) {
-    Write-Host "  Docker not found (optional — only needed for Lab 6 local build)." -ForegroundColor Yellow
+    Write-Host "  Docker not found (optional - only needed for Lab 6 local build)." -ForegroundColor Yellow
     Write-Host "  Lab 6 can use ACR Tasks (cloud build) instead. Install Docker: https://docs.docker.com/get-docker/" -ForegroundColor Yellow
 }
 
@@ -103,11 +103,11 @@ if (Get-Command "code" -ErrorAction SilentlyContinue) {
             Write-Host "  Already installed: $ext"
         } else {
             Write-Host "  Installing: $ext..." -ForegroundColor Yellow
-            code --install-extension $ext --force 2>$null
+            code --install-extension $ext --force 2>&1 | Out-Null
         }
     }
 } else {
-    Write-Host "  Visual Studio Code CLI not found — skipping extension install." -ForegroundColor Yellow
+    Write-Host "  Visual Studio Code CLI not found - skipping extension install." -ForegroundColor Yellow
     Write-Host "  Recommended: Install Visual Studio Code from https://code.visualstudio.com/" -ForegroundColor Yellow
 }
 
@@ -143,11 +143,11 @@ $providers = @(
 foreach ($provider in $providers) {
     $state = az provider show --namespace $provider --query registrationState -o tsv 2>$null
     if ($state -eq "Registered") {
-        Write-Host "  $provider — already registered"
+        Write-Host "  $provider - already registered"
     } else {
-        Write-Host "  $provider — registering..." -ForegroundColor Yellow
+        Write-Host "  $provider - registering..." -ForegroundColor Yellow
         az provider register --namespace $provider --wait 2>$null
-        Write-Host "  $provider — registered" -ForegroundColor Green
+        Write-Host "  $provider - registered" -ForegroundColor Green
     }
 }
 
@@ -186,14 +186,14 @@ if (-not $SkipProvision) {
 
     Write-Host "  Provisioning complete." -ForegroundColor Green
 } else {
-    Write-Step "6/10" "Skipping azd init (--SkipProvision)"
-    Write-Step "7/10" "Skipping azd provision (--SkipProvision)"
+    Write-Step "6/10" "Skipping azd init (-SkipProvision)"
+    Write-Step "7/10" "Skipping azd provision (-SkipProvision)"
 }
 
 # -----------------------------------------------------------------------
 Write-Step "8/10" "Creating Python virtual environment..."
 
-$venvPath = Join-Path $PSScriptRoot ".." ".venv"
+$venvPath = Join-Path (Join-Path $PSScriptRoot "..") ".venv"
 if (-not (Test-Path $venvPath)) {
     python -m venv $venvPath
     Write-Host "  Virtual environment created at: .venv" -ForegroundColor Green
@@ -202,7 +202,7 @@ if (-not (Test-Path $venvPath)) {
 }
 
 # Activate the virtual environment
-$activateScript = Join-Path $venvPath "Scripts" "Activate.ps1"
+$activateScript = Join-Path (Join-Path $venvPath "Scripts") "Activate.ps1"
 if (Test-Path $activateScript) {
     & $activateScript
     Write-Host "  Virtual environment activated." -ForegroundColor Green
@@ -213,7 +213,7 @@ if (Test-Path $activateScript) {
 # -----------------------------------------------------------------------
 Write-Step "9/10" "Installing Python dependencies..."
 
-$reqPath = Join-Path $PSScriptRoot ".." "requirements.txt"
+$reqPath = Join-Path (Join-Path $PSScriptRoot "..") "requirements.txt"
 if (Test-Path $reqPath) {
     pip install -r $reqPath --quiet
     Write-Host "  Dependencies installed."
@@ -226,7 +226,7 @@ Write-Step "10/10" "Writing .env configuration..."
 
 # The postprovision hook already writes .env, but if SkipProvision was used
 # we need to check.
-$envPath = Join-Path $PSScriptRoot ".." ".env"
+$envPath = Join-Path (Join-Path $PSScriptRoot "..") ".env"
 if (-not (Test-Path $envPath) -or $SkipProvision) {
     $endpoint = $null
     $model    = $null
