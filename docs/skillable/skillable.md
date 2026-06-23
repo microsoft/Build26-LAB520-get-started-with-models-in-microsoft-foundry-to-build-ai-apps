@@ -339,39 +339,7 @@ If the script fails, check if you're experiencing one of these issues:
 
 ---
 
-## Step 3: Experiment
-
-Try modifying the code to explore different behaviors:
-
-### Change the System Prompt
-
-Edit the system message to change the model's behavior:
-
-```python
-{"role": "system", "content": "You are Cora, Zava's friendly AI shopping assistant. Help customers find the right home-improvement products."},
-```
-
-### Change the User Input
-
-```python
-{"role": "user", "content": "I'm Bruno and I'm renovating my kitchen. What tools do I need to install new cabinets?"},
-```
-
-### Add Temperature Control
-
-The temperature param can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
-
-```python
-response = inference_client.chat.completions.create(
-    model=os.environ["MODEL_DEPLOYMENT_NAME"],
-    messages=[...],
-    temperature=0.0,
-)
-```
-
-> **For Zava's review moderation tasks (Lab 4), use temperature=0.0** to get the most consistent, reproducible classifications.
-
-## Experiment (Run, Observe, Learn)
+## Step 3: Experiment (Run, Observe, Learn)
 
 Now that your code is working, this step is about **actively testing changes and observing how the model behaves**.
 
@@ -399,7 +367,7 @@ Each time you make a change, re-run the script and observe the output in the ter
 Follow a simple loop:
 
 1. Change one thing only
-2. Run the script
+2. Run the script:
 3. Observe the output
 4. Compare with previous runs
 
@@ -443,6 +411,8 @@ Try variations:
 ***
 
 ### Add Temperature Control
+
+The temperature param can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
 
 ```python
 response = inference_client.chat.completions.create(
