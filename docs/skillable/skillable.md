@@ -4,7 +4,7 @@
 
 To begin, log into the virtual machine using the following credentials: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
-# Lab 1: Discover Models in Microsoft Foundry
+# Part 1: Discover Models in Microsoft Foundry
 
 > **Duration:** ~10 minutes | **Phase:** Orientation (UI)
 
@@ -22,30 +22,29 @@ Explore the Microsoft Foundry portal to discover available hosted models, unders
 
 ## Step 1: Open Microsoft Foundry Portal
 
-Open, Microsoft Foundry Portal +++https://ai.azure.com+++ and sign in with the following Azure credentials using the **start building** button:
+Open the Microsoft Edge browser from the bottom taskbar.
+
+Navigate to the Microsoft Foundry Portal at +++https://ai.azure.com+++ 
+
+Select the **Start building** button and sign in with the following Azure credentials.
 
 Username:  
 +++@lab.CloudPortalCredential(User1).Username+++
 
-If Prompted for a temporary Access Password 'TAP'
+If prompted for a Temporary Access Password 'TAP'
 +++@lab.CloudPortalCredential(User1).AccessToken+++
 
-If Prompted for a Password: 
+If prompted for a Password: 
 +++@lab.CloudPortalCredential(User1).Password+++
-
 
 You will land on the Foundry **resources** page. This is the central hub for managing AI resources.
 
-Ensure the new foundry switch at the top of the screen is turned on for New Foundry. 
-
+Ensure the **New Foundry** switch at the top of the screen is turned on.
 
 !IMAGE[newfoundry.png](instructions343795/newfoundry.png)
 
-If don't get the screen below."You will  have to update the current project to the latest Foundry version. Select the project listed to update. 
-
-!IMAGE[selectproject.png](instructions343795/selectproject.png) 
-
-Now Select the project from the available projects screen to load the project.
+Now click the linked project name from the "All resources" listing to open it in Foundry.
+If you see a dialog pop open about what you would like to do next, you can close it.
 
 > [+alert] **If you are unable to view the project please see below**
 > 
@@ -64,73 +63,55 @@ Now Select the project from the available projects screen to load the project.
 
 ## Step 2: Explore the Model Catalog
 
-1. In the main windows, click **discover** from the top menu.
-2. In the discover section browse the available models by clicking **view all models** -- these are production-ready, hosted models you can use without fine-tuning
-4. You can use the filters within the 'Models' page to narrow down the list of models. For example you can filter by Supported features (Agent service, Fine-tuning, etc), Source (Azure OpenAI, Microsoft, Meta, Mistral, etc.) or by Inference Task (Chat Completition, Image Analysis etc). This allows you to quickly filter models based on a specific task or requirement.
+1. In the main windows, click **Discover** from the top menu.
+2. In the **Discover** section, browse the available models by clicking **Models**. These are production-ready, hosted models that you can use without fine-tuning.
+4. You can use the filters within the **Models** page to narrow down the list of models. For example, you can filter by Supported features (Agent service, Fine-tuning, etc), Source (Azure OpenAI, Microsoft, Meta, Mistral, etc.) or by Inference Task (Chat Completion, Image Analysis etc). This allows you to quickly filter models based on a specific task or requirement.
 
-Select a Model to view the Model Card
+Select a model to view the details page. Take note of the following properties in the side box.
 
-Take note of the following for each model:
-
-| Property | What to Look For |
+| Property | Common values |
 |----------|-----------------|
-| **Publisher** | OpenAI, Microsoft, Meta, Mistral, etc. |
-| **Task type** | Chat completion, text generation, embeddings |
-| **Deployment options** | Serverless API, managed compute |
-| **Pricing tier** | Pay-as-you-go, free playground |
-| **Benchmarks** | Model performance and stats|
-| **Responsible AI** | Prompts and completions are passed through a default configuration of Azure AI Content Safety classification models |
-
----
-
-## Step 3: Identify a Model for This Lab
-
-For this workshop, you need a model that supports **chat completion** -- the ability to accept a system prompt and user messages and return a structured response.
-
-**Recommended models for this lab:**
-
-| Model | Publisher | Why |
-|-------|-----------|-----|
-| gpt-4.1-mini | OpenAI | Fast, cost-efficient, excellent for classification |
-| gpt-4.1 | OpenAI | Higher quality, good for complex moderation |
-| Phi-4 | Microsoft | Strong reasoning, open-weight |
-
-> **Tip:** gpt-4.1-mini is the best choice for this lab -- it is fast, inexpensive, and well-suited for moderation and classification tasks.
+| **Model provider** | Azure OpenAI, Microsoft AI, Meta, Mistral, etc. |
+| **Task type** | Chat completion, Responses, Text to image |
+| **Input type** | text, image |
+| **Output type** | text, image |
+| **Context window** | 1000K |
+| **Token limits** | 128K output |
 
 ---
 
 ## Step 4: Check Model Details
 
-Click on your chosen model (e.g., **gpt-4.1-mini**) to view its detail page:
+For this workshop, you need a model that supports **chat completion**: the ability to accept a system prompt and user messages and return a structured response. The **gpt-4.1-mini** from Azure OpenAI is a high quality model that is also fast and cost-efficient, so we have already deployed it in the Foundry project for you.
 
-1. **Details** Read the model description and capabilities
-2. **Deployments** -- Deployment options
-3. **Benchmarks** -- Review performance metrics
-4. **License** -- The Model License
+Find **gpt-4.1-mini** from the catalog and open the details page.
+Explore the tabs at the top:
 
-> You will deploy this model programmatically in Lab 2. For now, just confirm it is available in the catalog and you can see the model card details.
+1. **Details**: Model description and capabilities
+2. **Deployments**: A list of current deployments of this model
+3. **Benchmarks**: Scores and performance metrics
+4. **Responsible AI**: Guardrails imposed on the model from Azure AI Content Safety
+4. **License**: Links to applicable licensing terms
 
 ---
 
 
 ## Step 5: Explore the Playground (Optional)
 
-1. Select **Deploy** → Select "gpt-4.1-mini" under Use an existing deployment, which then brings you to the **playground** for the model deployment.
-2. In the **instructions**, enter:
+1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
+2. In the **Instructions** text field, enter:
 
 ```Instructions
 You are a product review moderator for Zava, a home-improvement retailer. Classify the following customer review as SAFE, NEEDS_REVIEW, or UNSAFE. Respond with only the classification label.
 ```
 
-3. In the chat with model window, enter:
+3. In the **Chat with the model** text field, enter:
 
 ```Prompt
 This paint is garbage and whoever designed it should be fired
 ```
 
-4. Click **Send** and observe the response
-
-This is a preview of the inference pattern you will implement in code during Labs 3 and 4 to moderate Zava product reviews.
+4. Click the send button and observe the response. This is a preview of the inference pattern you will implement in code during Labs 3 and 4 to moderate Zava product reviews.
 
 ---
 
@@ -138,139 +119,55 @@ This is a preview of the inference pattern you will implement in code during Lab
 
 - ✅ How to navigate the Microsoft Foundry portal
 - ✅ How to browse the model catalog
-- ✅ How to identify models suitable for chat completion tasks
-- ✅ How to check quota and region availability
 - ✅ How a model responds to a Zava review moderation prompt
 
 ---
 
 ## Key Takeaway
 
-> Microsoft Foundry provides access to production-ready hosted models from multiple publishers. You do not need to train, fine-tune, or host these models yourself -- you simply connect to them via API and start building. For Zava, this means Serena can have a working review moderation prototype in hours, not weeks.
+> Microsoft Foundry provides access to production-ready hosted models from multiple publishers. You do not need to train, fine-tune, or host these models yourself — you simply connect to them via API and start building. That means you can have a working prototype in hours, not weeks.
 
 ---
 
-**Next:** Lab 2 - Verify your Microsoft Foundry Project 
+**Next:** Lab 2 - Set up VS Code
 
 ======
 
 
-# Lab 2: Verify your Microsoft Foundry Project 
+# Lab 2: Set up VS Code
 
-## Step 1: Verify in Foundry Portal if your already logged in moved to Step 2
+## Step 1: Open the project in VS Code
 
-1. Open +++https://ai.azure.com+++ in the browser
-2. Login with username: 
-+++@lab.CloudPortalCredential(User1).Username+++
-and 
-Password: 
-+++@lab.CloudPortalCredential(User1).Password+++
-2. You should see your new project listed
+1. Open Visual Studio Code by launching it from the Start menu or desktop.
 
+2. In VS Code, select **File → Open Folder**.
 
----
+3. Navigate to the "Desktop" folder, select "Build26-LAB520-main", and click **Select folder**.
 
-## Step 2: Open the folder in VS Code and trust the workspace
+4.  When prompted with "Do you trust the authors of the files in this folder?", select "Yes, I trust the authors"
 
-Open Visual Studio Code
+    !IMAGE[trust.png](instructions343795/trust.png)
 
-Launch VS Code from the Start menu or desktop.
-
-Open the lab folder
-
-In VS Code, select:
-
-File → Open Folder
-
-Navigate to:
-C:\Users\LabUser\Desktop\Build26-LAB520-main
-
-Click Select Folder
-
-Alternative (faster option):
-
-Open File Explorer
-Go to:
-C:\Users\LabUser\Desktop\Build26-LAB520-main
-
-Right-click in the folder and choose Open with Code (if installed)
-
+5. You should see the project files in the sidebar. 
 
 ---
 
-## Step 3: Trust the workspace
+## Step 2. Validate the .env is correct
 
-!IMAGE[trust.png](instructions343795/trust.png)
+Ensure that the .env file has been created successfully in the root of your project:
 
-When prompted with "Do you trust the authors of the files in this folder?"
-Click Yes, I trust the authors
+1. Open the `.env` file from the root of the project folder.
+2. Confirm the following variables exist:
 
-Select Trust
+    ```
+    PROJECT_ENDPOINT
+    MODEL_DEPLOYMENT_NAME
+    ```
 
-Expected outcome
+    You may also see `MODEL_DEPLOYMENT_NAME_2` and `AZURE_CONTAINER_REGISTRY_NAME`, which are optional variables for later sections, but they are not required.
 
-The folder opens in VS Code
-All features (extensions, terminals, scripts) are fully enabled
-No restricted mode warnings are shown
+3. (Optional) Check the values of the variables are correct according to your Foundry project. `PROJECT_ENDPOINT` should match the project endpoint listed on https://ai.azure.com, and `MODEL_DEPLOYMENT_NAME` should match the name of the model deployment.
 
----
-
-## Step 4. Validate your .env is created and populated
-
-
-Ensure the .env file has been created in the root of your project.
-
-To complete the command please open a terminal within VSCode click in VSCode click on the on 'Terminal' menu -> then select 'New terminal'? before running 'Test-Path .env'. This will open a new Terminal window within VSCode.
-
-```powershell
-Test-Path .env
-```
-Compare .env against .env.sample
-
-Validate that all required keys from .env.sample exist in .env.
-
-Option A - Manual check
-Open both files and confirm the following variables exist:
-
-PROJECT_ENDPOINT
-MODEL_DEPLOYMENT_NAME
-MODEL_DEPLOYMENT_NAME_2 (optional)
-AZURE_CONTAINER_REGISTRY_NAME (optional)
-
-Option B - Automated Check 
-
-Copy and paste the following into a powershell command window
-
-```powershell
-
-# Load sample keys
-$sampleKeys = Get-Content .env.sample | Where-Object { $_ -match "=" } | ForEach-Object {
-    ($_ -split "=")[0].Trim()
-}
-
-# Load env keys
-$envKeys = Get-Content .env | Where-Object { $_ -match "=" } | ForEach-Object {
-    ($_ -split "=")[0].Trim()
-}
-
-# Compare
-$missingKeys = $sampleKeys | Where-Object { $_ -notin $envKeys }
-
-if ($missingKeys.Count -eq 0) {
-    Write-Host "✅ All required keys are present in .env"
-} else {
-    Write-Host "❌ Missing keys in .env:"
-    $missingKeys
-}
-```
-
-Option C - Visual Check using VSCode Project
-
-Open the project in VSCode and verify:
-   - The project endpoint listed at https://ai.azure.com matches your .env details in the solution.
-   - Your model deployment appears under **Deployments** menu at https://ai.azure.com
-
-You will see that the Missing Keys in the .env for MODEL_DEPLOYMENT_NAME_2 as you have only one model deployed. You will need add the details manually for an additional model deployment, and we will do this in a later lab, so do not worry this error is correct.
 
 --- 
 
@@ -278,56 +175,37 @@ You will see that the Missing Keys in the .env for MODEL_DEPLOYMENT_NAME_2 as yo
 
 Run the included validation script to confirm that all files, dependencies, CLI tools, and configuration are correct:
 
-In Visual Studio Code Open a Terminal Window 
+1. Open a terminal in VS Code by selecting **Terminal > New Terminal**
 
-```powershell
-python -X utf8 src/tests/validate_lab.py
-```
+2. Run this command in the terminal:
 
-> **Note:** Use the -X utf8 flag on Windows to avoid encoding errors. On Linux/macOS you can omit it.
+    ```powershell
+    python -X utf8 src/tests/validate_lab.py
+    ```
 
-You should see output ending with:
+    > **Note:** Use the -X utf8 flag on Windows to avoid encoding errors. On Linux/macOS you can omit it.
 
-```output
-  VALIDATION SUMMARY
-  Total checks: 100
-  Passed:  99
-  Failed:  0
-  Skipped: 1
+3. You should see output ending with:
 
-  Result: PASS  - lab is ready!
-```
+    ```output
+    Total checks: 100
+    ✅ Passed:  99
+    ❌ Failed:  0
+    ⏭️ Skipped: 1
 
-If any checks fail, the output tells you exactly what to fix. Common issues:
+    Result: PASS — lab is ready!
+    ```
 
-| Failure | Fix |
-|---------|-----|
-| Missing file | Re-check your azd provision output for errors |
-| CLI not found | Install the missing tool (see [SETUP.md](../setup/SETUP.md)) |
-| Package not installed | Run pip install -r requirements.txt inside your .venv |
-| .env not configured | Copy .env.sample to .env and fill in your endpoint |
+    If any checks fail, the output tells you exactly what to fix. Common issues:
+
+    | Failure | Fix |
+    |---------|-----|
+    | Missing file | Re-check your azd provision output for errors |
+    | CLI not found | Install the missing tool (see [SETUP.md](../setup/SETUP.md)) |
+    | Package not installed | Run pip install -r requirements.txt inside your .venv |
+    | .env not configured | Copy .env.sample to .env and fill in your endpoint |
 
 > **Tip:** Re-run validation after any fix to confirm it resolves the issue.
-
----
-## What You Learned
-
-- ✅ How to validate your setup with the automated validation script
-- ✅ Loading the workshop solution in VSCode
-
-
----
-
-## Checkpoint
-
-Before moving on, confirm all of the following:
-
-- [ ] .env file exists and contains PROJECT_ENDPOINT and MODEL_DEPLOYMENT_NAME
-- [ ] python -X utf8 src/tests/validate_lab.py shows all checks passing
-- [ ] azd env get-values shows your project endpoint and resource group
-- [ ] Your Foundry project is visible at https://ai.azure.com
-
-If validation fails, check the failure messages -- common issues include missing .env values or incomplete provisioning.
 
 ---
 
@@ -347,26 +225,15 @@ If validation fails, check the failure messages -- common issues include missing
 
 ## Objective
 
-As Serena (Zava's developer), write Python code that authenticates against your Foundry project, connects to a hosted model endpoint, and sends your first inference request -- laying the groundwork for Zava's review moderation system.
-
----
-
-## Concepts
-
-| Concept | Description |
-|---------|-------------|
-| **AIProjectClient** | SDK client that connects to your Foundry project |
-| **DefaultAzureCredential** | Automatic credential chain -- uses your az login session locally |
-| **Chat Completion** | Send a system prompt + user message, receive a model response |
-| **Inference Endpoint** | The API endpoint your model deployment exposes |
+Write Python code that authenticates against your Foundry project, connects to a hosted model endpoint, and sends your first inference request — laying the groundwork for Zava's review moderation system.
 
 ---
 
 ## Step 1: Review the Code
 
-Open src/01_first_inference.py in your editor. 
+Open `src/01_first_inference.py` in your editor. 
 
-The following sections walk through and explains the code in the solution step by step covering the key aspects of the solution.
+The following sections walk through the code and explains the key concepts.
 
 ### Authentication and Client Setup
 
@@ -398,7 +265,7 @@ def main():
     )
 ```
 
-This creates a project client authenticated with your Azure credentials. The PROJECT_ENDPOINT comes from your .env file (configured in Lab 2).
+This creates a project client authenticated with your Azure credentials. The `PROJECT_ENDPOINT` comes from your `.env` file.
 
 ### Getting an Inference Client
 
@@ -420,7 +287,7 @@ response = inference_client.chat.completions.create(
 )
 ```
 
-The chat.completions.create() method sends a chat completion request with:
+The `chat.completions.create()` method sends a chat completion request with:
 
 - **model** -- The deployment name (e.g., gpt-4.1-mini)
 - **messages** -- An array of conversation messages with roles (system, user, assistant)
@@ -437,41 +304,38 @@ The response object contains an array of choices. Each choice has a message with
 
 ## Step 2: Run the Code
 
-Make sure your .env file is configured within your solution (from Lab 2), then run the following command from a terminal windows:
+1. Open a terminal in VS Code by selecting **Terminal > New Terminal**
 
-To open a terminal windows in VSCode select Terminal -> new windows from the top menu in VSCode 
+2. Run the following command from the terminal:
 
-```powershell
-python src/01_first_inference.py
-```
+    ```powershell
+    python src/01_first_inference.py
+    ```
 
-### Expected Output (You are using a LLM non determistic solution so the output will not 100% match, simply validate message and format)
+3. You should see output similar to the sample output below. Since LLMs are non-deterministic, the output will not 100% match. Validate that the message and formatting is similar.
 
-```output
-Connecting to Foundry project...
-Sending inference request to model: gpt-4.1-mini
----
-Response:
-Microsoft Foundry is a unified platform for discovering, deploying, and
-managing AI models, which Zava could use to power product recommendations,
-review moderation, and customer support agents at scale.
----
-Model: gpt-4.1-mini
-Tokens used: 52 (prompt: 30, completion: 22)
-```
+    ```output
+    Connecting to Foundry project...
+    Sending inference request to model: gpt-4.1-mini
+    ---
+    Response:
+    Microsoft Foundry is a unified platform for discovering, deploying, and
+    managing AI models, which Zava could use to power product recommendations,
+    review moderation, and customer support agents at scale.
+    ---
+    Model: gpt-4.1-mini
+    Tokens used: 52 (prompt: 30, completion: 22)
+    ```
 
-> **Note:** The first inference request may take 3-5 seconds due to cold start (the model endpoint warming up). Subsequent requests in the same session are typically much faster (under 2 seconds). This is normal behavior -- if you see a delay on the first call, just wait for the response.
 
-### Troubleshooting Common Errors
-
-If the script fails, check the table below before asking for help:
+If the script fails, check if you're experiencing one of these issues:
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| KeyError: PROJECT_ENDPOINT | .env file is missing or incomplete | Run azd env get-values > .env to regenerate it |
-| AuthenticationError or DefaultAzureCredential failed | Azure CLI session expired | Run az login and try again |
+| KeyError: PROJECT_ENDPOINT | `.env` file is missing or incomplete | Run `azd env get-values > .env` to regenerate it |
+| AuthenticationError or DefaultAzureCredential failed | Azure CLI session expired | Run `az login` and try again |
 | Connection timed out after 30+ seconds | Endpoint is unreachable | Check your network/VPN; verify the endpoint URL in .env |
-| ResourceNotFoundError | Model deployment name does not match | Run az cognitiveservices account deployment list to check the exact name |
+| ResourceNotFoundError | Model deployment name does not match | Run `az cognitiveservices account deployment list` to check the exact name |
 
 ---
 
@@ -495,21 +359,17 @@ Edit the system message to change the model's behavior:
 
 ### Add Temperature Control
 
+The temperature param can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
+
 ```python
 response = inference_client.chat.completions.create(
     model=os.environ["MODEL_DEPLOYMENT_NAME"],
     messages=[...],
-    temperature=0.0,  # Deterministic output
+    temperature=0.0,
 )
 ```
 
-| Temperature | Behavior |
-|-------------|----------|
-| 0.0 | Deterministic -- same input produces same output |
-| 0.7 | Balanced creativity (default) |
-| 1.0 | Maximum creativity / variability |
-
-> **For Zava's review moderation tasks (Lab 4), use temperature=0.0** to get consistent, reproducible classifications.
+> **For Zava's review moderation tasks (Lab 4), use temperature=0.0** to get the most consistent, reproducible classifications.
 
 ## Experiment (Run, Observe, Learn)
 
