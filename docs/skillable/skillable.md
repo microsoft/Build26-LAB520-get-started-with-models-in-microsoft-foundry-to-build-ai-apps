@@ -63,9 +63,9 @@ If you see a dialog pop open about what you would like to do next, you can close
 
 ## Step 2: Explore the model catalog
 
-1. In the main windows, click **Discover** from the top menu.
+1. In the main window, click **Discover** from the top menu.
 2. In the **Discover** section, browse the available models by clicking **Models**. These are production-ready, hosted models that you can use without fine-tuning.
-4. You can use the filters within the **Models** page to narrow down the list of models. For example, you can filter by Supported features (Agent service, Fine-tuning, etc), Source (Azure OpenAI, Microsoft, Meta, Mistral, etc.) or by Inference Task (Chat Completion, Image Analysis etc). This allows you to quickly filter models based on a specific task or requirement.
+3. You can use the filters within the **Models** page to narrow down the list of models. For example, you can filter by Supported features (Agent service, Fine-tuning, etc), Source (Azure OpenAI, Microsoft, Meta, Mistral, etc.) or by Inference Task (Chat Completion, Image Analysis etc). This allows you to quickly filter models based on a specific task or requirement.
 
 Select a model to view the details page. Take note of the following properties in the side box.
 
