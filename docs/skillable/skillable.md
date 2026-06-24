@@ -80,7 +80,8 @@ Select a model to view the details page. Take note of the following properties i
 | **Context window** | 1000K |
 | **Token limits** | 128K output |
 
-## Step 3: Check model details
+## Step 3: Check model details
+
 
 ## Step 4: Check model details
 
@@ -97,7 +98,7 @@ Explore the tabs at the top:
 
 ---
 
-
+## Step 4: Explore the playground (Optional)
 ## Step 5: Explore the playground (Optional)
 
 1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
