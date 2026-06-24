@@ -2,9 +2,6 @@
 Lab 3: First Inference with Microsoft Foundry
 ==============================================
 Connect to a Foundry project and send your first inference request to a hosted model.
-
-Scenario: You are Serena, a developer at Zava (a global home-improvement retailer),
-exploring Microsoft Foundry to power AI features for the Zava platform.
 """
 
 import os
