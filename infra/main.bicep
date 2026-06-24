@@ -42,6 +42,14 @@ param secondModelCapacity int = 10
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+@description('Type of the principal referenced by principalId (User, ServicePrincipal, or Group)')
+@allowed([
+  'User'
+  'ServicePrincipal'
+  'Group'
+])
+param principalType string = 'User'
+
 @description('Enable hosted agent infrastructure (ACR + capability host) for Lab 6')
 param enableHostedAgents bool = false
 
@@ -112,6 +120,7 @@ module roleAssignments './modules/role-assignments.bicep' = if (!empty(principal
   scope: rg
   params: {
     principalId: principalId
+    principalType: principalType
     aiServicesName: aiServices.outputs.aiServicesName
     acrName: enableHostedAgents ? aiServices.outputs.acrName : ''
   }

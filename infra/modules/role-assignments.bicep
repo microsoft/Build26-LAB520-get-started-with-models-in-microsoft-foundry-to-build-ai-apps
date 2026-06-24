@@ -5,6 +5,14 @@
 @description('Principal ID to assign roles to (user or service principal)')
 param principalId string
 
+@description('Type of the principal referenced by principalId (User, ServicePrincipal, or Group)')
+@allowed([
+  'User'
+  'ServicePrincipal'
+  'Group'
+])
+param principalType string = 'User'
+
 @description('Name of the AI Services resource to scope role assignments')
 param aiServicesName string
 
@@ -36,7 +44,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   properties: {
     principalId: principalId
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesOpenAIUserRoleId)
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
@@ -49,7 +57,7 @@ resource contributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = 
   properties: {
     principalId: principalId
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesContributorRoleId)
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
@@ -68,6 +76,6 @@ resource acrPushRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (
   properties: {
     principalId: principalId
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', acrPushRoleId)
-    principalType: 'User'
+    principalType: principalType
   }
 }
