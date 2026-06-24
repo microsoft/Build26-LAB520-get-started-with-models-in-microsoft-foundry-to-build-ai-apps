@@ -94,11 +94,12 @@ Explore the tabs at the top:
 2. **Deployments**: A list of current deployments of this model
 3. **Benchmarks**: Scores and performance metrics
 4. **Responsible AI**: Guardrails imposed on the model from Azure AI Content Safety
-4. **License**: Links to applicable licensing terms
+5. **License**: Links to applicable licensing terms
 
 ---
 
-## Step 4: Explore the playground (Optional)
+## Step 4: Explore the playground (Optional)
+
 ## Step 5: Explore the playground (Optional)
 
 1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
