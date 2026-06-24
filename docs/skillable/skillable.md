@@ -77,8 +77,10 @@ Select a model to view the details page. Take note of the following properties i
 | **Task type** | Chat completion, Responses, Text to image |
 | **Input type** | text, image |
 | **Output type** | text, image |
-| **Context window** | Varies by model (see model card) |
-| **Token limits** | Varies by model (see model card) |
+| **Context window** | Varies by model (see model card) |
+
+| **Token limits** | Varies by model (see model card) |
+
 
 ## Step 3: Check model details
 
@@ -155,7 +157,7 @@ This paint is garbage and whoever designed it should be fired
 
 5. You should see the project files in the sidebar. 
 
----
+## Step 2: Validate the .env is correct
 
 ## Step 2. Validate the .env is correct
 
