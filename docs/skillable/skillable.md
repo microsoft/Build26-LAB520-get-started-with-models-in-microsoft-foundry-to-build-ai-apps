@@ -1,16 +1,16 @@
 @lab.Title
 
-## Welcome to Your Lab Environment
+## Welcome to your lab environment
 
 To begin, log into the virtual machine using the following credentials: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
-# Part 1: Discover Models in Microsoft Foundry
+# Part 1: Discover models in Microsoft Foundry
 
-> **Duration:** ~10 minutes | **Phase:** Orientation (UI)
+> **Duration:** ~10 minutes
 
 ## Scenario
 
-You are **Serena**, a developer at **Zava** -- a large global home-improvement retailer that operates both online and physical stores. Zava's platform receives thousands of customer product reviews daily from shoppers like **Bruno**, who is renovating his kitchen. Your task is to build an automated review moderation system that classifies customer reviews before they go live on the site. Eventually, this system will work alongside **Cora**, Zava's AI shopping assistant, to keep the platform safe and helpful.
+You are a developer at **Zava** — a large global home-improvement retailer that operates both online and physical stores. Zava's platform receives thousands of customer product reviews daily from shoppers like **Bruno**, who is renovating his kitchen. Your task is to build an automated review moderation system that classifies customer reviews before they go live on the site. Eventually, this system will work alongside **Cora**, Zava's AI shopping assistant, to keep the platform safe and helpful.
 
 In this lab, you will explore the Microsoft Foundry model catalog to find a model that can power Zava's review moderation pipeline.
 
@@ -20,7 +20,7 @@ Explore the Microsoft Foundry portal to discover available hosted models, unders
 
 ---
 
-## Step 1: Open Microsoft Foundry Portal
+## Step 1: Open Microsoft Foundry portal
 
 Open the Microsoft Edge browser from the bottom taskbar.
 
@@ -61,7 +61,7 @@ If you see a dialog pop open about what you would like to do next, you can close
 
 ---
 
-## Step 2: Explore the Model Catalog
+## Step 2: Explore the model catalog
 
 1. In the main windows, click **Discover** from the top menu.
 2. In the **Discover** section, browse the available models by clicking **Models**. These are production-ready, hosted models that you can use without fine-tuning.
@@ -80,7 +80,7 @@ Select a model to view the details page. Take note of the following properties i
 
 ---
 
-## Step 4: Check Model Details
+## Step 4: Check model details
 
 For this workshop, you need a model that supports **chat completion**: the ability to accept a system prompt and user messages and return a structured response. The **gpt-4.1-mini** from Azure OpenAI is a high quality model that is also fast and cost-efficient, so we have already deployed it in the Foundry project for you.
 
@@ -96,7 +96,7 @@ Explore the tabs at the top:
 ---
 
 
-## Step 5: Explore the Playground (Optional)
+## Step 5: Explore the playground (Optional)
 
 1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
 2. In the **Instructions** text field, enter:
@@ -115,7 +115,7 @@ This paint is garbage and whoever designed it should be fired
 
 ---
 
-## What You Learned
+## What you learned
 
 - ✅ How to navigate the Microsoft Foundry portal
 - ✅ How to browse the model catalog
@@ -123,7 +123,7 @@ This paint is garbage and whoever designed it should be fired
 
 ---
 
-## Key Takeaway
+## Key takeaway
 
 > Microsoft Foundry provides access to production-ready hosted models from multiple publishers. You do not need to train, fine-tune, or host these models yourself — you simply connect to them via API and start building. That means you can have a working prototype in hours, not weeks.
 
@@ -171,7 +171,7 @@ Ensure that the .env file has been created successfully in the root of your proj
 
 --- 
 
-## Step 5: Validate Your Setup
+## Step 5: Validate your setup
 
 Run the included validation script to confirm that all files, dependencies, CLI tools, and configuration are correct:
 
@@ -209,7 +209,7 @@ Run the included validation script to confirm that all files, dependencies, CLI 
 
 ---
 
-## Key Takeaway
+## Key takeaway
 
 > A Foundry project is your workspace for organizing AI resources. The project endpoint is the single connection point your application code needs to access any model deployed within it.
 
@@ -219,9 +219,9 @@ Run the included validation script to confirm that all files, dependencies, CLI 
 
 ======
 
-# Lab 3: Connect and Send Your First Inference
+# Lab 3: Connect and send your first inference
 
-> **Duration:** ~15 minutes | **Phase:** Code-First Interaction
+> **Duration:** ~15 minutes
 
 ## Objective
 
@@ -229,13 +229,13 @@ Write Python code that authenticates against your Foundry project, connects to a
 
 ---
 
-## Step 1: Review the Code
+## Step 1: Review the code
 
 Open `src/01_first_inference.py` in your editor. 
 
 The following sections walk through the code and explains the key concepts.
 
-### Authentication and Client Setup
+### Authentication and client setup
 
 ```python
 import os
@@ -267,7 +267,7 @@ def main():
 
 This creates a project client authenticated with your Azure credentials. The `PROJECT_ENDPOINT` comes from your `.env` file.
 
-### Getting an Inference Client
+### Getting an inference client
 
 ```python
 inference_client = project_client.get_openai_client()
@@ -275,7 +275,7 @@ inference_client = project_client.get_openai_client()
 
 The project client provides an OpenAI-compatible client for chat completions. This client is pre-configured with your project's endpoint and credentials.
 
-### Sending a Request
+### Sending a request
 
 ```python
 response = inference_client.chat.completions.create(
@@ -289,20 +289,20 @@ response = inference_client.chat.completions.create(
 
 The `chat.completions.create()` method sends a chat completion request with:
 
-- **model** -- The deployment name (e.g., gpt-4.1-mini)
-- **messages** -- An array of conversation messages with roles (system, user, assistant)
+- **model** — The deployment name (e.g., gpt-4.1-mini)
+- **messages** — An array of conversation messages with roles (system, user, assistant)
 
-### Processing the Response
+### Processing the response
 
 ```python
 print(response.choices[0].message.content)
 ```
 
-The response object contains an array of choices. Each choice has a message with content -- the model's text response.
+The response object contains an array of choices. Each choice has a message with content — the model's text response.
 
 ---
 
-## Step 2: Run the Code
+## Step 2: Run the code
 
 1. Open a terminal in VS Code by selecting **Terminal > New Terminal**
 
@@ -339,43 +339,29 @@ If the script fails, check if you're experiencing one of these issues:
 
 ---
 
-## Step 3: Experiment (Run, Observe, Learn)
+## Step 3: Experiment (run, observe, learn)
 
 Now that your code is working, this step is about **actively testing changes and observing how the model behaves**.
 
-***
-
-## Where to Run Your Experiments
-
-You should run and test your changes in your **Python environment**:
-
-* Open the root folder in your terminal or VS Code
-* Run your script:
-
-```powershell
-python src/01_first_inference.py
-```
-
-Each time you make a change, re-run the script and observe the output in the terminal.
-
-* Use **Microsoft Foundry Playground** only to compare prompt behaviour, not for debugging your code
-
-***
-
-## How to Experiment
+## How to experiment
 
 Follow a simple loop:
 
-1. Change one thing only
+1. Change only one part of the code
 2. Run the script:
+
+    ```powershell
+    python src/01_first_inference.py
+    ```
+
 3. Observe the output
 4. Compare with previous runs
 
 ***
 
-## Experiments to Try
+## Experiments to try
 
-### Change the System Prompt
+### Change the system prompt
 
 Edit the system message to control tone and behaviour:
 
@@ -383,7 +369,7 @@ Edit the system message to control tone and behaviour:
 {"role": "system", "content": "You are Cora, Zava's friendly AI shopping assistant. Help customers find the right home-improvement products."},
 ```
 
-Ask:
+Observe:
 
 * Does the tone change?
 * Does it stay in role?
@@ -391,13 +377,13 @@ Ask:
 
 ***
 
-### Change the User Input
+### Change the user input
 
 ```python
 {"role": "user", "content": "I'm Bruno and I'm renovating my kitchen. What tools do I need to install new cabinets?"},
 ```
 
-Ask:
+Observe:
 
 * Does adding context improve the response?
 * Does it ask clarifying questions?
@@ -410,9 +396,9 @@ Try variations:
 
 ***
 
-### Add Temperature Control
+### Add temperature control
 
-The temperature param can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
+The temperature parameter can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
 
 ```python
 response = inference_client.chat.completions.create(
@@ -422,13 +408,7 @@ response = inference_client.chat.completions.create(
 )
 ```
 
-| Temperature | Behaviour                             |
-| ----------- | ------------------------------------- |
-| 0.0         | Same output every time, deterministic |
-| 0.7         | Balanced and natural                  |
-| 1.0         | More creative and variable            |
-
-Ask:
+Observe:
 
 * Does output stay the same at 0.0?
 * Does creativity increase at higher values?
@@ -438,7 +418,7 @@ For classification tasks later, always use `temperature=0.0`.
 
 ***
 
-### Add Conversation Context
+### Add conversation context
 
 Extend messages to simulate a conversation:
 
@@ -451,15 +431,15 @@ messages = [
 ]
 ```
 
-Ask:
+Observe:
 
 * Does the model remember previous steps?
 * Does it give better follow-up answers?
 
 
-## What You Should Be Learning
+## What these experiments teach
 
-After running these experiments, you should understand:
+After running these experiments, you should have better intuition for:
 
 * How prompts control behaviour
 * How input affects output quality
@@ -469,84 +449,46 @@ After running these experiments, you should understand:
 
 ***
 
-## Tip
+### Break it on purpose
 
-Add simple debug output to compare runs:
+The experiments above focused on how the model responds to different inputs. This next set focuses on what happens when the **code itself** is misconfigured — missing environment variables, wrong model names, or broken imports. Try these changes one at a time (undo each before the next):
 
-```python
-print("User:", user_input)
-print("Temperature:", temperature)
-print("Response:\n", response.choices[0].message.content)
-```
-**NOTE** The debug snippet references user_input and temperature, which don't exist in 01_first_inference.py today - the user message is inlined and no temperature is passed. So you'd need to extract them into variables first, then print them.
-
-Here's the minimal change. Replace the inference request block (around lines 42-55) of 01_first_inference.py
-
-```Python
-    # --- Send inference request ---
-    user_input = "What is Microsoft Foundry and how could a retailer like Zava use it? Answer in one sentence."
-    temperature = 0.7
-
-    print(f"Sending inference request to model: {model}")
-    response = inference_client.chat.completions.create(
-        model=model,
-        temperature=temperature,
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant for Zava, a global home-improvement retailer. Respond concisely.",
-            },
-            {
-                "role": "user",
-                "content": user_input,
-            },
-        ],
-    )
-
-    # --- Debug output (compare runs) ---
-    print("User:", user_input)
-    print("Temperature:", temperature)
-    print("Response:\n", response.choices[0].message.content)
-```
-
-### Break It on Purpose
-
-The best way to understand what each piece does is to remove it and see what happens. Try these experiments (undo each change before the next):
-
-| Experiment | What to Change | What Happens |
+| Experiment | What to change | What happens |
 |------------|---------------|---------------|
 | Remove the system prompt | Delete the {"role": "system", ...} message | The model gives a generic answer instead of a focused one |
 | Send an empty user message | Change content to "" | The model may return an empty response or ask for clarification |
-| Use a nonsense model name | Change MODEL_DEPLOYMENT_NAME to "fake-model" | You get a ResourceNotFoundError -- the SDK cannot find the deployment |
-| Remove load_dotenv() | Comment out the line | KeyError: PROJECT_ENDPOINT -- Python cannot read your .env file |
+| Use a nonsense model name | Change MODEL_DEPLOYMENT_NAME to "fake-model" | You get a ResourceNotFoundError — the SDK cannot find the deployment |
+| Remove load_dotenv() | Comment out the line | KeyError: PROJECT_ENDPOINT — Python cannot read your .env file |
 
 These errors are the same ones you will hit in real projects. Seeing them now makes them easier to diagnose later.
 
 ---
 
-## Step 4: Understand the Response Object
+## Step 4: Understand the response
 
-The full response object contains useful metadata:
+The full response object contains useful metadata, which is printed out by the Python script:
 
 ```python
 print(f"Model: {response.model}")
 print(f"Finish reason: {response.choices[0].finish_reason}")
-print(f"Prompt tokens: {response.usage.prompt_tokens}")
-print(f"Completion tokens: {response.usage.completion_tokens}")
-print(f"Total tokens: {response.usage.total_tokens}")
+print(
+    f"Tokens used: {response.usage.total_tokens} "
+    f"(prompt: {response.usage.prompt_tokens}, "
+    f"completion: {response.usage.completion_tokens})"
+)
 ```
 
 | Field | Description |
 |-------|-------------|
 | model | The model that generated the response |
 | finish_reason | Why generation stopped (stop, length, content_filter) |
-| usage.prompt_tokens | Tokens consumed by your input |
+| usage.total_tokens | Total tokens |
+| usage.prompt_tokens | Tokens consumed by the input |
 | usage.completion_tokens | Tokens generated in the response |
-| usage.total_tokens | Total tokens (drives cost) |
 
 ---
 
-## What You Learned
+## What you learned
 
 - ✅ How to authenticate with DefaultAzureCredential
 - ✅ How to create an AIProjectClient connected to your Foundry project
@@ -557,40 +499,28 @@ print(f"Total tokens: {response.usage.total_tokens}")
 
 ---
 
-## Checkpoint
-
-Before moving on, confirm:
-
-- [ ] Running python src/01_first_inference.py returns a text response (not an error)
-- [ ] The output shows Model: gpt-4.1-mini (or your chosen model)
-- [ ] Token usage is displayed (prompt + completion tokens)
-
-If any of these fail, check your .env file has the correct PROJECT_ENDPOINT and MODEL_DEPLOYMENT_NAME values.
-
----
-
-## Key Takeaway
+## Key takeaway
 
 > Connecting to a Foundry-hosted model takes three lines of setup: load credentials, create a project client, get an OpenAI-compatible client. From there, every interaction follows the same request/response pattern.
 
 ---
 
-**Next:** Lab 4 - Zava Review Moderation App 
+**Next:** Lab 4 - Zava review moderation app
 
 =====
-# Lab 4: Build a Product Review Moderation Application for Zava
+# Lab 4: Build a product review moderation application for Zava
 
-> **Duration:** ~20 minutes | **Phase:** Real-World Task Implementation
+> **Duration:** ~20 minutes
 
 ## Objective
 
-Build a working product review moderation pipeline for Zava's online store. The system accepts customer-submitted product reviews, classifies them using a Foundry-hosted model, applies moderation logic, and outputs structured results -- ensuring that reviews from customers like Bruno are safe and helpful before going live on the site.
+Build a working product review moderation pipeline for Zava's online store. The system accepts customer-submitted product reviews, classifies them using a Foundry-hosted model, applies moderation logic, and outputs structured results — ensuring that reviews from customers like Bruno are safe and helpful before going live on the site.
 
 ---
 
-## The Problem
+## The problem
 
-Zava's online store receives thousands of product reviews daily across hundreds of home-improvement categories -- from power tools and paint to kitchen cabinets and smart-home devices. Manual review does not scale. Serena needs to build an automated system that can:
+Zava's online store receives thousands of product reviews daily across hundreds of home-improvement categories — from power tools and paint to kitchen cabinets and smart-home devices. Manual review does not scale. Zava needs an automated system that can:
 
 1. Accept a customer review as input
 2. Classify it into a moderation category
@@ -603,11 +533,13 @@ Zava's online store receives thousands of product reviews daily across hundreds 
 
 !IMAGE[architecture_lab520.png](instructions343795/architecture_lab520.png)
 
+This pipeline uses **prompt-based JSON**: the system prompt instructs the model to respond only with valid JSON. For even stricter guarantees, OpenAI models support [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs), a `response_format` parameter that constrains the model to conform to a JSON schema. This lab uses the prompt-based approach for simplicity and portability across model providers.
+
 ---
 
-## Step 1: Review the System Prompt
+## Step 1: Review the system prompt
 
-The key to reliable moderation is a well-structured system prompt. Open src/02_comment_moderation.py and examine the SYSTEM_PROMPT:
+The key to reliable moderation is a well-structured system prompt. Open `src/02_comment_moderation.py` and examine the `SYSTEM_PROMPT`:
 
 ```python
 SYSTEM_PROMPT = """You are a product review moderation system for Zava, a global home-improvement retailer. Analyze the provided customer review and classify it.
@@ -629,18 +561,18 @@ Do not include any text outside the JSON object."""
 
 This prompt:
 
-- **Constrains the output format** -- JSON only, predictable structure
-- **Defines clear categories** -- three-tier classification
-- **Provides classification rules** -- reduces ambiguity
-- **Eliminates free-text noise** -- "Do not include any text outside the JSON"
+- **Constrains the output format** — JSON only, predictable structure
+- **Defines clear categories** — three-tier classification
+- **Provides classification rules** — reduces ambiguity
+- **Eliminates free-text noise** — "Do not include any text outside the JSON"
 
 ---
 
-## Step 2: Understand the Moderation Pipeline
+## Step 2: Understand the moderation pipeline
 
 The application follows this flow:
 
-### 2a. Send Comment for Classification
+### 2a. Send comment for classification
 
 ```python
 def classify_comment(client, model: str, comment: str) -> dict:
@@ -651,7 +583,7 @@ def classify_comment(client, model: str, comment: str) -> dict:
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": comment},
             ],
-            temperature=0.0,  # Deterministic output
+            temperature=0.0, # Maximum determinism
         )
     except Exception as e:
         if "content_filter" in str(e) or "content management policy" in str(e):
@@ -684,7 +616,7 @@ Key design decisions:
 | try/except around inference | Catches Azure content safety filter blocks gracefully |
 | try/except around json.loads() | Falls back to NEEDS_REVIEW if the model returns malformed output |
 
-### 2b. Apply Moderation Logic
+### 2b. Apply moderation logic
 
 ```python
 def apply_moderation(result: dict) -> str:
@@ -705,7 +637,7 @@ This adds a **business logic layer** on top of the model's classification:
 - High-confidence UNSAFE → auto-block (review is rejected)
 - Everything else → human review queue (Zava's trust & safety team)
 
-### 2c. Process Results
+### 2c. Process results
 
 ```python
 def moderate_comment(client, model: str, comment: str) -> dict:
@@ -720,23 +652,22 @@ def moderate_comment(client, model: str, comment: str) -> dict:
     }
 ```
 
-> **Note:** The classify_comment function uses json.loads() to parse the model's response. Because we set temperature=0.0 and use a structured system prompt, the model reliably returns valid JSON. If you modify the prompt and see json.JSONDecodeError, check that your system prompt still instructs the model to respond in JSON format.
-
 ---
 
-## Step 3: Run the Application
+## Step 3: Run the application
+
+Run the following command from the terminal:
 
 ```powershell
 python src/02_comment_moderation.py
 ```
 
-### Expected Output 
-(You are using a LLM non determistic solution so the output will not 100% match, simply validate message and format)
+You should see output similar to the sample output below. Since LLMs are non-deterministic, the output will not 100% match. Validate that the message and formatting is similar.
 
 ```output
 ========================================
-  Zava Product Review Moderation System
-  Model: gpt-4.1-mini
+Zava Product Review Moderation System
+Model: gpt-4.1-mini
 ========================================
 
 Processing 5 sample reviews...
@@ -754,7 +685,7 @@ Reason:  Strong negative sentiment with borderline personal attack toward staff
 Action:  🔍 FLAGGED_FOR_REVIEW
 
 --- Comment 3/5 ---
-Comment:  "You're all idiots if you shop here -- worst store ever"
+Comment:  "You're all idiots if you shop here — worst store ever"
 Classification: UNSAFE (confidence: 0.95)
 Reason:  Contains insults directed at customers
 Action:  🚫 BLOCKED
@@ -772,21 +703,21 @@ Reason:  Neutral product observation with mild criticism
 Action:  ✅ APPROVED
 
 ========================================
-  Summary
+Summary
 ========================================
 Total comments: 5
-  APPROVED:          3
-  FLAGGED_FOR_REVIEW: 1
-  BLOCKED:           1
+APPROVED:          3
+FLAGGED_FOR_REVIEW: 1
+BLOCKED:           1
 ```
 
-> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as UNSAFE with a "Blocked by Azure content safety filter" reason. This is expected behavior -- the content filter is an additional layer of protection in production deployments.
+> **Note:** Some test comments containing threats or explicit content may be blocked by Azure's built-in content safety filter *before* reaching the model. When this happens, the application handles it gracefully and labels the comment as UNSAFE with a "Blocked by Azure content safety filter" reason. This is expected behavior — the content filter is an additional layer of protection in production deployments.
 
 ---
 
-## Step 4: Test with Custom Comments
+## Step 4: Test with custom comments
 
-The application also accepts interactive input. Run it with the --interactive flag:
+The application also accepts interactive input. Run it with the `--interactive` flag:
 
 ```powershell
 python src/02_comment_moderation.py --interactive
@@ -801,11 +732,13 @@ Reason: Product complaint that could be constructive feedback or frustration
 Action: 🔍 FLAGGED_FOR_REVIEW
 ```
 
+Type `quit` to exit the interactive prompt, when you're done testing.
+
 ---
 
-## Step 5: Test with the Sample Dataset
+## Step 5: Test with the sample dataset
 
-The src/sample_comments.json file contains a broader set of test comments. Run the batch test:
+The `src/sample_comments.json` file contains a broader set of test comments. Run the batch test:
 
 ```powershell
 python src/02_comment_moderation.py --file src/sample_comments.json
@@ -813,9 +746,9 @@ python src/02_comment_moderation.py --file src/sample_comments.json
 
 ---
 
-## Step 6: Customize the Moderation Logic
+## Step 6: Customize the moderation logic
 
-Try adjusting the confidence thresholds in the apply_moderation function:
+Try adjusting the confidence thresholds in the `apply_moderation` function:
 
 | Threshold Change | Effect |
 |-----------------|--------|
@@ -823,9 +756,15 @@ Try adjusting the confidence thresholds in the apply_moderation function:
 | Raise UNSAFE threshold (0.7 → 0.9) | Fewer auto-blocks, more human review |
 | Add a NEEDS_REVIEW handler | Custom routing for borderline content |
 
+After each change, re-run the moderation script to see the effect on the same 5 sample reviews:
+
+```powershell
+python src/02_comment_moderation.py
+```
+
 ---
 
-## What You Learned
+## What you learned
 
 - ✅ How to design a system prompt for structured output (JSON)
 - ✅ How to build a classification pipeline using model inference
@@ -835,134 +774,27 @@ Try adjusting the confidence thresholds in the apply_moderation function:
 
 ---
 
-## Checkpoint
+## Key takeaway
 
-Before moving on, confirm:
-
-- [ ] python src/02_comment_moderation.py classifies all 5 sample comments without errors
-- [ ] You see all three action types: APPROVED, FLAGGED_FOR_REVIEW, and BLOCKED
-- [ ] python src/02_comment_moderation.py --file src/sample_comments.json processes all 15 comments
-
-If classifications seem inconsistent, verify you are using temperature=0.0 in your requests.
+> A model provides the intelligence — your application provides the logic. By combining a structured prompt with deterministic settings and programmatic decision-making, you can build a production-quality review moderation system for Zava without any fine-tuning.
 
 ---
 
-## Key Takeaway
-
-> A model provides the intelligence -- your application provides the logic. By combining a structured prompt with deterministic settings and programmatic decision-making, Serena can build a production-quality review moderation system for Zava without any fine-tuning.
-
----
-
-## Optional: Write a Unit Test for the Moderation Logic
-
-The validation script (src/tests/validate_lab.py) tests setup and end-to-end inference, but it does not unit-test the business logic in isolation. Here is a quick pattern you can use to test apply_moderation without calling the model:
-
-```python
-# test_moderation.py -- run with: python test_moderation.py
-import sys
-sys.path.insert(0, "src")
-from importlib import import_module
-mod = import_module("02_comment_moderation")
-
-def test_apply_moderation():
-    # High-confidence SAFE → APPROVED
-    assert mod.apply_moderation({"classification": "SAFE", "confidence": 0.95}) == "APPROVED"
-    # Low-confidence SAFE → FLAGGED
-    assert mod.apply_moderation({"classification": "SAFE", "confidence": 0.5}) == "FLAGGED_FOR_REVIEW"
-    # High-confidence UNSAFE → BLOCKED
-    assert mod.apply_moderation({"classification": "UNSAFE", "confidence": 0.9}) == "BLOCKED"
-    # Low-confidence UNSAFE → FLAGGED
-    assert mod.apply_moderation({"classification": "UNSAFE", "confidence": 0.3}) == "FLAGGED_FOR_REVIEW"
-    # NEEDS_REVIEW always → FLAGGED
-    assert mod.apply_moderation({"classification": "NEEDS_REVIEW", "confidence": 0.8}) == "FLAGGED_FOR_REVIEW"
-    print("All tests passed!")
-
-test_apply_moderation()
-```
-
-This tests the **business logic** independently from the model -- you can run it offline, in CI, and with no Azure credentials. It validates that your confidence thresholds route comments correctly.
-
-### Reun the pytest Version
-
-If you are familiar with pytest, here is the same coverage as a proper test module. Run the following script src/tests/test_moderation.py:
-
-```python
-# src/tests/test_moderation.py -- run with: pytest src/tests/test_moderation.py -v
-import sys
-sys.path.insert(0, "src")
-from importlib import import_module
-
-mod = import_module("02_comment_moderation")
-apply_moderation = mod.apply_moderation
-classify_comment = mod.classify_comment
-
-
-class TestApplyModeration:
-    """Unit tests for the business-logic layer (no model calls)."""
-
-    def test_safe_high_confidence_approved(self):
-        assert apply_moderation({"classification": "SAFE", "confidence": 0.95}) == "APPROVED"
-
-    def test_safe_low_confidence_flagged(self):
-        assert apply_moderation({"classification": "SAFE", "confidence": 0.5}) == "FLAGGED_FOR_REVIEW"
-
-    def test_safe_at_threshold_approved(self):
-        assert apply_moderation({"classification": "SAFE", "confidence": 0.8}) == "APPROVED"
-
-    def test_unsafe_high_confidence_blocked(self):
-        assert apply_moderation({"classification": "UNSAFE", "confidence": 0.9}) == "BLOCKED"
-
-    def test_unsafe_low_confidence_flagged(self):
-        assert apply_moderation({"classification": "UNSAFE", "confidence": 0.3}) == "FLAGGED_FOR_REVIEW"
-
-    def test_unsafe_at_threshold_blocked(self):
-        assert apply_moderation({"classification": "UNSAFE", "confidence": 0.7}) == "BLOCKED"
-
-    def test_needs_review_always_flagged(self):
-        assert apply_moderation({"classification": "NEEDS_REVIEW", "confidence": 0.99}) == "FLAGGED_FOR_REVIEW"
-
-    def test_missing_classification_flagged(self):
-        assert apply_moderation({"confidence": 0.9}) == "FLAGGED_FOR_REVIEW"
-
-    def test_missing_confidence_flagged(self):
-        assert apply_moderation({"classification": "SAFE"}) == "FLAGGED_FOR_REVIEW"
-```
-
-Run it with:
-
-```powershell
-pytest src/tests/test_moderation.py -v
-```
-
-Expected output:
-
-```output
-src/tests/test_moderation.py::TestApplyModeration::test_safe_high_confidence_approved PASSED
-src/tests/test_moderation.py::TestApplyModeration::test_safe_low_confidence_flagged PASSED
-src/tests/test_moderation.py::TestApplyModeration::test_safe_at_threshold_approved PASSED
-...
-9 passed in 0.02s
-```
-
-> **Why pytest?** It discovers tests automatically, gives clear failure diffs, and integrates with CI pipelines (GitHub Actions, Azure DevOps). The standalone script above is simpler to run; pytest is what you'd use in a real project.
-
----
-
-**Next:** Lab 5 - Model Comparison (Optional Extension)
+**Next:** Lab 5 - Model comparison (Optional)
 
 =====
 
-# Lab 5: Compare Model Outputs (Optional Extension)
+# Lab 5: Compare model outputs (Optional)
 
-> **Duration:** ~15 minutes | **Phase:** Extension Challenge
+> **Duration:** ~15 minutes
 
 ## Objective
 
-Compare how different hosted models classify the same Zava product reviews, measure response quality and latency, and help Serena make an informed decision about which model to deploy for Zava's review moderation pipeline.
+Compare how different hosted models classify the same Zava product reviews, measure response quality and latency, and help Zava make an informed decision about which model to deploy for the review moderation pipeline.
 
 ---
 
-## Why Compare Models?
+## Why compare models?
 
 Different models have different strengths:
 
@@ -972,7 +804,7 @@ Different models have different strengths:
 | gpt-4.1 | Higher reasoning quality, better at edge cases | Slower, more expensive |
 | Phi-4 | Open-weight, strong reasoning, runs on-device | May need different prompt tuning |
 
-Comparing models on your **actual Zava review data** helps Serena make informed deployment decisions.
+Comparing models on your **actual Zava review data** helps make informed deployment decisions.
 
 ---
 
@@ -983,7 +815,7 @@ Login to your Azure Subscription
 ```Powershell
 az login 
 ```
-**NOTE** This will open a login screen in a new window. Ensure you 'login with a work or school account' the login/authentication windows may be hidden behind your open windows. Minimize all open windows to see the authentication window. Once authenicated maximise your VSCode window to continue.
+**NOTE** This will open a login screen in a new window. Ensure you 'login with a work or school account' the login/authentication windows may be hidden behind your open windows. Minimize all open windows to see the authentication window. Once authenticated, maximize your VS Code window to continue.
 
 Username:  
 +++@lab.CloudPortalCredential(User1).Username+++
@@ -1046,11 +878,11 @@ az cognitiveservices account deployment create `
 
 **NOTE** The foundry resource name is the value of the 'parent resource' field in the resource screen on Skillable. 
 
-### Single-Model Alternative
+### Single-model alternative
 
 If you only have **one model** deployed, you can still get meaningful comparison insights by varying **how** you call it rather than **which** model you call. Try these experiments with src/02_comment_moderation.py:
 
-**1. Compare prompt strategies** -- Edit the system prompt in classify_comment() to be stricter or more lenient:
+**1. Compare prompt strategies** — Edit the system prompt in classify_comment() to be stricter or more lenient:
 
 ```python
 # Strict: lower tolerance
@@ -1062,15 +894,15 @@ If you only have **one model** deployed, you can still get meaningful comparison
 
 Run the script with each prompt and compare how classifications change for the same comments.
 
-**2. Compare temperature settings** -- Change temperature=0.0 to temperature=0.7 and run the moderation script several times. At 0.0, results should be identical every run; at 0.7, you may see classification drift on borderline comments.
+**2. Compare temperature settings** — Change temperature=0.0 to temperature=0.7 and run the moderation script several times. At 0.0, results should be identical every run; at 0.7, you may see classification drift on borderline comments.
 
-**3. Compare output formats** -- Modify the system prompt to return a plain text label instead of JSON. Compare how reliably you can parse the response vs. the structured JSON approach.
+**3. Compare output formats** — Modify the system prompt to return a plain text label instead of JSON. Compare how reliably you can parse the response vs. the structured JSON approach.
 
 These experiments teach the same core lesson as multi-model comparison: **small changes in configuration produce measurably different results**, and you should test systematically before committing to a production setup.
 
 ---
 
-## Step 1: Review the Comparison Code
+## Step 1: Review the comparison code
 
 Open src/03_model_comparison.py. The key function runs the same comment through multiple models:
 
@@ -1093,13 +925,13 @@ def compare_models(client, models: list[str], comment: str) -> list[dict]:
 
 ---
 
-## Step 2: Run the Comparison
+## Step 2: Run the comparison
 
 ```bash
 python src/03_model_comparison.py
 ```
 
-### Expected Output
+### Expected output
 
 ```output
 ========================================
@@ -1113,7 +945,7 @@ Comment: "This paint is garbage and whoever designed it should be fired"
   gpt-4.1-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
   gpt-4.1        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
 
-Comment: "You're all idiots if you shop here -- worst store ever"
+Comment: "You're all idiots if you shop here — worst store ever"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
@@ -1131,7 +963,7 @@ Comment: "You're all idiots if you shop here -- worst store ever"
 
 ---
 
-## Step 3: Analyze the Results
+## Step 3: Analyze the results
 
 Look for patterns in the comparison:
 
@@ -1162,13 +994,13 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 | gpt-4.1 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
 | **Total for this lab** | | | | **< $0.01** |
 
-Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at Zava's scale -- at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
+Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at Zava's scale — at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
 
 > **Tip:** For this type of classification task, gpt-4.1-mini often matches gpt-4.1 performance at a fraction of the cost.
 
 ---
 
-## Step 4: Try a Hybrid Approach
+## Step 4: Try a hybrid approach
 
 A common production pattern is to use the cheaper model first and escalate disagreements to the more capable model.
 
@@ -1182,18 +1014,18 @@ This runs gpt-4.1-mini first. If confidence is below 0.8, it re-runs with gpt-4.
 
 ---
 
-## Extension Challenges
+## Extension challenges
 
 If you finish early, try these:
 
-1. **Add a third model** -- Deploy Phi-4 and add it to the comparison
-2. **Create your own test set** -- Write 10 Zava product reviews that span edge cases (returns complaints, competitor mentions, sarcastic praise)
-3. **Measure consistency** -- Run the same review 5 times and check if classification varies (it should not at temperature=0.0)
-4. **Adjust the prompt** -- Make the system prompt stricter about complaints toward Zava staff and see how it changes classifications
+1. **Add a third model** — Deploy Phi-4 and add it to the comparison
+2. **Create your own test set** — Write 10 Zava product reviews that span edge cases (returns complaints, competitor mentions, sarcastic praise)
+3. **Measure consistency** — Run the same review 5 times and check if classification varies (it should not at temperature=0.0)
+4. **Adjust the prompt** — Make the system prompt stricter about complaints toward Zava staff and see how it changes classifications
 
 ---
 
-## What You Learned
+## What you learned
 
 - ✅ How to run the same inference across multiple models
 - ✅ How to compare classification quality, confidence, and latency
@@ -1202,90 +1034,77 @@ If you finish early, try these:
 
 ---
 
-## Key Takeaway
+## Key takeaway
 
 > Model selection is a product decision, not just a technical one. By programmatically comparing models on your actual task data, you can optimize for the right balance of quality, speed, and cost.
 
 ---
 
-**Next:** Lab 6 - Deploy Agent
+**Next:** Lab 6 - Deploy agent
 
 =====
-# Lab 6: Deploy a Hosted Agent with the AZD AI CLI
+# Lab 6: Deploy a hosted agent with the AZD CLI
 
-> **Duration:** ~20 minutes | **Phase:** Final Solution -- Hosted Agent Deployment
+> **Duration:** ~20 minutes
 
 ## Objective
 
-Deploy Zava's product review moderation logic from Lab 4 as a **hosted agent** on Microsoft Foundry Agent Service using the Azure Developer CLI (azd ai agent). This turns Serena's local Python script into a persistent, cloud-hosted service that can scale to handle Zava's daily review volume. The entire workflow -- initialization, build, deploy, invoke, monitor, and cleanup -- is driven by CLI commands.
+Deploy Zava's product review moderation logic from Lab 4 as a **hosted agent** on Microsoft Foundry Agent Service using the Azure Developer CLI (`azd ai agent`). This turns the local Python script into a persistent, cloud-hosted service that can scale to handle Zava's daily review volume. The entire workflow — initialization, build, deploy, invoke, monitor, and cleanup — is driven by CLI commands.
 
 ---
 
-## What is a Hosted Agent?
+## What is a hosted agent?
 
-A **hosted agent** is a containerized application that runs on Foundry's managed infrastructure:
+A **hosted agent** is a containerized application that runs on Foundry's managed infrastructure. Unlike the scripts in Labs 3-5 which run locally, a hosted agent is a **persistent, cloud-hosted service**.
 
-| Property | Description |
-|----------|-------------|
-| **Runtime** | Your code in a Docker container, managed by Foundry |
-| **Adapter** | Hosting adapter exposes your agent as a REST API |
-| **Protocol** | OpenAI Responses API compatible |
-| **Scaling** | Automatic (configurable min/max replicas) |
-| **Lifecycle** | init → deploy → invoke → monitor → cleanup via azd |
-| **Identity** | Project managed identity (auto-configured) |
+Foundry handles the heavy lifting of hosting an agent:
 
-Unlike the scripts in Labs 3-5 which run locally, a hosted agent is a **persistent, cloud-hosted service** accessible from the Foundry Playground, other agents, or any application.
+- **VM-isolated sandboxes**: each session runs in its own isolated sandbox with a persistent filesystem, ensuring security and predictable performance.
+- **REST API**: a protocol library exposes your agent as an OpenAI Responses API endpoint, callable by the Foundry Playground, other agents, or any application.
+- **Per-session scaling**: the platform creates a sandbox on demand for each session and tears it down when idle (no replica counts to configure).
+- **Dedicated agent identity**: each agent gets its own Microsoft Entra ID, which it uses to authenticate to Foundry models and downstream Azure services (no keys to manage).
+- **Full lifecycle via CLI**: the `azd` CLI handles all steps: init → deploy → invoke → monitor → cleanup.
 
 ---
 
 ## Architecture
 
+The `azd` CLI turns your agent code into a container image, pushes it to Azure Container Registry, and deploys it to Foundry Agent Service. At runtime, the platform pulls the image, provisions a sandbox, and exposes a dedicated endpoint that your agent uses to call Foundry models.
+
 !IMAGE[mermaid_diagram2.png](instructions343795/mermaid_diagram2.png)
-
----
-
-## What's New in This Lab
-
-Labs 3-4 were pure Python -- you wrote a script, ran it locally, and saw output in your terminal. This lab introduces **three new concepts**, but do not worry: azd handles the heavy lifting for all of them.
-
-| New concept | What it means | What you actually do |
-|---|---|---|
-| **Docker container** | Your agent code is packaged into a portable image | **azd up** builds it for you -- you do not write or run any Docker commands |
-| **Azure Container Registry (ACR)** | Cloud storage for container images | Already provisioned in Lab 2 -- azd pushes to it automatically |
-| **Hosted agent on Foundry** | A persistent REST API running your moderation logic | **azd up** deploys it; **azd ai agent invoke** calls it |
-
-The bottom line: you will edit zero infrastructure files. The commands are **azd up** (deploy) and **azd ai agent invoke** (test).
 
 ---
 
 ## Prerequisites
 
-- Labs 1-4 completed (Foundry project provisioned, model deployed)
 - Azure Developer CLI installed with the ai agent extension:
   ```bash
   azd ext install azure.ai.agents
   azd ext upgrade azure.ai.agents
   ```
-- .env file with PROJECT_ENDPOINT and MODEL_DEPLOYMENT_NAME set
-
-> **From Lab 4 to hosted agent:** In Labs 3-4, you built Zava's review moderation pipeline that runs locally -- you send a product review, the model classifies it, and your code applies business logic. In this lab, you take that same moderation logic and deploy it as a **hosted agent** on Foundry. The agent runs in a managed container, is accessible via REST API, and can be used from the Foundry Playground, other agents (like Cora, Zava's shopping assistant), or any application. Same intelligence, now as a persistent cloud service.
+- `.env` file with `PROJECT_ENDPOINT` and `MODEL_DEPLOYMENT_NAME` set
 
 ---
 
-## Step 1: Review the Agent Code
+## Step 1: Review the agent code
 
-The agent source code lives in src/agent/. Three files make up the hosted agent app.py, dockerfile and agent.yml:
+The agent source code lives in `src/agent/` and consists of three files: `app.py`, `Dockerfile` and `agent.yml`:
 
-### src/agent/app.py -- The Agent
+### The agent: src/agent/app.py
+
+The code uses three classes from the Agent Framework packages:
+
+- **Agent**: defines the agent's behavior with a model client and system prompt
+- **FoundryChatClient**: connects to Foundry for model inference using the project endpoint
+- **ResponsesHostServer**: wraps the agent as an OpenAI Responses API endpoint, serving on port 8088
 
 ```python
 from agent_framework import Agent
 from agent_framework_foundry import FoundryChatClient
 from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.identity import DefaultAzureCredential
-....
 
-Do not include any text outside the JSON object."""
+...
 
 agent = Agent(
     client=FoundryChatClient(
@@ -1294,19 +1113,18 @@ agent = Agent(
         credential=DefaultAzureCredential(),
     ),
     name="zava-review-moderation-agent",
-    instructions=SYSTEM_PROMPT,  # Same Zava review moderation prompt from Lab 4
+    instructions=SYSTEM_PROMPT, # Same review moderation prompt from earlier
 )
 
 if __name__ == "__main__":
     ResponsesHostServer(agent).run(port=8088)
 ```
 
-Key components:
-- **Agent** from Microsoft Agent Framework -- defines the agent's behavior
-- **FoundryChatClient** -- connects to Foundry for model inference using the current Agent Framework sample pattern
-- **ResponsesHostServer(agent).run(port=8088)** -- the Foundry hosting adapter wraps your agent as an HTTP server on port 8088
+Open the file locally to see the complete file.
 
-### src/agent/Dockerfile -- Container Definition
+### The container definition: src/agent/Dockerfile
+
+This file builds a container with a Python 3.12 installation and packages installed from `requirements.txt`.
 
 ```dockerfile
 FROM python:3.12-slim
@@ -1318,7 +1136,9 @@ EXPOSE 8088
 CMD ["python", "-u", "app.py"]
 ```
 
-### src/agent/agent.yaml -- Agent Manifest
+### The agent manifest: src/agent/agent.yaml
+
+The manifest tells Foundry how to configure the review moderation agent — which protocols it supports (Responses API) and what environment variables to inject.
 
 ```yaml
 kind: hosted
@@ -1334,13 +1154,11 @@ environment_variables:
       value: ${MODEL_DEPLOYMENT_NAME}
 ```
 
-The manifest tells Foundry how to configure Zava's review moderation agent -- which protocols it supports and what environment variables to inject.
-
 ---
 
-## Step 2: Initialize the Project (Optional -- Already Done)
+## Reference: How to initialize a hosted agent project
 
-> **Note:** The repo already includes the agent files and azure.yaml configuration. This step shows how it was set up, for reference.
+> **Skip this step** — the repo already includes the agent files and `azure.yaml` configuration. This section is here for reference only, so you understand how it was set up.
 
 If you were starting from scratch, you would run:
 
@@ -1372,11 +1190,11 @@ This command:
 
 ---
 
-## Step 3: Test the Agent Locally
+## Step 3: Test the agent locally
 
 Before deploying to the cloud, validate that the agent runs correctly on your machine. This catches import errors, configuration issues, and logic bugs early.
 
-### Install Agent Dependencies
+### Install agent dependencies
 
 The agent uses packages that are separate from the main lab requirements. Install them first:
 
@@ -1384,7 +1202,7 @@ The agent uses packages that are separate from the main lab requirements. Instal
 pip install -r src/agent/requirements.txt
 ```
 
-### Start the Agent
+### Start the agent
 
 Open a terminal, activate your virtual environment, and run:
 
@@ -1392,6 +1210,8 @@ Open a terminal, activate your virtual environment, and run:
 cd src/agent
 python app.py
 ```
+
+If you see a dialog about allowing Python network access, allow it.
 
 You should see output like:
 
@@ -1403,37 +1223,46 @@ Starting hosting adapter on port 8088...
 INFO:     Uvicorn running on http://0.0.0.0:8088 (Press CTRL+C to quit)
 ```
 
-### Send a Test Request
+### Send test requests over HTTP
 
 Open a **second terminal** and send a test comment to the locally running agent:
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8088/responses" `
     -Method POST -ContentType "application/json" `
-    -Body '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-4.1-mini"}' | ConvertTo-Json -Depth 10
+    -Body '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive."}' | ConvertTo-Json -Depth 10
 ```
 
-### Expected Response
-
-Look for the output_text field in the response -- it should contain a JSON classification:
+The response is an OpenAI Responses API object. Look for the `text` field inside `output[].content[]` — it contains the agent's classification as escaped JSON:
 
 ```json
 {
-    "classification": "SAFE",
-    "confidence": 1.0,
-    "reason": "Positive and constructive product feedback about a cordless drill."
+  ...
+  "output": [
+    {
+      "type": "message",
+      "status": "completed",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\n  \"classification\": \"SAFE\",\n  \"confidence\": 1.0,\n  \"reason\": \"Positive and constructive product feedback about a cordless drill.\"\n}"
+        }
+      ]
+    }
+  ],
 }
 ```
 
-### Test an Unsafe Review
+Now send this command to test an input that should trigger an "UNSAFE" classification:
 
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:8088/responses" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"input":"Zava employees are the worst people on earth","model":"gpt-4.1-mini"}'
+Invoke-RestMethod -Uri "http://localhost:8088/responses" `
+    -Method POST -ContentType "application/json" `
+    -Body '{"input": "Zava employees are the worst people on earth"}' | ConvertTo-Json -Depth 10
 ```
 
-Expected: "classification": "UNSAFE"
-
-### Alternatively, Use the CLI
+### Send test requests with the CLI
 
 If you prefer, use **azd ai agent invoke** with the **--local** flag:
 
@@ -1441,96 +1270,78 @@ If you prefer, use **azd ai agent invoke** with the **--local** flag:
 azd ai agent invoke --local "The cabinet hardware feels cheap for the price Zava is charging"
 ```
 
-> **Troubleshooting:** If you see ImportError, make sure your virtual environment is activated and the packages from src/agent/requirements.txt are installed:
-> ```powershell
-> pip install -r src/agent/requirements.txt
-> ```
-
-Once you've confirmed the agent works locally, press **Ctrl+C** to stop it and proceed to cloud deployment.
+Once you've confirmed the agent works locally, proceed to cloud deployment.
 
 ---
 
-## Step 4: Deploy the Agent
+## Step 4: Deploy the agent
 
-Run the following command to turn off additional tools installations for AZD
+1. Run the following command to turn off additional tools installations for azd:
 
-```powershell
-azd config set tool.firstRunCompleted true
-```
+    ```powershell
+    azd config set tool.firstRunCompleted true
+    ```
 
-Build the container image in ACR and deploy the hosted agent to Foundry:
+2. Run the following command to set your environment endpoint:
 
-Run the following command to set your environment endpoint
+    ```powershell
+    azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
+    ```
 
-```powershell
-azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
-```
+    This is the same endpoint as `PROJECT_ENDPOINT` in the `.env` file, so you can copy from there.
 
-Then run the deployment using AZD up
+3. Then run the full deployment process with azd. This will provision Azure resources, build the container image in ACR and deploy the agent to Foundry:
 
-```powershell
-azd up
-```
-**Note** You may get 404 error when deploying the agent through azd up. You can ignore that error simply ensure the output console shows the following
-!IMAGE[deploysuccess.png](instructions343795/deploysuccess.png)
+    ```powershell
+    azd up
+    ```
 
+    **Note** You may get a 404 error when deploying the agent through azd up. You can ignore that error, as long as the output console shows the following:
+    !IMAGE[deploysuccess.png](instructions343795/deploysuccess.png)
 
-**Troubleshooting Tips ** 
-- If you get the error: "ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment" ensure you have run
+**Troubleshooting tips ** 
 
-```powershell
-azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
-```
+- If you get the error: "ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment", ensure that you have run:
 
-- If requested to Select recommended tools to install: simply deselect the all the tools or ctrl+c then run the azd config set command
+    ```powershell
+    azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
+    ```
 
-You get your endpoint from the config page at https://ai.azure.com/ for the project. 
+- If requested to "Select recommended tools to install", simply deselect the all the tools or ctrl+c, and then run the `azd config set` command above.
 
-Now re-run to deploy
+### The azd up process
 
-```powershell
-azd up 
-```
+The command executes a multi-step process based on the files in your project:
 
-### What azd up Does
+1. **Provisions** — Creates/updates infrastructure (ACR, capability host, RBAC)
+2. **Builds** — Sends src/agent/ to ACR for a remote Docker build
+3. **Deploys** — Registers a hosted agent version on Foundry Agent Service
+4. **Starts** — Launches the container and waits for it to be ready
 
-1. **Provisions** -- Creates/updates infrastructure (ACR, capability host, RBAC)
-2. **Builds** -- Sends src/agent/ to ACR for a remote Docker build
-3. **Deploys** -- Registers a hosted agent version on Foundry Agent Service
-4. **Starts** -- Launches the container and waits for it to be ready
+### Expected output
 
-### Expected Output
+Typically, you would see a list of the Azure and Foundry resources that were provisioned, but since this lab environment has already provisioned all the resources, the CLI skips the provisioning step.
 
 ```output
-Provisioning Azure resources (azd provision)
-...
-(✓) Done: Resource group: rg-<your-resource-group>
+Provisioning and deploying (azd up)
 
-Deploying services (azd deploy)
-  Building container image...
-  (✓) Done: Container image built and pushed to ACR
-  Creating hosted agent version...
-  (✓) Done: Agent deployed and started
+  (-) Skipped: Didn't find new changes.
 
-SUCCESS: Your application was provisioned and deployed to Azure.
+  Service                                    Status        Duration
+  ─────────────────────────────────────────  ────────────  ──────────
+  ● get-started-with-models-microsoft-foundry  Done          1m33s
 ```
 
 > The first deployment takes 3-5 minutes. Subsequent deployments are faster.
 
 ---
 
-## Step 5: Check Agent Status
+## Step 5: Check agent status
 
 Verify the agent is running:
 
 ```powershell
 azd ai agent show
-```
-
-Use table format for the clearest status view:
-
-```powershell
-azd ai agent show --output table
 ```
 
 Expected output includes:
@@ -1545,7 +1356,7 @@ Status   active
 
 ---
 
-## Step 6: Invoke the Agent
+## Step 6: Invoke the agent
 
 Send messages to your hosted agent directly from the CLI:
 
@@ -1553,7 +1364,7 @@ Send messages to your hosted agent directly from the CLI:
 azd ai agent invoke "Love this cordless drill! Battery lasts all day and the torque is impressive."
 ```
 
-### Expected Output
+### Expected output
 
 ```json
 {
@@ -1589,25 +1400,25 @@ azd ai agent invoke --new-session "Fresh conversation here"
 
 ## Step 7: Test in the Microsoft Foundry Playground
 
-The Foundry Playground at +++https://ai.azure.com+++ lets you interact with your deployed agent through a chat-style UI -- no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
+The Foundry Playground at +++https://ai.azure.com+++ lets you interact with your deployed agent through a chat-style UI — no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
 
-### 7.1 -- Open the Playground
+### 7.1: Open the Playground
 
-1. Open in the browser +++https://ai.azure.com+++ and sign in with the same account used for **azd**
-2. In the top navigation, select your **build**. If you do not see it, click **All projects** and find it under your AI Services resource
-3. In the left sidebar, click **Agents**
-4. Find **zava-review-moderation-agent** in the agent list -- its status should show **Version** the version of the agent after running AZD up this should incremently increase as a new version is deployed **Type** = Hosted **Created on** Date and Time stamp of last update.
-5. Click the agent name to open its detail page
-6. Click the **Try in Playground** button (or the **Playground** tab) to open the interactive chat UI
+1. Open in the browser and navigate to +++https://ai.azure.com+++. If you got signed out, sign in with the same Azure account you used earlier.
+2. In the top navigation, select **Build**. If you do not see it, click **All projects** and find it under your AI Services resource
+3. In the left sidebar, click **Agents**.
+4. Find **zava-review-moderation-agent** in the agent list. Its details should show: **Version** (increments with each deployment), **Type** = hosted, and **Created on** (timestamp of last update).
+5. Click the agent name to open its detail page.
+6. Click the **Try in Playground** button (or the **Playground** tab) to open the interactive chat UI. You may already be in it.
 
-> **Tip:** After **azd deploy**, the output includes a direct portal link. You can also get it with:
+> **Tip:** You can get a direct playground link using the azd CLI. Run this command again:
 > 
 ```powershell
 > azd ai agent show
 ```
-> Look for the **playground** URL in the output.
+> Look for **Playground URL** in the output.
 
-### 7.2 -- Test Classification Prompts
+### 7.2: Test classification prompts
 
 In the Playground chat box, type a comment and press **Send**. The agent responds with a JSON classification.
 
@@ -1615,10 +1426,10 @@ Try these test prompts to validate each classification category:
 
 | Prompt to send | Expected classification |
 |---|---|
-| Love this cordless drill! Battery lasts all day.` | **SAFE** |
+| Love this cordless drill! Battery lasts all day. | **SAFE** |
 | The tile cutter is mediocre, I expected more for the price. | **SAFE** |
 | I think this review contains sensitive personal data: SSN 123-45-6789 | **NEEDS_REVIEW** |
-| Zava employees are the worst people on earth | **UNSAFE** 
+| Zava employees are the worst people on earth | **UNSAFE** |
 | Does this deck stain work on pressure-treated lumber? | **SAFE** |
 
 Each response should contain a structured JSON object:
@@ -1631,28 +1442,11 @@ Each response should contain a structured JSON object:
 }
 ```
 
-### 7.3 -- Review the System Prompt
+The playground maintains conversation history within a session. Send several prompts in sequence and notice the chat window shows the full exchange, with each agent response appearing as a message with the JSON classification. Click **New chat** (or the **+** button) to start a fresh session — useful when testing the same prompt multiple times to check consistency.
 
-The Playground shows the agent's **system prompt** (instructions) that drives the classification behavior:
+### 7.3: Validate edge cases
 
-1. In the Playground view, look for the **System prompt** or **Instructions** panel (usually on the right side or in the agent settings)
-2. Verify it contains the Zava review moderation instructions -- the rules for classifying reviews as SAFE, NEEDS_REVIEW, or UNSAFE
-3. This is the same prompt defined in src/agent/app.py as SYSTEM_PROMPT
-
-> **Note:** The system prompt is read-only in the Playground for hosted agents -- it is baked into the container code. To change it, edit app.py and redeploy with azd deploy.
-
-### 7.4 -- Inspect Conversation History
-
-The Playground maintains conversation history within a session:
-
-1. Send several prompts in sequence -- the chat window shows the full exchange
-2. Each agent response appears as a message with the JSON classification
-3. Click **New conversation** (or the **+** button) to start a fresh session -- useful when testing the same prompt multiple times to check consistency
-4. Previous sessions are listed in the left panel -- click any session to review past interactions
-
-### 7.5 -- Validate Edge Cases
-
-Use the Playground to quickly test edge cases and boundary conditions:
+Use the playground to quickly test edge cases and boundary conditions:
 
 ```testcases
 Empty review:
@@ -1670,16 +1464,13 @@ Non-English:
 
 Check that the agent returns valid JSON for every input and that the **confidence** score reflects ambiguity (lower confidence for borderline cases).
 
-> **Troubleshooting:** If the Playground shows the agent as **Stopped** or **Activating**, wait 1-2 minutes -- the container may still be starting. Check status with azd ai agent show --output table from the CLI.
+> **Troubleshooting:** If the Playground shows the agent as **Stopped** or **Activating**, wait 1-2 minutes — the container may still be starting. Check status with `azd ai agent show` from the CLI.
 
 ---
 
-## Step 8: Monitor Logs
+## Step 8: Monitor logs
 
 To monitor a specific interaction, first create a session and invoke the agent:
-
-
-**PowerShell (Windows):**
 
 ```powershell
 $SESSION_ID = [System.Guid]::NewGuid().ToString()
@@ -1689,13 +1480,11 @@ azd ai agent invoke "Hello" --session-id $SESSION_ID
 
 Then stream logs for that session in real time:
 
-**PowerShell (Windows):**
-
 ```powershell
 azd ai agent monitor --session-id $SESSION_ID
 ```
 
-Additional Monitoring Options
+You can also experiment with other monitoring options.
 
 Stream the agent's container logs:
 
@@ -1717,10 +1506,9 @@ azd ai agent monitor --follow
 
 > Open a second terminal for log monitoring while you invoke the agent in the first.
 
-
 ---
 
-## CLI Command Reference
+## CLI command reference
 
 | Command | Purpose |
 |---------|---------|
@@ -1736,37 +1524,23 @@ azd ai agent monitor --follow
 
 ---
 
-## Stretch Goal: Add a SPAM Category
+## Stretch goal: Add a SPAM category
 
 Want to extend the agent before wrapping up? Try adding a fourth classification category:
 
-1. **Edit the system prompt** in src/agent/app.py -- add SPAM to the list of valid classifications, with a description like: *"SPAM: Promotional, advertising, or off-topic content unrelated to the product being reviewed."*
-2. **Update the business logic** -- decide what action SPAM reviews should get (e.g., FLAGGED_FOR_REVIEW or a new QUARANTINED action)
-3. **Redeploy** -- run azd deploy to push your changes to the hosted agent
-4. **Test** -- invoke the agent with a spammy review:
+1. **Edit the system prompt** in `src/agent/app.py` — add SPAM to the list of valid classifications, with a description like: *"SPAM: Promotional, advertising, or off-topic content unrelated to the product being reviewed."*
+2. **Update the business logic** — decide what action SPAM reviews should get (e.g., FLAGGED_FOR_REVIEW or a new QUARANTINED action)
+3. **Redeploy** — run `azd deploy` to push your changes to the hosted agent
+4. **Test** — invoke the agent with a spammy review:
 
    ```powershell
    azd ai agent invoke "Buy cheap sunglasses at www.example.com! 50% off today only!"
    ```
-5. Verify the response includes "classification": "SPAM"`
-
-This exercise reinforces the full edit → deploy → test cycle you'd use in production.
+5. Verify the response includes `"classification": "SPAM"`
 
 ---
 
-## Checkpoint
-
-Before moving on, confirm:
-
-- [ ] azd ai agent show --output table shows **Status: active**
-- [ ] azd ai agent invoke "Love this cordless drill!" returns a JSON response with "classification": "SAFE"
-- [ ] The agent is visible in the Foundry Playground at +++https://ai.azure.com+++
-
-If the agent status shows an error, check the logs with azd **ai agent monitor** for details.
-
----
-
-## What You Learned
+## What you learned
 
 - ✅ How hosted agents package your code as managed containers on Foundry
 - ✅ How the Foundry hosting adapter (**ResponsesHostServer**) turns your agent into an API
@@ -1776,18 +1550,18 @@ If the agent status shows an error, check the logs with azd **ai agent monitor**
 
 ---
 
-## Key Takeaway
+## Key takeaway
 
-> The Zava review moderation pipeline from Lab 4 is now a **production-ready hosted agent** on Microsoft Foundry. Using the **azd ai agent** CLI, the entire workflow -- from initialization to deployment to invocation -- is just a few terminal commands. No manual Docker builds, no SDK deployment scripts, no infrastructure management.
+> The Zava review moderation pipeline from Lab 4 is now a **production-ready hosted agent** on Microsoft Foundry. Using the **azd ai agent** CLI, the entire workflow — from initialization to deployment to invocation — is just a few terminal commands. No manual Docker builds, no SDK deployment scripts, no infrastructure management.
 
 ---
 
-**Next:** Lab 7: Workshop Summary 
+**Next:** Lab 7: Workshop summary 
 
 ======
-# Lab 7: Workshop Summary and Learning Outcomes
+# Lab 7: Workshop summary and learning outcomes
 
-> **Duration:** ~10 minutes | **Phase:** Reflection and Review
+> **Duration:** ~10 minutes
 
 ## Objective
 
@@ -1795,33 +1569,17 @@ Review the complete journey from discovering a model in the Foundry catalog to d
 
 ---
 
-## Total Workshop Duration
+## What you built
 
-| Lab | Title | Duration |
-|-----|-------|----------|
-| 1 | Discover Models in Microsoft Foundry | ~10 min |
-| 2 | Create and Configure a Foundry Project | ~15 min |
-| 3 | Connect and Send Your First Inference | ~15 min |
-| 4 | Build a Product Review Moderation Application for Zava | ~20 min |
-| 5 | Compare Model Outputs *(optional)* | ~15 min |
-| 6 | Deploy a Hosted Agent | ~20 min |
-| 7 | Workshop Summary and Learning Outcomes | ~10 min |
-| | **Core labs (1-4, 6-7)** | **~90 min** |
-| | **All labs including optional Lab 5** | **~105 min** |
-
----
-
-## What You Built
-
-Across six labs, you -- as Serena, a developer at Zava -- constructed a **product review moderation pipeline** end-to-end, from a blank terminal to a cloud-hosted agent accessible via REST API:
+Across six labs, you constructed a **product review moderation pipeline** end-to-end, from a blank terminal to a cloud-hosted agent accessible via REST API:
 
 !IMAGE[mermaid_diagram3.png](instructions343795/mermaid_diagram3.png)
 
 ---
 
-## Lab-by-Lab Recap
+## Lab-by-lab recap
 
-### Lab 1: Discover Models in Microsoft Foundry
+### Lab 1: Discover models in Microsoft Foundry
 
 | | |
 |---|---|
@@ -1829,23 +1587,23 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 | **Key skill** | Selecting the right model for a task based on capabilities, pricing, and quotas |
 | **Outcome** | Chose **gpt-4.1-mini** as the model for Zava's review moderation |
 
-**Core concept:** Not all models are equal -- task type, latency, cost, and region availability all factor into model selection for enterprise workloads like Zava's.
+**Core concept:** Not all models are equal — task type, latency, cost, and region availability all factor into model selection for enterprise workloads like Zava's.
 
 ---
 
-### Lab 2: Create and Configure a Foundry Project
+### Lab 2: Create and configure a Foundry project
 
 | | |
 |---|---|
-| **What you did** | Provisioned a complete Azure environment with **azd** -- AI Services account, Foundry project, model deployment, monitoring, and RBAC |
+| **What you did** | Provisioned a complete Azure environment with **azd** — AI Services account, Foundry project, model deployment, monitoring, and RBAC |
 | **Key skill** | Infrastructure-as-Code with Bicep, environment configuration with **azd** |
 | **Outcome** | A fully provisioned Foundry project with a deployed model and local **.env** configuration |
 
-**Core concept:** **azd** manages the full lifecycle -- from infrastructure provisioning to environment variables -- so you never touch the portal for deployment.
+**Core concept:** **azd** manages the full lifecycle — from infrastructure provisioning to environment variables — so you never touch the portal for deployment.
 
 ---
 
-### Lab 3: Connect and Send Your First Inference
+### Lab 3: Connect and send your first inference
 
 | | |
 |---|---|
@@ -1857,7 +1615,7 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 
 ---
 
-### Lab 4: Build a Product Review Moderation Application for Zava
+### Lab 4: Build a product review moderation application for Zava
 
 | | |
 |---|---|
@@ -1869,7 +1627,7 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 
 ---
 
-### Lab 5: Compare Model Outputs
+### Lab 5: Compare model outputs
 
 | | |
 |---|---|
@@ -1877,11 +1635,11 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 | **Key skill** | Multi-model evaluation, cost-performance trade-off analysis, hybrid escalation patterns |
 | **Outcome** | A comparison script (src/03_model_comparison.py) with side-by-side results and an optional hybrid routing mode |
 
-**Core concept:** Cheaper models often perform well enough for most inputs. Reserve expensive models for low-confidence cases -- this reduces cost while maintaining quality.
+**Core concept:** Cheaper models often perform well enough for most inputs. Reserve expensive models for low-confidence cases — this reduces cost while maintaining quality.
 
 ---
 
-### Lab 6: Deploy a Hosted Agent
+### Lab 6: Deploy a hosted agent
 
 | | |
 |---|---|
@@ -1889,28 +1647,28 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 | **Key skill** | Containerized agent deployment, the Agent Framework SDK, hosted agent lifecycle management |
 | **Outcome** | A live, cloud-hosted Zava review moderation agent accessible via the OpenAI Responses API |
 
-**Core concept:** A hosted agent turns Serena's local Python code into a managed, scalable service -- no infrastructure management, just azd up.
+**Core concept:** A hosted agent turns the local Python code into a managed, scalable service — no infrastructure management, just azd up.
 
 ---
 
-## Skills Acquired
+## Skills acquired
 
 By completing this workshop, you gained hands-on experience with:
 
-### Azure & Infrastructure
+### Azure & infrastructure
 - Navigating the Microsoft Foundry portal and model catalog
 - Provisioning infrastructure with Bicep and **azd**
 - Managing Azure resources (AI Services, ACR, RBAC, monitoring)
 - Understanding Foundry project architecture (accounts, projects, deployments, capability hosts)
 
-### Python & AI Development
+### Python & AI development
 - Authenticating with **DefaultAzureCredential** (no hardcoded keys)
 - Sending chat completion requests via the Azure AI Projects SDK
 - Engineering system prompts for structured JSON output
 - Building business logic around model responses
 - Comparing multiple models on identical tasks
 
-### Agent Development & Deployment
+### Agent development & deployment
 - Using the Microsoft Agent Framework (Agent, FoundryChatClient)
 - Writing a Dockerfile and agent.yaml manifest
 - Local testing before cloud deployment
@@ -1920,14 +1678,14 @@ By completing this workshop, you gained hands-on experience with:
 
 ---
 
-## Architecture Overview
+## Architecture overview
 
 The final system you built spans local development and Azure cloud services:
 
 !IMAGE[mermaid_diagram4.png](instructions343795/mermaid_diagram4.png)
 ---
 
-## Key Files You Created or Modified
+## Key files used by the lab
 
 | File | Purpose | Lab |
 |------|---------|-----|
@@ -1945,74 +1703,51 @@ The final system you built spans local development and Azure cloud services:
 
 ---
 
-## Key Patterns and Takeaways
+## Key patterns and takeaways
 
-### 1. Prompt Engineering Drives Behavior
+### 1. Prompt engineering drives behavior
 
 The system prompt is the most important piece of your application. A well-structured prompt with clear output format instructions (SAFE/NEEDS_REVIEW/UNSAFE with JSON schema) turns a general-purpose model into a specialized classifier.
 
-### 2. Business Logic Wraps Model Output
+### 2. Business logic wraps model output
 
-Models provide probabilistic output -- your code makes deterministic decisions. The confidence threshold pattern (auto-approve above 0.85, auto-block below, flag for review in between) is reusable across many AI applications.
+Models provide probabilistic output — your code makes deterministic decisions. The confidence threshold pattern (auto-approve above 0.85, auto-block below, flag for review in between) is reusable across many AI applications.
 
-### 3. Start Cheap, Escalate Smart
+### 3. Start cheap, escalate smart
 
 The hybrid model pattern from Lab 5 applies broadly: use a fast, cheap model for the majority of requests and only route low-confidence cases to a more capable (and expensive) model. This can reduce costs by 60-80% with minimal quality impact.
 
-### 4. Local First, Cloud Second
+### 4. Local first, cloud second
 
 Always test locally before deploying. The python app.py → curl localhost:8088 workflow catches issues that are much harder to debug in the cloud.
 
-### 5. Infrastructure as Code, Always
+### 5. Infrastructure as code, always
 
 Every Azure resource in this workshop is defined in Bicep and managed by azd. This means the entire environment is reproducible, version-controlled, and deletable with a single command (azd down).
 
 ---
 
-## CLI Commands Used
-
-A complete reference of every CLI command used across the workshop:
-
-| Command | Lab | Purpose |
-|---------|-----|---------|
-| azd init | 2 | Initialize the azd project |
-| azd provision | 2 | Provision Azure infrastructure |
-| azd env set | 2 | Set environment variables |
-| azd env get-values | 2 | View current environment config |
-| python src/01_first_inference.py | 3 | Run first inference script |
-| python src/02_comment_moderation.py | 4 | Run moderation pipeline |
-| python src/03_model_comparison.py | 5 | Run model comparison |
-| python src/agent/app.py` | 6 | Run agent locally |
-| azd up | 6 | Provision + build + deploy |
-| azd deploy | 6 | Rebuild and redeploy |
-| azd ai agent show | 6 | Check agent status |
-| azd ai agent invoke | 6 | Send message to agent |
-| azd ai agent monitor | 6 | Stream agent logs |
-| azd down | Cleanup | Delete all resources |
-
----
-
-## Next Steps
+## Next steps
 
 Now that you have a working hosted agent, here are ways to extend what you built:
 
-### Add More Classification Categories
+### Add more classification categories
 
-Expand the system prompt to handle additional categories like **SPAM**, **OFF_TOPIC**, or **COMPETITOR_MENTION**. Update the business logic layer to route each category differently -- for example, Zava might want competitor mentions flagged for their marketing team.
+Expand the system prompt to handle additional categories like **SPAM**, **OFF_TOPIC**, or **COMPETITOR_MENTION**. Update the business logic layer to route each category differently — for example, Zava might want competitor mentions flagged for their marketing team.
 
-### Add Tools to the Agent
+### Add tools to the agent
 
-Use the Agent Framework's tool support to give the agent capabilities beyond text classification -- for example, looking up a customer's purchase history, checking a product blocklist, or notifying Zava's trust & safety team via a webhook.
+Use the Agent Framework's tool support to give the agent capabilities beyond text classification — for example, looking up a customer's purchase history, checking a product blocklist, or notifying Zava's trust & safety team via a webhook.
 
-### Build a Multi-Agent Workflow
+### Build a multi-agent workflow
 
 Create a second agent (e.g., a response-drafting agent) and chain it with the moderation agent. The moderation agent classifies; the response agent drafts an appropriate reply based on the classification.
 
-### Connect to a Frontend
+### Connect to a frontend
 
 The hosted agent exposes an OpenAI-compatible REST API. Connect it to a web application, Slack bot, or any frontend that can make HTTP requests to **/responses**.
 
-### Set Up CI/CD
+### Set up CI/CD
 
 Use GitHub Actions with **azd** to automate deployments on every push to **main**. Create **.github/workflows/deploy.yml**:
 
@@ -2052,7 +1787,7 @@ jobs:
 
 This workflow triggers only when agent code changes, uses workload identity federation (no stored secrets), and redeploys via **azd deploy**.
 
-### Monitor in Production
+### Monitor in production
 
 Use Application Insights (already provisioned) to track agent performance. Open the Azure portal → your Application Insights resource → **Logs**, and run this KQL query:
 
@@ -2067,15 +1802,15 @@ requests
 | order by timestamp desc
 ```
 
-This shows request volume, average response time, and failure rate in 5-minute buckets -- the three metrics you need to know your agent is healthy.
+This shows request volume, average response time, and failure rate in 5-minute buckets — the three metrics you need to know your agent is healthy.
 
 ---
 
-## Try It Yourself: Final Challenge
+## Try it yourself: final challenge
 
 Put everything together by building a **new classifier** from scratch. Pick one of these (or invent your own):
 
-| Challenge | System Prompt Idea | Test Data |
+| Challenge | System prompt idea | Test data |
 |-----------|-------------------|------------|
 | **Sentiment analyzer** | Classify as POSITIVE, NEGATIVE, or NEUTRAL with a confidence score | Product reviews |
 | **Support ticket router** | Classify as BILLING, TECHNICAL, FEATURE_REQUEST, or OTHER | Sample support emails |
@@ -2092,41 +1827,16 @@ This exercise proves you can apply the inference → structured output → busin
 
 ---
 
-## Clean Up
+## Thank you
 
-If you have not already, remove all Azure resources to avoid ongoing charges:
+You started with a model in a catalog and finished with a production-ready hosted agent on Microsoft Foundry. The patterns you learned — prompt engineering, structured output, confidence-based routing, containerized deployment — apply to any AI application, not just content moderation.
 
-```powershell
-azd down --force --purge
-```
-## Step 9: Clean Up
+If you encountered any issues during this lab or would like to try it self paced see:
 
-When you are done, clean up all Azure resources:
-
-```powershell
-azd down
-```
-
-This removes:
-- The hosted agent deployment
-- The container image in ACR
-- Any infrastructure provisioned by **azd up**
-
-> To just stop the agent without deleting everything, use the Foundry portal or az cognitiveservices agent stop. AZD down deletes the resource group, all resources within it, and purges any soft-deleted AI Services accounts. See [Cleanup Guide](../cleanup/CLEANUP.md) for more options.
-
----
-
-## Thank You
-
-You started with a model in a catalog and finished with a production-ready hosted agent on Microsoft Foundry. The patterns you learned -- prompt engineering, structured output, confidence-based routing, containerized deployment -- apply to any AI application, not just content moderation.
-
-Please leave feedback for the lab experience.
-!IMAGE[feedback.png](instructions343795/feedback.png)
-
-If you encountered any issues during this lab or would like to try it self paced see 
 !IMAGE[issues.png](instructions343795/issues.png)
 
-Join the Microsoft Foundry Discord 
+Join the Microsoft Foundry Discord:
+
 !IMAGE[image.jpg](instructions343795/image.jpg)
 
 - Connect with others building on Foundry
