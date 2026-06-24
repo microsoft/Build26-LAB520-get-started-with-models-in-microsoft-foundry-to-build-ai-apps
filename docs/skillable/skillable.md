@@ -157,7 +157,8 @@ This paint is garbage and whoever designed it should be fired
 
 5. You should see the project files in the sidebar. 
 
-## Step 2: Validate the .env is correct
+## Step 2: Validate the .env is correct
+
 
 ## Step 2. Validate the .env is correct
 
@@ -177,7 +178,7 @@ Ensure that the .env file has been created successfully in the root of your proj
 
 
 --- 
-
+## Step 3: Validate your setup
 ## Step 5: Validate your setup
 
 Run the included validation script to confirm that all files, dependencies, CLI tools, and configuration are correct:
