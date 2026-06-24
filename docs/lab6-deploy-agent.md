@@ -251,24 +251,37 @@ Once you've confirmed the agent works locally, press **Ctrl+C** to stop it and p
 
 ## Step 4: Deploy the Agent
 
-Build the container image in ACR and deploy the hosted agent to Foundry:
+1. Turn off azd's additional-tools install prompt so it does not interrupt deployment:
 
-```bash
-azd up
-```
-If you get the error: "ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment"
+   ```bash
+   azd config set tool.firstRunCompleted true
+   ```
 
-run 
-```bash 
-azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
-```
-You get your endpoint from the config page at https://ai.azure.com/ for the project. 
+2. Set your Foundry project endpoint. This is the **same value** as `PROJECT_ENDPOINT` in your `.env` file, so you can copy it from there (or find it on the project's config page at https://ai.azure.com):
 
-Now re-run to deploy
+   ```bash
+   azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
+   ```
 
-```bash
-azd up 
-```
+3. Run the full deployment. This provisions Azure resources (ACR, capability host, RBAC), builds the container image in ACR, and deploys the agent to Foundry:
+
+   ```bash
+   azd up
+   ```
+
+   > **Note:** You may see a **404 error** when azd deploys the agent. You can safely **ignore it** — as long as the console output shows the resources provisioned and the container built and deployed. This is a known post-deploy timing issue, not a deployment failure.
+
+### Troubleshooting
+
+- **`ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment`** — you skipped step 2. Run:
+
+  ```bash
+  azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
+  ```
+
+  then re-run `azd up`.
+
+- **"Select recommended tools to install"** — deselect all the tools (or press **Ctrl+C**), then run the `azd config set tool.firstRunCompleted true` command from step 1 and retry.
 
 ### What azd up Does
 

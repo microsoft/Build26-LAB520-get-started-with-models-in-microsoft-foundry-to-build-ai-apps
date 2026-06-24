@@ -54,6 +54,14 @@ MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
 MODEL_DEPLOYMENT_NAME_2=gpt-4.1
 ```
 
+You need your **Foundry resource name** and **resource group name** for the deployment command below. To find them:
+
+- Go to +++https://ai.azure.com+++
+- Open the **Operate** menu at the top
+- Select **Admin** in the left-hand menu
+- Select your **Project**
+- The resource group and Foundry resource name are shown on this screen
+
 If you only have one model deployed, deploy a second one using:
 
 **Bash (Mac/Linux):**

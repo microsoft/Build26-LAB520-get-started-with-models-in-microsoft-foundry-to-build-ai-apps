@@ -43,6 +43,14 @@ The fastest way to provision everything is the included setup script. From the *
 ./scripts/setup.sh
 ```
 
+> **Windows — script blocked? (self-study only)** If you see *"…setup.ps1 is not digitally signed"* or *"running scripts is disabled on this system"*, your PowerShell execution policy is blocking unsigned scripts. Run this once in the same terminal first, then re-run the setup script:
+>
+> ```powershell
+> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+> ```
+>
+> It applies only to the current session and its child processes (including the azd post-provision hook), so it also prevents the same error during `azd up`.
+
 This script will:
 
 1. Verify all prerequisites (Azure CLI, azd, Python)
@@ -143,6 +151,14 @@ azd env set DEPLOY_SECOND_MODEL true
 
 ### Step 6: Provision Infrastructure
 
+> **First time using azd? (self-study only)** Disable the one-time tools check so it does not interrupt provisioning:
+>
+> ```bash
+> azd config set tool.firstRunCompleted true
+> ```
+>
+> (Or set `AZD_SKIP_FIRST_RUN=true` for the current session.)
+
 ```bash
 azd provision --no-prompt
 ```
@@ -228,8 +244,9 @@ You should see output ending with:
 ```
   VALIDATION SUMMARY
   Total checks: 100
-  ✅ Passed:  100
-  ❌ Failed:  0
+  Passed:  99
+  Failed:  0
+  Skipped: 1
 
   Result: PASS  - lab is ready!
 ```
@@ -242,6 +259,7 @@ If any checks fail, the output tells you exactly what to fix. Common issues:
 | CLI not found | Install the missing tool (see [SETUP.md](../setup/SETUP.md)) |
 | Package not installed | Run `pip install -r requirements.txt` inside your `.venv` |
 | `.env` not configured | Copy `.env.sample` to `.env` and fill in your endpoint |
+| `.ps1 is not digitally signed` (Windows) | Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force`, then re-run |
 
 > **Tip:** Re-run validation after any fix to confirm it resolves the issue.
 

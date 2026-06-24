@@ -6,6 +6,14 @@ Complete these steps before starting the lab modules.
 
 > **Fast-track option:** Run `.\scripts\setup.ps1` (Windows) or `./scripts/setup.sh` (Linux/macOS) to automate **all** prerequisite installation, resource provider registration, Azure provisioning, and environment configuration in one command. Then skip to Lab 1.
 
+> **Windows — PowerShell execution policy (self-study only):** If a `.ps1` script (such as `scripts\setup.ps1` or `.venv\Scripts\Activate.ps1`) fails with *"… is not digitally signed"* or *"running scripts is disabled on this system"*, your execution policy is blocking unsigned scripts. Allow them for the current session **before** running `scripts\setup.ps1` or `azd up`:
+>
+> ```powershell
+> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+> ```
+>
+> This affects only the current terminal session and its child processes (including the azd post-provision hook) — it does not change your machine-wide policy.
+
 ---
 
 ## Key Terms
@@ -141,6 +149,14 @@ If not logged in:
 ```bash
 azd auth login
 ```
+
+> **Skip the azd first-run tools check (self-study only):** The first time you run `azd up` (or `azd provision`), azd may prompt *"Would you like to check your Azure development tools?"*. This pauses an otherwise unattended run. Disable it once so future `azd` commands run without the prompt:
+>
+> ```bash
+> azd config set tool.firstRunCompleted true
+> ```
+>
+> Alternatively, set the `AZD_SKIP_FIRST_RUN=true` environment variable for a single session (useful in automation/CI). On Windows PowerShell: `$env:AZD_SKIP_FIRST_RUN = "true"`.
 
 ---
 
