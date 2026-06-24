@@ -77,8 +77,8 @@ Select a model to view the details page. Take note of the following properties i
 | **Task type** | Chat completion, Responses, Text to image |
 | **Input type** | text, image |
 | **Output type** | text, image |
-| **Context window** | 1000K |
-| **Token limits** | 128K output |
+| **Context window** | Varies by model (see model card) |
+| **Token limits** | Varies by model (see model card) |
 
 ## Step 3: Check model details
 
@@ -94,7 +94,8 @@ Explore the tabs at the top:
 2. **Deployments**: A list of current deployments of this model
 3. **Benchmarks**: Scores and performance metrics
 4. **Responsible AI**: Guardrails imposed on the model from Azure AI Content Safety
-5. **License**: Links to applicable licensing terms
+5. **License**: Links to applicable licensing terms
+
 
 ---
 
