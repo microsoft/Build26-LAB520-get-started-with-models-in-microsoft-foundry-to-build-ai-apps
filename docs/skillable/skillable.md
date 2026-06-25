@@ -936,7 +936,8 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 | gpt-4.1 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
 | **Total for this lab** | | | | **< $0.01** |
 
-Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests), the inference cost stays well under $0.01. The cost difference becomes meaningful at Zava's scale — at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
+Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests), the inference cost stays well under $0.01. The cost difference becomes meaningful at Zava's scale — at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
+
 
 > **Tip:** For this type of classification task, gpt-4.1-mini often matches gpt-4.1 performance at a fraction of the cost.
 
@@ -1248,7 +1249,7 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
     ```powershell
     azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
     ```
-
+- If requested to "Select recommended tools to install", simply deselect all the tools or press **Ctrl+C**, and then run the **azd config set** command above.
 - If requested to "Select recommended tools to install", simply deselect all the tools or ctrl+c, and then run the **azd config set** command above.
 
 ### The azd up process
