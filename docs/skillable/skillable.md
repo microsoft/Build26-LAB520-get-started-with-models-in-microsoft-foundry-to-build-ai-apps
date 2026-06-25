@@ -31,7 +31,7 @@ Select the **Start building** button and sign in with the following Azure creden
 Username:  
 +++@lab.CloudPortalCredential(User1).Username+++
 
-If prompted for a Temporary Access Password 'TAP'
+If prompted for a Temporary Access Pass 'TAP':
 +++@lab.CloudPortalCredential(User1).AccessToken+++
 
 If prompted for a Password: 
@@ -78,14 +78,11 @@ Select a model to view the details page. Take note of the following properties i
 | **Input type** | text, image |
 | **Output type** | text, image |
 | **Context window** | Varies by model (see model card) |
-
 | **Token limits** | Varies by model (see model card) |
 
+---
 
 ## Step 3: Check model details
-
-
-## Step 4: Check model details
 
 For this workshop, you need a model that supports **chat completion**: the ability to accept a system prompt and user messages and return a structured response. The **gpt-4.1-mini** from Azure OpenAI is a high quality model that is also fast and cost-efficient, so we have already deployed it in the Foundry project for you.
 
@@ -102,8 +99,6 @@ Explore the tabs at the top:
 ---
 
 ## Step 4: Explore the playground (Optional)
-
-## Step 5: Explore the playground (Optional)
 
 1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
 2. In the **Instructions** text field, enter:
@@ -143,6 +138,14 @@ This paint is garbage and whoever designed it should be fired
 
 # Lab 2: Set up VS Code
 
+> **Duration:** ~5 minutes
+
+## Objective
+
+Open the lab project in VS Code and validate that your environment is configured correctly — ensuring the `.env` file, dependencies, and CLI tools are all in place before you start writing code.
+
+---
+
 ## Step 1: Open the project in VS Code
 
 1. Open Visual Studio Code by launching it from the Start menu or desktop.
@@ -157,10 +160,9 @@ This paint is garbage and whoever designed it should be fired
 
 5. You should see the project files in the sidebar. 
 
+---
+
 ## Step 2: Validate the .env is correct
-
-
-## Step 2. Validate the .env is correct
 
 Ensure that the .env file has been created successfully in the root of your project:
 
@@ -177,9 +179,9 @@ Ensure that the .env file has been created successfully in the root of your proj
 3. (Optional) Check the values of the variables are correct according to your Foundry project. `PROJECT_ENDPOINT` should match the project endpoint listed on https://ai.azure.com, and `MODEL_DEPLOYMENT_NAME` should match the name of the model deployment.
 
 
---- 
-## Step 3: Validate your setup
-## Step 5: Validate your setup
+---
+
+## Step 3: Validate your setup
 
 Run the included validation script to confirm that all files, dependencies, CLI tools, and configuration are correct:
 
@@ -241,7 +243,7 @@ Write Python code that authenticates against your Foundry project, connects to a
 
 Open `src/01_first_inference.py` in your editor. 
 
-The following sections walk through the code and explains the key concepts.
+The following sections walk through the code and explain the key concepts.
 
 ### Authentication and client setup
 
@@ -351,7 +353,7 @@ If the script fails, check if you're experiencing one of these issues:
 
 Now that your code is working, this step is about **actively testing changes and observing how the model behaves**.
 
-## How to experiment
+### How to experiment
 
 Follow a simple loop:
 
@@ -367,9 +369,9 @@ Follow a simple loop:
 
 ***
 
-## Experiments to try
+### Experiments to try
 
-### Change the system prompt
+#### Change the system prompt
 
 Edit the system message to control tone and behaviour:
 
@@ -385,7 +387,7 @@ Observe:
 
 ***
 
-### Change the user input
+#### Change the user input
 
 ```python
 {"role": "user", "content": "I'm Bruno and I'm renovating my kitchen. What tools do I need to install new cabinets?"},
@@ -404,7 +406,7 @@ Try variations:
 
 ***
 
-### Add temperature control
+#### Add temperature control
 
 The temperature parameter can be increased or decreased to vary the determinism of the LLM output. A temperature of 0.0 provides the most deterministic output (though not guaranteed to be 100% the same across runs), whereas the maximum temperature of 1.0 results in the least deterministic (most variable) output.
 
@@ -426,7 +428,7 @@ For classification tasks later, always use `temperature=0.0`.
 
 ***
 
-### Add conversation context
+#### Add conversation context
 
 Extend messages to simulate a conversation:
 
@@ -445,7 +447,7 @@ Observe:
 * Does it give better follow-up answers?
 
 
-## What these experiments teach
+### What these experiments teach
 
 After running these experiments, you should have better intuition for:
 
@@ -457,7 +459,7 @@ After running these experiments, you should have better intuition for:
 
 ***
 
-### Break it on purpose
+#### Break it on purpose
 
 The experiments above focused on how the model responds to different inputs. This next set focuses on what happens when the **code itself** is misconfigured — missing environment variables, wrong model names, or broken imports. Try these changes one at a time (undo each before the next):
 
@@ -1096,7 +1098,7 @@ The `azd` CLI turns your agent code into a container image, pushes it to Azure C
 
 ## Step 1: Review the agent code
 
-The agent source code lives in `src/agent/` and consists of three files: `app.py`, `Dockerfile` and `agent.yml`:
+The agent source code lives in `src/agent/` and consists of three files: `app.py`, `Dockerfile` and `agent.yaml`:
 
 ### The agent: src/agent/app.py
 
@@ -1307,7 +1309,7 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
     **Note** You may get a 404 error when deploying the agent through azd up. You can ignore that error, as long as the output console shows the following:
     !IMAGE[deploysuccess.png](instructions343795/deploysuccess.png)
 
-**Troubleshooting tips ** 
+**Troubleshooting tips**
 
 - If you get the error: "ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment", ensure that you have run:
 
@@ -1315,7 +1317,7 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
     azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
     ```
 
-- If requested to "Select recommended tools to install", simply deselect the all the tools or ctrl+c, and then run the `azd config set` command above.
+- If requested to "Select recommended tools to install", simply deselect all the tools or ctrl+c, and then run the `azd config set` command above.
 
 ### The azd up process
 
