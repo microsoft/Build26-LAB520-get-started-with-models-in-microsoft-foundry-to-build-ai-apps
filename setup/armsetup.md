@@ -143,7 +143,7 @@ AZURE_CONTAINER_REGISTRY_NAME=$($outputs.AZURE_CONTAINER_REGISTRY_NAME.value)
 | `location` | string | `northcentralus` | Azure region for all resources |
 | `principalId` | string | *(empty)* | Attendee's Azure AD Object ID for RBAC |
 | `modelName` | string | `gpt-5.4-mini` | Primary model to deploy |
-| `modelVersion` | string | `2026-03-05` | Primary model version |
+| `modelVersion` | string | `2026-03-17` | Primary model version |
 | `modelFormat` | string | `OpenAI` | Model format |
 | `modelSkuName` | string | `GlobalStandard` | SKU for model deployments |
 | `modelCapacity` | int | `10` | Tokens-per-minute (thousands) for primary model |

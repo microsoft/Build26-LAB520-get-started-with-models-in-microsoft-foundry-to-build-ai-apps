@@ -923,6 +923,8 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 
 ### Cost
 
+> The per-token prices below are **illustrative** to demonstrate the cost-vs-quality trade-off. Check the [Azure OpenAI pricing page](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/) for current rates for `gpt-5.4-mini` and `gpt-5.4`.
+
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |-------|----------------------|----------------------|
 |gpt-5.4-mini | ~$0.15 | ~$0.60 |
@@ -1249,7 +1251,8 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
     ```powershell
     azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
     ```
-- If requested to "Select recommended tools to install", simply deselect all the tools or press **Ctrl+C**, and then run the **azd config set** command above.
+- If requested to "Select recommended tools to install", simply deselect all the tools or press **Ctrl+C**, and then run the **azd config set** command above.
+
 - If requested to "Select recommended tools to install", simply deselect all the tools or ctrl+c, and then run the **azd config set** command above.
 
 ### The azd up process
