@@ -13,10 +13,10 @@ param environmentName string
 param location string
 
 @description('Name of the model to deploy')
-param modelName string = 'gpt-4.1-mini'
+param modelName string = 'gpt-5.4-mini'
 
 @description('Version of the model to deploy')
-param modelVersion string = '2025-04-14'
+param modelVersion string = '2026-03-17'
 
 @description('Model format (OpenAI for GPT models)')
 param modelFormat string = 'OpenAI'
@@ -31,10 +31,10 @@ param modelCapacity int = 10
 param deploySecondModel bool = false
 
 @description('Second model name (for comparison lab)')
-param secondModelName string = 'gpt-4.1'
+param secondModelName string = 'gpt-5.4'
 
 @description('Second model version')
-param secondModelVersion string = '2025-04-14'
+param secondModelVersion string = '2026-03-05'
 
 @description('Second model capacity')
 param secondModelCapacity int = 10

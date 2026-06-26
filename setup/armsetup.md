@@ -19,8 +19,8 @@ The ARM template creates all Azure resources in a single subscription-scoped dep
 | Application Insights | `appi-{token}` | Agent telemetry (Lab 6) |
 | Azure AI Services (Foundry) | `ai-{token}` | Model hosting account |
 | Foundry Project | `{environmentName}-project` | Project with App Insights connection |
-| Model Deployment | `gpt-4.1-mini` | Primary model (Labs 3–6) |
-| Model Deployment (optional) | `gpt-4.1` | Second model (Lab 5 comparison) |
+| Model Deployment | `gpt-5.4-mini` | Primary model (Labs 3–6) |
+| Model Deployment (optional) | `gpt-5.4` | Second model (Lab 5 comparison) |
 | Azure Container Registry | `ai{token}` | Agent container images (Lab 6) |
 | Capability Host | `agents` | Hosted agent compute (Lab 6) |
 | RBAC Role Assignments | — | OpenAI User, Contributor, AcrPush for attendee; CogServices User + AcrPull for project identity |
@@ -142,14 +142,14 @@ AZURE_CONTAINER_REGISTRY_NAME=$($outputs.AZURE_CONTAINER_REGISTRY_NAME.value)
 | `environmentName` | string | `foundry-lab` | Used for resource group name and resource naming |
 | `location` | string | `northcentralus` | Azure region for all resources |
 | `principalId` | string | *(empty)* | Attendee's Azure AD Object ID for RBAC |
-| `modelName` | string | `gpt-4.1-mini` | Primary model to deploy |
-| `modelVersion` | string | `2025-04-14` | Primary model version |
+| `modelName` | string | `gpt-5.4-mini` | Primary model to deploy |
+| `modelVersion` | string | `2026-03-05` | Primary model version |
 | `modelFormat` | string | `OpenAI` | Model format |
 | `modelSkuName` | string | `GlobalStandard` | SKU for model deployments |
 | `modelCapacity` | int | `10` | Tokens-per-minute (thousands) for primary model |
-| `deploySecondModel` | bool | `false` | Deploy `gpt-4.1` for Lab 5 comparison |
-| `secondModelName` | string | `gpt-4.1` | Second model name |
-| `secondModelVersion` | string | `2025-04-14` | Second model version |
+| `deploySecondModel` | bool | `false` | Deploy `gpt-5.4` for Lab 5 comparison |
+| `secondModelName` | string | `gpt-5.4` | Second model name |
+| `secondModelVersion` | string | `2026-03-05` | Second model version |
 | `secondModelCapacity` | int | `10` | Capacity for second model |
 | `enableHostedAgents` | bool | `true` | Deploy ACR + capability host for Lab 6 |
 

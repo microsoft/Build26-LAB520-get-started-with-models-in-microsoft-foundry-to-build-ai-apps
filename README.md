@@ -66,7 +66,7 @@ Help me extend Zava's product review moderation system from this lab to support 
 4. Explore model comparison:
 
 ```
-Compare the trade-offs between gpt-4.1-mini and gpt-4.1 for product review classification tasks at Zava's scale -- when should I choose one over the other?
+Compare the trade-offs between gpt-5.4-mini and gpt-5.4 for product review classification tasks at Zava's scale -- when should I choose one over the other?
 ```
 
 5. Build something new:

@@ -40,7 +40,7 @@ By the end of this workshop, you will be able to:
 
 - Azure account with an active subscription ([free account](https://azure.microsoft.com/free/))
 - Role allowing creation of Foundry resources (Azure AI Owner or Contributor)
-- Quota for at least one hosted model (e.g., `gpt-4.1-mini`)
+- Quota for at least one hosted model (e.g., `gpt-5.4-mini`)
 - Python 3.10+ installed
 - Azure CLI installed ([install guide](https://aka.ms/installazurecli))
 - Azure Developer CLI installed ([install guide](https://aka.ms/azure-dev/install))

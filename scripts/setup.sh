@@ -227,7 +227,7 @@ step "10/10" "Writing .env configuration..."
 ENV_PATH="$ROOT_DIR/.env"
 if [ ! -f "$ENV_PATH" ] || [ "$SKIP_PROVISION" = true ]; then
     ENDPOINT=$(azd env get-value AZURE_AI_PROJECT_ENDPOINT 2>/dev/null || echo "")
-    MODEL=$(azd env get-value MODEL_DEPLOYMENT_NAME 2>/dev/null || echo "gpt-4.1-mini")
+    MODEL=$(azd env get-value MODEL_DEPLOYMENT_NAME 2>/dev/null || echo "gpt-5.4-mini")
     MODEL2=$(azd env get-value MODEL_DEPLOYMENT_NAME_2 2>/dev/null || echo "")
 
     if [ -z "$ENDPOINT" ]; then

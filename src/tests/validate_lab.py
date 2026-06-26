@@ -218,7 +218,7 @@ def test_model_references():
     print("=" * 60)
 
     # Ensure deprecated model names are gone
-    deprecated = ["gpt-4o-mini", "gpt-4o"]
+    deprecated = ["gpt-4o-mini", "gpt-4o", "gpt-4.1-mini", "gpt-4.1"]
     all_files = list(REPO_ROOT.rglob("*"))
     # Exclude this validation script itself — it contains deprecated names as test data
     self_path = Path(__file__).resolve()
@@ -251,12 +251,12 @@ def test_model_references():
 
     # Ensure new model names are present where expected
     expected_model_refs = {
-        "gpt-4.1-mini": [
+        "gpt-5.4-mini": [
             "infra/main.bicep",
             ".env.sample",
             "src/agent/app.py",
         ],
-        "gpt-4.1": [
+        "gpt-5.4": [
             "infra/main.bicep",
             ".env.sample",
         ],

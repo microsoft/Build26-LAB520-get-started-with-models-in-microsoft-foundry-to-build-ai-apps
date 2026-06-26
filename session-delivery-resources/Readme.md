@@ -55,7 +55,7 @@ If an attendee leaves with only one of these, make it #1 (Foundry + OpenAI SDK p
 ### Trainer environment
 - [ ] Clone the repo locally and complete the full lab end-to-end yourself **at least once** on the exact machine you will demo from.
 - [ ] Verify Python 3.10+, Azure CLI, Azure Developer CLI (`azd`), Docker (or the lab container host), and Git are installed and on PATH.
-- [ ] Sign in: `az login` and `azd auth login` — confirm the subscription you are using has quota for **gpt-4.1-mini** in your chosen region (see [setup/SETUP.md](../setup/SETUP.md) and [setup/armsetup.md](../setup/armsetup.md)).
+- [ ] Sign in: `az login` and `azd auth login` — confirm the subscription you are using has quota for **gpt-5.4-mini** in your chosen region (see [setup/SETUP.md](../setup/SETUP.md) and [setup/armsetup.md](../setup/armsetup.md)).
 - [ ] Run `.\scripts\setup.ps1` (or `./scripts/setup.sh`) and confirm a clean provision. Capture the resource group name — you may want to leave it provisioned to skip Lab 2 wait time on stage.
 - [ ] Run `src/01_first_inference.py`, `src/02_comment_moderation.py`, and the agent in `src/agent/` to confirm everything works.
 - [ ] Pre-pull any container images and warm `azd` so the first `azd up` on stage is fast.
@@ -93,7 +93,7 @@ If an attendee leaves with only one of these, make it #1 (Foundry + OpenAI SDK p
 
 - Open [ai.azure.com](https://ai.azure.com), navigate the **Model Catalog**.
 - Talk through filters: provider, capability (chat, embeddings), modality, deployment options.
-- Compare **gpt-4.1-mini**, **gpt-4.1**, and **Phi-4** — frame as "cost, latency, quality" trade-off.
+- Compare **gpt-5.4-mini**, **gpt-5.4**, and **Phi-4** — frame as "cost, latency, quality" trade-off.
 - Show **quota** and **regional availability** — call out that quota is per region per model.
 - Optional: paste a Zava-style review into the **Playground** and show a classification response.
 
@@ -104,7 +104,7 @@ If an attendee leaves with only one of these, make it #1 (Foundry + OpenAI SDK p
 - Show what the `setup.ps1` / `setup.sh` script does at a high level before running:
   - AI Services account
   - Foundry project
-  - Model deployment (gpt-4.1-mini)
+  - Model deployment (gpt-5.4-mini)
   - Monitoring (App Insights / Log Analytics)
   - RBAC role assignments
   - Local `.env` file
@@ -159,7 +159,7 @@ If an attendee leaves with only one of these, make it #1 (Foundry + OpenAI SDK p
 ### Lab 7 — Wrap, takeaways, Q&A (5 min)
 
 - Recap the journey in one breath: *catalog → project → first call → moderation pipeline → hosted agent.*
-- Call out **Lab 5** as a self-paced extension — attendees compare gpt-4.1-mini vs gpt-4.1 at home, including the hybrid "cheap first, escalate when uncertain" pattern.
+- Call out **Lab 5** as a self-paced extension — attendees compare gpt-5.4-mini vs gpt-5.4 at home, including the hybrid "cheap first, escalate when uncertain" pattern.
 - Point to related Build 2026 sessions (have 2–3 specific session codes on a slide).
 - Direct attendees to:
   - [Lab GitHub repo](https://github.com/microsoft/Build26-LAB520-get-started-with-models-in-microsoft-foundry-to-build-ai-apps)
@@ -177,7 +177,7 @@ The vast majority of attendee issues fall into one of these buckets. Triage in t
 |:--------|:------------------|:----|
 | `az login` / `azd auth login` loops or fails | Wrong tenant or stale token | `az logout` then `az login --tenant <tenant-id>`; same for `azd auth logout` / `login` |
 | `setup.ps1` fails on resource provider not registered | Subscription is missing `Microsoft.CognitiveServices` | `az provider register --namespace Microsoft.CognitiveServices` |
-| Model deployment fails with quota error | No quota for **gpt-4.1-mini** in chosen region | Switch to a region with quota (see [armsetup.md](../setup/armsetup.md)) or request quota |
+| Model deployment fails with quota error | No quota for **gpt-5.4-mini** in chosen region | Switch to a region with quota (see [armsetup.md](../setup/armsetup.md)) or request quota |
 | `DefaultAzureCredential` fails in Python | Not signed in, or wrong tenant active | `az login`; verify `az account show` matches the project's subscription |
 | `401`/`403` on first inference call | RBAC role assignment hasn't propagated yet | Wait 1–2 minutes; re-run. If still failing, confirm role assignment in the portal |
 | `ModuleNotFoundError` | Virtual env not activated or `pip install -r requirements.txt` not run | Activate venv; reinstall |

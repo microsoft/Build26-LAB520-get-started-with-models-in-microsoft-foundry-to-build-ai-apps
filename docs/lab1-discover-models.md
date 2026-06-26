@@ -67,17 +67,17 @@ For this workshop, you need a model that supports **chat completion** -- the abi
 
 | Model | Publisher | Why |
 |-------|-----------|-----|
-| gpt-4.1-mini | OpenAI | Fast, cost-efficient, excellent for classification |
-| gpt-4.1 | OpenAI | Higher quality, good for complex moderation |
+| gpt-5.4-mini | OpenAI | Fast, cost-efficient, excellent for classification |
+| gpt-5.4 | OpenAI | Higher quality, good for complex moderation |
 | Phi-4 | Microsoft | Strong reasoning, open-weight |
 
-> **Tip:** gpt-4.1-mini is the best choice for this lab -- it is fast, inexpensive, and well-suited for moderation and classification tasks.
+> **Tip:** gpt-5.4-mini is the best choice for this lab -- it is fast, inexpensive, and well-suited for moderation and classification tasks.
 
 ---
 
 ## Step 4: Check Model Details
 
-Click on your chosen model (e.g., **gpt-4.1-mini**) to view its detail page:
+Click on your chosen model (e.g., **gpt-5.4-mini**) to view its detail page:
 
 1. **Details** Read the model description and capabilities
 2. **Deployments** -- Deployment options
@@ -92,7 +92,7 @@ Click on your chosen model (e.g., **gpt-4.1-mini**) to view its detail page:
 ## Step 5: Explore the Playground (Optional)
 
 1. Return to the model detail page
-2. Select **Deploy** → Select "gpt-4.1-mini" under Use an existing deployment, which then brings you to the **playground** for the model deployment.
+2. Select **Deploy** → Select "gpt-5.4-mini" under Use an existing deployment, which then brings you to the **playground** for the model deployment.
 3. In the **instructions**, enter:
 
 ```

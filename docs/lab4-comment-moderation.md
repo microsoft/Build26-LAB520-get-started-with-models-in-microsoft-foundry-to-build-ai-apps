@@ -155,7 +155,7 @@ python src/02_comment_moderation.py
 ```
 ========================================
   Zava Product Review Moderation System
-  Model: gpt-4.1-mini
+  Model: gpt-5.4-mini
 ========================================
 
 Processing 5 sample reviews...

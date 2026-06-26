@@ -136,7 +136,7 @@ If you were starting from scratch, you would run:
 ```bash
 azd ai agent init \
     --project-id "<your-foundry-project-resource-id>" \
-    --model-deployment gpt-4.1-mini \
+    --model-deployment gpt-5.4-mini \
     --protocol responses \
     --src src/agent
 ```
@@ -146,7 +146,7 @@ azd ai agent init \
 ```powershell
 azd ai agent init `
     --project-id "<your-foundry-project-resource-id>" `
-    --model-deployment gpt-4.1-mini `
+    --model-deployment gpt-5.4-mini `
     --protocol responses `
     --src src/agent
 ```
@@ -185,7 +185,7 @@ You should see output like:
 ```
 Starting Zava product review moderation agent...
   Endpoint: https://<your-resource>.services.ai.azure.com/api/projects/<your-project>
-  Model:    gpt-4.1-mini
+  Model:    gpt-5.4-mini
 Starting hosting adapter on port 8088...
 INFO:     Uvicorn running on http://0.0.0.0:8088 (Press CTRL+C to quit)
 ```
@@ -199,7 +199,7 @@ Open a **second terminal** and send a test comment to the locally running agent:
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8088/responses" `
     -Method POST -ContentType "application/json" `
-    -Body '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-4.1-mini"}' | ConvertTo-Json -Depth 10
+    -Body '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-5.4-mini"}' | ConvertTo-Json -Depth 10
 ```
 
 **Bash / curl:**
@@ -207,7 +207,7 @@ Invoke-RestMethod -Uri "http://localhost:8088/responses" `
 ```bash
 curl -s http://localhost:8088/responses \
     -H "Content-Type: application/json" \
-    -d '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-4.1-mini"}' | python -m json.tool
+    -d '{"input": "Love this cordless drill! Battery lasts all day and the torque is impressive.", "model": "gpt-5.4-mini"}' | python -m json.tool
 ```
 
 ### Expected Response
@@ -227,7 +227,7 @@ Look for the output_text field in the response -- it should contain a JSON class
 ```bash
 curl -s http://localhost:8088/responses \
     -H "Content-Type: application/json" \
-    -d '{"input": "Zava employees are the worst people on earth", "model": "gpt-4.1-mini"}'
+    -d '{"input": "Zava employees are the worst people on earth", "model": "gpt-5.4-mini"}'
 ```
 
 Expected: "classification": "UNSAFE"

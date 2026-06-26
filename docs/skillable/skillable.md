@@ -84,9 +84,9 @@ Select a model to view the details page. Take note of the following properties i
 
 ## Step 3: Check model details
 
-For this workshop, you need a model that supports **chat completion**: the ability to accept a system prompt and user messages and return a structured response. The **gpt-4.1-mini** from Azure OpenAI is a high quality model that is also fast and cost-efficient, so we have already deployed it in the Foundry project for you.
+For this workshop, you need a model that supports **chat completion**: the ability to accept a system prompt and user messages and return a structured response. The **gpt-5.4-mini** from Azure OpenAI is a high quality model that is also fast and cost-efficient, so we have already deployed it in the Foundry project for you.
 
-Find **gpt-4.1-mini** from the catalog and open the details page.
+Find **gpt-5.4-mini** from the catalog and open the details page.
 Explore the tabs at the top:
 
 1. **Details**: Model description and capabilities
@@ -100,7 +100,7 @@ Explore the tabs at the top:
 
 ## Step 4: Explore the playground (Optional)
 
-1. From the **gpt-4.1-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
+1. From the **gpt-5.4-mini** deployments tab, select the existing deployment. That brings you to the **playground** for the model deployment.
 2. In the **Instructions** text field, enter:
 
 ```Instructions
@@ -299,7 +299,7 @@ response = inference_client.chat.completions.create(
 
 The **chat.completions.create()** method sends a chat completion request with:
 
-- **model** — The deployment name (e.g., gpt-4.1-mini)
+- **model** — The deployment name (e.g., gpt-5.4-mini)
 - **messages** — An array of conversation messages with roles (system, user, assistant)
 
 ### Processing the response
@@ -326,14 +326,14 @@ The response object contains an array of choices. Each choice has a message with
 
     ```output
     Connecting to Foundry project...
-    Sending inference request to model: gpt-4.1-mini
+    Sending inference request to model: gpt-5.4-mini
     ---
     Response:
     Microsoft Foundry is a unified platform for discovering, deploying, and
     managing AI models, which Zava could use to power product recommendations,
     review moderation, and customer support agents at scale.
     ---
-    Model: gpt-4.1-mini
+    Model: gpt-5.4-mini
     Tokens used: 52 (prompt: 30, completion: 22)
     ```
 
@@ -677,7 +677,7 @@ You should see output similar to the sample output below. Since LLMs are non-det
 ```output
 ========================================
 Zava Product Review Moderation System
-Model: gpt-4.1-mini
+Model: gpt-5.4-mini
 ========================================
 
 Processing 5 sample reviews...
@@ -810,8 +810,8 @@ Different models have different strengths:
 
 | Model | Strengths | Trade-offs |
 |-------|-----------|-----------|
-| gpt-4.1-mini | Fast, cost-efficient, good for simple tasks | May miss nuance in complex cases |
-| gpt-4.1 | Higher reasoning quality, better at edge cases | Slower, more expensive |
+| gpt-5.4-mini | Fast, cost-efficient, good for simple tasks | May miss nuance in complex cases |
+| gpt-5.4 | Higher reasoning quality, better at edge cases | Slower, more expensive |
 | Phi-4 | Open-weight, strong reasoning, runs on-device | May need different prompt tuning |
 
 Comparing models on your **actual Zava review data** helps make informed deployment decisions.
@@ -823,8 +823,8 @@ Comparing models on your **actual Zava review data** helps make informed deploym
 To complete this lab, you need **two model deployments** in your Foundry project. Update your **.env** to add a new variable:
 
 ```.env
-MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
-MODEL_DEPLOYMENT_NAME_2=gpt-4.1
+MODEL_DEPLOYMENT_NAME=gpt-5.4-mini
+MODEL_DEPLOYMENT_NAME_2=gpt-5.4
 ```
 
 ## Deploying a new model
@@ -835,7 +835,7 @@ If you only have one model deployed, deploy a second one from the Foundry portal
 2. Open your **Project**
 3. Select **Models** from the left-hand menu
 4. Click **Deploy** > **Deploy a base model**
-5. Search for **gpt-4.1** and select it
+5. Search for **gpt-5.4** and select it
 6. Select **Deploy** > **Default settings**
 
 Wait for the deployment to complete before proceeding. You should see the playground once complete.
@@ -884,23 +884,23 @@ Comment: "This paint is garbage and whoever designed it should be fired"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
-  gpt-4.1-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
-  gpt-4.1        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
+  gpt-5.4-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
+  gpt-5.4        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
 
 Comment: "You're all idiots if you shop here — worst store ever"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
-  gpt-4.1-mini   UNSAFE         0.95        298ms     Contains insults directed at customers
-  gpt-4.1        UNSAFE         0.98        845ms     Personal attacks targeting customers
+  gpt-5.4-mini   UNSAFE         0.95        298ms     Contains insults directed at customers
+  gpt-5.4        UNSAFE         0.98        845ms     Personal attacks targeting customers
 
 \========================================
   Comparison Summary
 \========================================
   Agreement rate: 100% (both models agreed on all classifications)
-  Avg latency - gpt-4.1-mini: 310ms
-  Avg latency - gpt-4.1:      868ms
-  Cost ratio:  gpt-4.1-mini is ~10x cheaper per token
+  Avg latency - gpt-5.4-mini: 310ms
+  Avg latency - gpt-5.4:      868ms
+  Cost ratio:  gpt-5.4-mini is ~10x cheaper per token
 ```
 
 ---
@@ -925,21 +925,21 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |-------|----------------------|----------------------|
-|gpt-4.1-mini | ~$0.15 | ~$0.60 |
-|gpt-4.1 | ~$2.50 | ~$10.00 |
+|gpt-5.4-mini | ~$0.15 | ~$0.60 |
+|gpt-5.4 | ~$2.50 | ~$10.00 |
 
 **Estimating your lab cost:** Each moderation request uses roughly 250 input tokens (system prompt + comment) and 50 output tokens (JSON response). With 5 sample comments across 2 models, that is 10 requests total:
 
 | | Input tokens | Output tokens | Cost per 1M tokens (input/output) | Estimated cost |
 |---|---|---|---|---|
-| gpt-4.1-mini | 5 × 250 = 1,250 | 5 × 50 = 250 | $0.15 / $0.60 | **$0.0003** |
-| gpt-4.1 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
+| gpt-5.4-mini | 5 × 250 = 1,250 | 5 × 50 = 250 | $0.15 / $0.60 | **$0.0003** |
+| gpt-5.4 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
 | **Total for this lab** | | | | **< $0.01** |
 
-Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests), the inference cost stays well under $0.01. The cost difference becomes meaningful at Zava's scale — at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
+Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests), the inference cost stays well under $0.01. The cost difference becomes meaningful at Zava's scale — at 100,000 reviews/day, gpt-5.4-mini costs ~$5/day vs. gpt-5.4 at ~$80/day.
 
 
-> **Tip:** For this type of classification task, gpt-4.1-mini often matches gpt-4.1 performance at a fraction of the cost.
+> **Tip:** For this type of classification task, gpt-5.4-mini often matches gpt-5.4 performance at a fraction of the cost.
 
 ---
 
@@ -953,7 +953,7 @@ The comparison script includes a --hybrid mode:
 python src/03_model_comparison.py --hybrid
 ```
 
-This runs gpt-4.1-mini first. If confidence is below 0.8, it re-runs with gpt-4.1 for a second opinion.
+This runs gpt-5.4-mini first. If confidence is below 0.8, it re-runs with gpt-5.4 for a second opinion.
 
 ---
 
@@ -1110,7 +1110,7 @@ If you were starting from scratch, you would run:
 ```bash
 azd ai agent init \
     --project-id "<your-foundry-project-resource-id>" \
-    --model-deployment gpt-4.1-mini \
+    --model-deployment gpt-5.4-mini \
     --protocol responses \
     --src src/agent
 ```
@@ -1120,7 +1120,7 @@ azd ai agent init \
 ```powershell
 azd ai agent init `
     --project-id "<your-foundry-project-resource-id>" `
-    --model-deployment gpt-4.1-mini `
+    --model-deployment gpt-5.4-mini `
     --protocol responses `
     --src src/agent
 ```
@@ -1161,7 +1161,7 @@ You should see output like:
 ```output
 Starting Zava product review moderation agent...
   Endpoint: https://<your-resource>.services.ai.azure.com/api/projects/<your-project>
-  Model:    gpt-4.1-mini
+  Model:    gpt-5.4-mini
 Starting hosting adapter on port 8088...
 INFO:     Uvicorn running on http://0.0.0.0:8088 (Press CTRL+C to quit)
 ```
@@ -1528,7 +1528,7 @@ Across six labs, you constructed a **product review moderation pipeline** end-to
 |---|---|
 | **What you did** | Browsed the Foundry model catalog, evaluated model properties, tested Zava review moderation prompts in the Playground |
 | **Key skill** | Selecting the right model for a task based on capabilities, pricing, and quotas |
-| **Outcome** | Chose **gpt-4.1-mini** as the model for Zava's review moderation |
+| **Outcome** | Chose **gpt-5.4-mini** as the model for Zava's review moderation |
 
 **Core concept:** Not all models are equal — task type, latency, cost, and region availability all factor into model selection for enterprise workloads like Zava's.
 
@@ -1574,7 +1574,7 @@ Across six labs, you constructed a **product review moderation pipeline** end-to
 
 | | |
 |---|---|
-| **What you did** | Ran the same Zava review moderation prompts through gpt-4.1-mini and gpt-4.1, compared quality, latency, and cost |
+| **What you did** | Ran the same Zava review moderation prompts through gpt-5.4-mini and gpt-5.4, compared quality, latency, and cost |
 | **Key skill** | Multi-model evaluation, cost-performance trade-off analysis, hybrid escalation patterns |
 | **Outcome** | A comparison script (src/03_model_comparison.py) with side-by-side results and an optional hybrid routing mode |
 

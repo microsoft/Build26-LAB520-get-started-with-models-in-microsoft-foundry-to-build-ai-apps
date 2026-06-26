@@ -14,8 +14,8 @@ Different models have different strengths:
 
 | Model | Strengths | Trade-offs |
 |-------|-----------|-----------|
-| gpt-4.1-mini | Fast, cost-efficient, good for simple tasks | May miss nuance in complex cases |
-| gpt-4.1 | Higher reasoning quality, better at edge cases | Slower, more expensive |
+| gpt-5.4-mini | Fast, cost-efficient, good for simple tasks | May miss nuance in complex cases |
+| gpt-5.4 | Higher reasoning quality, better at edge cases | Slower, more expensive |
 | Phi-4 | Open-weight, strong reasoning, runs on-device | May need different prompt tuning |
 
 Comparing models on your **actual Zava review data** helps Serena make informed deployment decisions.
@@ -50,8 +50,8 @@ This step is important to make sure all deployments and commands are executed ag
 To complete this lab, you need **two model deployments** in your Foundry project. Update your .env:
 
 ```ini
-MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
-MODEL_DEPLOYMENT_NAME_2=gpt-4.1
+MODEL_DEPLOYMENT_NAME=gpt-5.4-mini
+MODEL_DEPLOYMENT_NAME_2=gpt-5.4
 ```
 
 You need your **Foundry resource name** and **resource group name** for the deployment command below. To find them:
@@ -70,9 +70,9 @@ If you only have one model deployed, deploy a second one using:
 az cognitiveservices account deployment create \
   --name <your-foundry-resource-name> \
   --resource-group rg-foundry-lab \
-  --deployment-name gpt-4.1 \
-  --model-name gpt-4.1 \
-  --model-version "2025-04-14" \
+  --deployment-name gpt-5.4 \
+  --model-name gpt-5.4 \
+  --model-version "2026-03-05" \
   --model-format OpenAI \
   --sku-capacity 10 \
   --sku-name "GlobalStandard"
@@ -84,9 +84,9 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create `
   --name <your-foundry-resource-name> `
   --resource-group rg-foundry-lab `
-  --deployment-name gpt-4.1 `
-  --model-name gpt-4.1 `
-  --model-version "2025-04-14" `
+  --deployment-name gpt-5.4 `
+  --model-name gpt-5.4 `
+  --model-version "2026-03-05" `
   --model-format OpenAI `
   --sku-capacity 10 `
   --sku-name "GlobalStandard"
@@ -156,23 +156,23 @@ Comment: "This paint is garbage and whoever designed it should be fired"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
-  gpt-4.1-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
-  gpt-4.1        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
+  gpt-5.4-mini   NEEDS_REVIEW   0.75        324ms     Strong negative sentiment...
+  gpt-5.4        NEEDS_REVIEW   0.80        891ms     Borderline personal attack toward staff...
 
 Comment: "You're all idiots if you shop here -- worst store ever"
 
   Model         Classification  Confidence  Latency   Reason
   ------------- -------------- ----------  --------  ------
-  gpt-4.1-mini   UNSAFE         0.95        298ms     Contains insults directed at customers
-  gpt-4.1        UNSAFE         0.98        845ms     Personal attacks targeting customers
+  gpt-5.4-mini   UNSAFE         0.95        298ms     Contains insults directed at customers
+  gpt-5.4        UNSAFE         0.98        845ms     Personal attacks targeting customers
 
 ========================================
   Comparison Summary
 ========================================
   Agreement rate: 100% (both models agreed on all classifications)
-  Avg latency - gpt-4.1-mini: 310ms
-  Avg latency - gpt-4.1:      868ms
-  Cost ratio:  gpt-4.1-mini is ~10x cheaper per token
+  Avg latency - gpt-5.4-mini: 310ms
+  Avg latency - gpt-5.4:      868ms
+  Cost ratio:  gpt-5.4-mini is ~10x cheaper per token
 ```
 
 ---
@@ -197,20 +197,20 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |-------|----------------------|----------------------|
-|gpt-4.1-mini | ~$0.15 | ~$0.60 |
-|gpt-4.1 | ~$2.50 | ~$10.00 |
+|gpt-5.4-mini | ~$0.15 | ~$0.60 |
+|gpt-5.4 | ~$2.50 | ~$10.00 |
 
 **Estimating your lab cost:** Each moderation request uses roughly 250 input tokens (system prompt + comment) and 50 output tokens (JSON response). With 5 sample comments across 2 models, that is 10 requests total:
 
 | | Input tokens | Output tokens | Cost per 1M tokens (input/output) | Estimated cost |
 |---|---|---|---|---|
-| gpt-4.1-mini | 5 × 250 = 1,250 | 5 × 50 = 250 | $0.15 / $0.60 | **$0.0003** |
-| gpt-4.1 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
+| gpt-5.4-mini | 5 × 250 = 1,250 | 5 × 50 = 250 | $0.15 / $0.60 | **$0.0003** |
+| gpt-5.4 | 5 × 250 = 1,250 | 5 × 50 = 250 | $2.50 / $10.00 | **$0.006** |
 | **Total for this lab** | | | | **< $0.01** |
 
-Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at Zava's scale -- at 100,000 reviews/day, gpt-4.1-mini costs ~$5/day vs. gpt-4.1 at ~$80/day.
+Even running the full sample_comments.json (15 Zava reviews × 2 models = 30 requests) stays well under $0.01. The cost difference becomes meaningful at Zava's scale -- at 100,000 reviews/day, gpt-5.4-mini costs ~$5/day vs. gpt-5.4 at ~$80/day.
 
-> **Tip:** For this type of classification task, gpt-4.1-mini often matches gpt-4.1 performance at a fraction of the cost.
+> **Tip:** For this type of classification task, gpt-5.4-mini often matches gpt-5.4 performance at a fraction of the cost.
 
 ---
 
@@ -224,7 +224,7 @@ The comparison script includes a --hybrid mode:
 python src/03_model_comparison.py --hybrid
 ```
 
-This runs gpt-4.1-mini first. If confidence is below 0.8, it re-runs with gpt-4.1 for a second opinion.
+This runs gpt-5.4-mini first. If confidence is below 0.8, it re-runs with gpt-5.4 for a second opinion.
 
 ---
 

@@ -24,12 +24,12 @@ Introduce the Zava scenario: attendees play the role of Serena, a developer at a
 **Lab 1: Discover Models in Microsoft Foundry**
 10 min | Lee Stott
 Content: DEMO
-Attendees navigate the Foundry portal (ai.azure.com), browse the model catalog, evaluate model capabilities (gpt-4.1-mini, gpt-4.1, Phi-4), check quota and region availability, and optionally test a Zava review moderation prompt in the Playground.
+Attendees navigate the Foundry portal (ai.azure.com), browse the model catalog, evaluate model capabilities (gpt-5.4-mini, gpt-5.4, Phi-4), check quota and region availability, and optionally test a Zava review moderation prompt in the Playground.
 
 **Lab 2: Create and Configure a Foundry Project**
 10 min | Lee Stott
 Content: DEMO
-Attendees run the one-command setup script (`setup.ps1` / `setup.sh`) which provisions all Azure infrastructure via azd and Bicep — AI Services account, Foundry project, model deployment (gpt-4.1-mini), monitoring, RBAC, and local `.env` configuration. Covers what azd does and why Infrastructure-as-Code matters.
+Attendees run the one-command setup script (`setup.ps1` / `setup.sh`) which provisions all Azure infrastructure via azd and Bicep — AI Services account, Foundry project, model deployment (gpt-5.4-mini), monitoring, RBAC, and local `.env` configuration. Covers what azd does and why Infrastructure-as-Code matters.
 
 ---
 
@@ -48,7 +48,7 @@ Build a complete moderation pipeline for Zava product reviews. Design a structur
 **Lab 5: Compare Model Outputs (Self-Paced Extension — not included in 75-min session)**
 15 min | Lee Stott
 Content: DEMO
-Run identical Zava product reviews through gpt-4.1-mini and gpt-4.1 to compare classification quality, confidence scores, latency, and cost. Demonstrate a hybrid escalation pattern — cheap model first, escalate to premium model when confidence is low. Discuss model selection as a product decision. *Attendees can complete this lab at home using the lab instructions.*
+Run identical Zava product reviews through gpt-5.4-mini and gpt-5.4 to compare classification quality, confidence scores, latency, and cost. Demonstrate a hybrid escalation pattern — cheap model first, escalate to premium model when confidence is low. Discuss model selection as a product decision. *Attendees can complete this lab at home using the lab instructions.*
 
 ---
 

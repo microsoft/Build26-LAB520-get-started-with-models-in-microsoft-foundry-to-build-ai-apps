@@ -14,7 +14,7 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Retrieve azd environment values
 PROJECT_ENDPOINT=$(azd env get-value AZURE_AI_PROJECT_ENDPOINT 2>/dev/null || echo "")
-MODEL_NAME=$(azd env get-value MODEL_DEPLOYMENT_NAME 2>/dev/null || echo "gpt-4.1-mini")
+MODEL_NAME=$(azd env get-value MODEL_DEPLOYMENT_NAME 2>/dev/null || echo "gpt-5.4-mini")
 MODEL_NAME_2=$(azd env get-value MODEL_DEPLOYMENT_NAME_2 2>/dev/null || echo "")
 ACR_NAME=$(azd env get-value AZURE_CONTAINER_REGISTRY_NAME 2>/dev/null || echo "")
 

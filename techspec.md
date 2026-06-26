@@ -141,8 +141,8 @@ az provider register --namespace Microsoft.ContainerRegistry
 
 ### Quota
 
-- [ ] The subscription has available quota for `gpt-4.1-mini` (GlobalStandard SKU) in the target region
-- [ ] *(Optional for Lab 5)* Quota for a second model (`gpt-4.1`) if cross-model comparison is desired
+- [ ] The subscription has available quota for `gpt-5.4-mini` (GlobalStandard SKU) in the target region
+- [ ] *(Optional for Lab 5)* Quota for a second model (`gpt-5.4`) if cross-model comparison is desired
 
 ---
 

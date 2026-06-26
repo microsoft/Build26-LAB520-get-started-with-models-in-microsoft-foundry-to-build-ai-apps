@@ -68,7 +68,7 @@ This script will:
 | Flag | Effect |
 |------|--------|
 | `-Location swedencentral` / `-l swedencentral` | Deploy to a different region |
-| `-DeploySecondModel` / `-s` | Also deploy `gpt-4.1` for Lab 5 comparison |
+| `-DeploySecondModel` / `-s` | Also deploy `gpt-5.4` for Lab 5 comparison |
 | `-SkipProvision` / `--skip-provision` | Skip Azure provisioning (if resources already exist) |
 
 After the script completes, skip to **Step 8: Verify in Foundry Portal** and then **Step 9: Validate Your Setup** below.
@@ -143,7 +143,7 @@ azd env set AZURE_PRINCIPAL_ID <your-principal-id>
 
 ### Step 5: (Optional) Enable Second Model for Lab 5
 
-To deploy `gpt-4.1` alongside `gpt-4.1-mini` for the model comparison lab:
+To deploy `gpt-5.4` alongside `gpt-5.4-mini` for the model comparison lab:
 
 ```bash
 azd env set DEPLOY_SECOND_MODEL true
@@ -170,8 +170,8 @@ This deploys the Bicep templates in `infra/` and creates:
 | Resource group (`rg-foundry-lab`) | Container for all resources |
 | Azure AI Services account | Foundry account (model host) |
 | Foundry project | Organizes models, agents, evaluations |
-| `gpt-4.1-mini` deployment | Primary model for Labs 3-4 |
-| `gpt-4.1` deployment *(optional)* | Second model for Lab 5 |
+| `gpt-5.4-mini` deployment | Primary model for Labs 3-4 |
+| `gpt-5.4` deployment *(optional)* | Second model for Lab 5 |
 | Log Analytics workspace | Telemetry storage |
 | Application Insights | Project monitoring |
 | RBAC role assignments | Your user gets OpenAI User + Contributor |
@@ -200,7 +200,7 @@ Key outputs:
 |----------|-------------|---------|
 | `AZURE_AI_PROJECT_ENDPOINT` | Your project endpoint URL | `https://ai-xxxx.services.ai.azure.com/api/projects/foundry-lab-project` |
 | `AZURE_RESOURCE_GROUP` | Resource group name | `rg-foundry-lab` |
-| `MODEL_DEPLOYMENT_NAME` | Primary model | `gpt-4.1-mini` |
+| `MODEL_DEPLOYMENT_NAME` | Primary model | `gpt-5.4-mini` |
 
 Check that `.env` was written:
 

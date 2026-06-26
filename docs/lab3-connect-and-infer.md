@@ -79,7 +79,7 @@ response = inference_client.chat.completions.create(
 
 The chat.completions.create() method sends a chat completion request with:
 
-- **model** -- The deployment name (e.g., gpt-4.1-mini)
+- **model** -- The deployment name (e.g., gpt-5.4-mini)
 - **messages** -- An array of conversation messages with roles (system, user, assistant)
 
 ### Processing the Response
@@ -106,14 +106,14 @@ python src/01_first_inference.py
 
 ```
 Connecting to Foundry project...
-Sending inference request to model: gpt-4.1-mini
+Sending inference request to model: gpt-5.4-mini
 ---
 Response:
 Microsoft Foundry is a unified platform for discovering, deploying, and
 managing AI models, which Zava could use to power product recommendations,
 review moderation, and customer support agents at scale.
 ---
-Model: gpt-4.1-mini
+Model: gpt-5.4-mini
 Tokens used: 52 (prompt: 30, completion: 22)
 ```
 
@@ -389,7 +389,7 @@ print(f"Total tokens: {response.usage.total_tokens}")
 Before moving on, confirm:
 
 - [ ] Running python src/01_first_inference.py returns a text response (not an error)
-- [ ] The output shows Model: gpt-4.1-mini (or your chosen model)
+- [ ] The output shows Model: gpt-5.4-mini (or your chosen model)
 - [ ] Token usage is displayed (prompt + completion tokens)
 
 If any of these fail, check your .env file has the correct PROJECT_ENDPOINT and MODEL_DEPLOYMENT_NAME values.

@@ -30,14 +30,14 @@
     },
     "modelName": {
       "type": "string",
-      "defaultValue": "gpt-4.1-mini",
+      "defaultValue": "gpt-5.4-mini",
       "metadata": {
         "description": "Primary model to deploy."
       }
     },
     "modelVersion": {
       "type": "string",
-      "defaultValue": "2025-04-14",
+      "defaultValue": "2026-03-17",
       "metadata": {
         "description": "Version of the primary model."
       }
@@ -67,19 +67,19 @@
       "type": "bool",
       "defaultValue": false,
       "metadata": {
-        "description": "Deploy a second model (gpt-4.1) for the optional Lab 5 comparison."
+        "description": "Deploy a second model (gpt-5.4) for the optional Lab 5 comparison."
       }
     },
     "secondModelName": {
       "type": "string",
-      "defaultValue": "gpt-4.1",
+      "defaultValue": "gpt-5.4",
       "metadata": {
         "description": "Second model name for comparison lab."
       }
     },
     "secondModelVersion": {
       "type": "string",
-      "defaultValue": "2025-04-14",
+      "defaultValue": "2026-03-05",
       "metadata": {
         "description": "Second model version."
       }
@@ -237,7 +237,7 @@
               }
             },
             {
-              "comments": "Primary Model Deployment (gpt-4.1-mini)",
+              "comments": "Primary Model Deployment (gpt-5.4-mini)",
               "type": "Microsoft.CognitiveServices/accounts/deployments",
               "apiVersion": "2025-06-01",
               "name": "[concat(variables('aiServicesName'), '/', parameters('modelName'))]",

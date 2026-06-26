@@ -26,7 +26,7 @@ New to AI development? Here are the core terms used throughout this workshop:
 | **Token** | The unit models use to measure text — roughly ¾ of a word. Pricing is per-token. |
 | **System prompt** | Hidden instructions that tell the model how to behave (e.g., "classify comments as SAFE or UNSAFE"). |
 | **Endpoint** | The URL your code connects to for accessing a deployed model or project. |
-| **Model deployment** | A specific model (like `gpt-4.1-mini`) made available in your project, ready to receive inference requests. |
+| **Model deployment** | A specific model (like `gpt-5.4-mini`) made available in your project, ready to receive inference requests. |
 | **Credential / authentication** | How your code proves it has permission to use Azure resources — typically via `az login` or a managed identity. |
 | **Hosted agent** | Your code packaged as a container and deployed to Foundry, accessible via a REST API without managing servers. |
 | **RBAC** | Role-Based Access Control — Azure's system for granting specific permissions to users and services. |

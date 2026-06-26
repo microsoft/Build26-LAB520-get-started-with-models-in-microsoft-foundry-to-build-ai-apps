@@ -40,7 +40,7 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 |---|---|
 | **What you did** | Browsed the Foundry model catalog, evaluated model properties, tested Zava review moderation prompts in the Playground |
 | **Key skill** | Selecting the right model for a task based on capabilities, pricing, and quotas |
-| **Outcome** | Chose **gpt-4.1-mini** as the model for Zava's review moderation |
+| **Outcome** | Chose **gpt-5.4-mini** as the model for Zava's review moderation |
 
 **Core concept:** Not all models are equal -- task type, latency, cost, and region availability all factor into model selection for enterprise workloads like Zava's.
 
@@ -86,7 +86,7 @@ Across six labs, you -- as Serena, a developer at Zava -- constructed a **produc
 
 | | |
 |---|---|
-| **What you did** | Ran the same Zava review moderation prompts through gpt-4.1-mini and gpt-4.1, compared quality, latency, and cost |
+| **What you did** | Ran the same Zava review moderation prompts through gpt-5.4-mini and gpt-5.4, compared quality, latency, and cost |
 | **Key skill** | Multi-model evaluation, cost-performance trade-off analysis, hybrid escalation patterns |
 | **Outcome** | A comparison script (src/03_model_comparison.py) with side-by-side results and an optional hybrid routing mode |
 

@@ -32,7 +32,7 @@ PROJECT_ENDPOINT = (
 )
 MODEL_DEPLOYMENT_NAME = (
     os.getenv("AZURE_AI_MODEL_DEPLOYMENT_NAME")
-    or os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1-mini")
+    or os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-5.4-mini")
 )
 
 if not PROJECT_ENDPOINT:

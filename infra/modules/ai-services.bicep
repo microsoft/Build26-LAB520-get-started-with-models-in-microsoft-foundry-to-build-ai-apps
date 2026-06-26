@@ -117,7 +117,7 @@ resource appInsightsConnection 'Microsoft.CognitiveServices/accounts/projects/co
 }
 
 // ---------------------------------------------------------------------------
-// Primary Model Deployment (e.g., gpt-4.1-mini)
+// Primary Model Deployment (e.g., gpt-5.4-mini)
 // ---------------------------------------------------------------------------
 resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-06-01' = {
   parent: aiServices
@@ -137,7 +137,7 @@ resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-
 }
 
 // ---------------------------------------------------------------------------
-// Secondary Model Deployment (e.g., gpt-4.1) — Optional
+// Secondary Model Deployment (e.g., gpt-5.4) — Optional
 // ---------------------------------------------------------------------------
 resource secondModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-06-01' = if (deploySecondModel) {
   parent: aiServices
