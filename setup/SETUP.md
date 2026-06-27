@@ -150,6 +150,12 @@ If not logged in:
 azd auth login
 ```
 
+Set your tenant ID so azd provisions to the correct tenant:
+
+```bash
+azd env set AZURE_TENANT_ID $(az account show --query tenantId -o tsv)
+```
+
 > **Skip the azd first-run tools check (self-study only):** The first time you run `azd up` (or `azd provision`), azd may prompt *"Would you like to check your Azure development tools?"*. This pauses an otherwise unattended run. Disable it once so future `azd` commands run without the prompt:
 >
 > ```bash
