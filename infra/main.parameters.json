@@ -19,6 +19,9 @@
     },
     "enableHostedAgents": {
       "value": "${ENABLE_HOSTED_AGENTS=false}"
+    },
+    "enableCapabilityHost": {
+      "value": "${ENABLE_CAPABILITY_HOST=true}"
     }
   }
 }

@@ -53,6 +53,9 @@ param principalType string = 'User'
 @description('Enable hosted agent infrastructure (ACR + capability host) for Lab 6')
 param enableHostedAgents bool = false
 
+@description('Enable the capability host for supporting BYO storage of agent conversations. When false and hosted agents are enabled, the capability host is not created.')
+param enableCapabilityHost bool
+
 // ---------------------------------------------------------------------------
 // Variables
 // ---------------------------------------------------------------------------
@@ -109,6 +112,7 @@ module aiServices './modules/ai-services.bicep' = {
     secondModelVersion: secondModelVersion
     secondModelCapacity: secondModelCapacity
     enableHostedAgents: enableHostedAgents
+    enableCapabilityHost: enableCapabilityHost
   }
 }
 

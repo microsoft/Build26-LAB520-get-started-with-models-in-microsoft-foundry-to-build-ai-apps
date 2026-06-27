@@ -51,6 +51,9 @@ param secondModelCapacity int
 @description('Enable hosted agent infrastructure (ACR + capability host)')
 param enableHostedAgents bool = false
 
+@description('Enable the capability host for agent conversations. When false and hosted agents are enabled, the capability host is not created (v2 hosted agents handle storage automatically).')
+param enableCapabilityHost bool = true
+
 // ---------------------------------------------------------------------------
 // Azure AI Services Account (Foundry) — new Foundry pattern
 // ---------------------------------------------------------------------------
@@ -179,7 +182,7 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = if (enableHos
 // Capability Host on Account (enables hosted compute for agents) — Optional
 // Must be at account level; the project inherits capability from the account
 // ---------------------------------------------------------------------------
-resource capabilityHost 'Microsoft.CognitiveServices/accounts/capabilityHosts@2025-10-01-preview' = if (enableHostedAgents) {
+resource capabilityHost 'Microsoft.CognitiveServices/accounts/capabilityHosts@2025-10-01-preview' = if (enableHostedAgents && enableCapabilityHost) {
   parent: aiServices
   name: 'agents'
   properties: {

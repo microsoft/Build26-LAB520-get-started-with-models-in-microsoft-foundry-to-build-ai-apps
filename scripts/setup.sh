@@ -173,6 +173,7 @@ if [ "$SKIP_PROVISION" = false ]; then
     cd "$ROOT_DIR"
     azd init --no-prompt -e "$ENV_NAME" 2>/dev/null || true
     azd env set AZURE_LOCATION "$LOCATION"
+    azd env set AZURE_SUBSCRIPTION_ID "$SUBSCRIPTION_ID"
     [ -n "$PRINCIPAL_ID" ] && azd env set AZURE_PRINCIPAL_ID "$PRINCIPAL_ID"
     [ "$DEPLOY_SECOND" = true ] && azd env set DEPLOY_SECOND_MODEL "true"
 

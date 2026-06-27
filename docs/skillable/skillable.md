@@ -1103,9 +1103,9 @@ environment_variables:
 
 ## Reference: How the agent project was initialized and deployed
 
-> **Skip this step** — the lab environment has already run both `azd ai agent init` and `azd up` for you. This section explains what was done, so you understand the full workflow.
+> **Don't run these commands!** The lab environment has already run both **azd ai agent init** and **azd up** for you. This section explains what was done, so you understand the full workflow.
 
-### Initialization (`azd ai agent init`)
+### Initialization (azd ai agent init)
 
 To scaffold the hosted agent project, the following command was run:
 
@@ -1124,7 +1124,7 @@ This command:
 3. Registers the agent as a service in azure.yaml
 4. Sets all required azd environment variables
 
-### Deployment (`azd up`)
+### Deployment (azd up)
 
 After initialization, this command was run to deploy the agent:
 
@@ -1132,14 +1132,14 @@ After initialization, this command was run to deploy the agent:
 azd up
 ```
 
-The `azd up` command executes a multi-step process:
+The **azd up** command executes a multi-step process:
 
 1. **Provisions**: Creates/updates infrastructure (ACR, capability host, RBAC)
 2. **Builds**: Sends src/agent/ to ACR for a remote Docker build
 3. **Deploys**: Registers a hosted agent version on Foundry Agent Service
 4. **Starts**: Launches the container and waits for it to be ready
 
-To see the full output from the `azd up` deployment that was run in this lab environment, open the **lifecycle** text file on the Desktop.
+To see the full output from the **azd up** deployment that was run in this lab environment, open the **lifecycle** text file on the Desktop.
 
 ---
 
@@ -1229,9 +1229,9 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
 
 ## Step 4: Test the deployed agent
 
-The agent has already been deployed to Foundry Agent Service in this lab environment using `azd up`. You can review the full deployment output by opening the **lifecycle-log** text file on the Desktop.
+The agent has already been deployed to Foundry Agent Service in this lab environment using **azd up**. You can review the full deployment output by opening the **lifecycle-log** text file on the Desktop.
 
-Before running any `azd ai agent` commands, set your environment endpoint so the CLI knows which Foundry project to target:
+Before running any **azd ai agent** commands, set your environment endpoint so the CLI knows which Foundry project to target:
 
 ```powershell
 azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
