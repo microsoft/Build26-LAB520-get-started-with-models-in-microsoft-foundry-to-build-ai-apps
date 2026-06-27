@@ -675,10 +675,10 @@ python src/02_comment_moderation.py
 You should see output similar to the sample output below. Since LLMs are non-deterministic, the output will not 100% match. Validate that the message and formatting is similar.
 
 ```output
-========================================
-Zava Product Review Moderation System
+\========================================
+Comment Moderation System
 Model: gpt-5.4-mini
-========================================
+\========================================
 
 Processing 5 sample reviews...
 
@@ -712,9 +712,9 @@ Classification: SAFE (confidence: 0.82)
 Reason:  Neutral product observation with mild criticism
 Action:  ✅ APPROVED
 
-========================================
+\========================================
 Summary
-========================================
+\========================================
 Total comments: 5
 APPROVED:          3
 FLAGGED_FOR_REVIEW: 1
@@ -833,7 +833,7 @@ If you only have one model deployed, deploy a second one from the Foundry portal
 
 1. Go to +++https://ai.azure.com+++
 2. Open your **Project**
-3. Select **Models** from the left-hand menu
+3. Select **Deployments** from the left-hand menu
 4. Click **Deploy** > **Deploy a base model**
 5. Search for **gpt-5.4** and select it
 6. Select **Deploy** > **Default settings**
@@ -923,7 +923,7 @@ How much slower is the larger model? For real-time moderation (e.g., chat), late
 
 ### Cost
 
-> The per-token prices below are **illustrative** to demonstrate the cost-vs-quality trade-off. Check the [Azure OpenAI pricing page](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/) for current rates for `gpt-5.4-mini` and `gpt-5.4`.
+> The per-token prices below are **illustrative** to demonstrate the cost-vs-quality trade-off. Check the [Azure OpenAI pricing page](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/) for current rates for **gpt-5.4-mini** and **gpt-5.4**.
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |-------|----------------------|----------------------|
@@ -1101,23 +1101,13 @@ environment_variables:
 
 ---
 
-## Reference: How to initialize a hosted agent project
+## Reference: How the agent project was initialized and deployed
 
-> **Skip this step** — the repo already includes the agent files and **azure.yaml** configuration. This section is here for reference only, so you understand how it was set up.
+> **Skip this step** — the lab environment has already run both `azd ai agent init` and `azd up` for you. This section explains what was done, so you understand the full workflow.
 
-If you were starting from scratch, you would run:
+### Initialization (`azd ai agent init`)
 
-**Bash (Mac/Linux):**
-
-```bash
-azd ai agent init \
-    --project-id "<your-foundry-project-resource-id>" \
-    --model-deployment gpt-5.4-mini \
-    --protocol responses \
-    --src src/agent
-```
-
-**PowerShell (Windows):**
+To scaffold the hosted agent project, the following command was run:
 
 ```powershell
 azd ai agent init `
@@ -1128,14 +1118,32 @@ azd ai agent init `
 ```
 
 This command:
+
 1. Detects your existing Foundry project and ACR
 2. Generates agent.yaml with the agent manifest
 3. Registers the agent as a service in azure.yaml
 4. Sets all required azd environment variables
 
+### Deployment (`azd up`)
+
+After initialization, this command was run to deploy the agent:
+
+```powershell
+azd up
+```
+
+The `azd up` command executes a multi-step process:
+
+1. **Provisions**: Creates/updates infrastructure (ACR, capability host, RBAC)
+2. **Builds**: Sends src/agent/ to ACR for a remote Docker build
+3. **Deploys**: Registers a hosted agent version on Foundry Agent Service
+4. **Starts**: Launches the container and waits for it to be ready
+
+To see the full output from the `azd up` deployment that was run in this lab environment, open the **lifecycle** text file on the Desktop.
+
 ---
 
-## Step 3: Test the agent locally
+## Step 3: Test the local agent
 
 Before deploying to the cloud, validate that the agent runs correctly on your machine. This catches import errors, configuration issues, and logic bugs early.
 
@@ -1219,66 +1227,17 @@ Once you've confirmed the agent works locally, proceed to cloud deployment.
 
 ---
 
-## Step 4: Deploy the agent
+## Step 4: Test the deployed agent
 
-1. Run the following command to turn off additional tools installations for azd:
+The agent has already been deployed to Foundry Agent Service in this lab environment using `azd up`. You can review the full deployment output by opening the **lifecycle-log** text file on the Desktop.
 
-    ```powershell
-    azd config set tool.firstRunCompleted true
-    ```
+Before running any `azd ai agent` commands, set your environment endpoint so the CLI knows which Foundry project to target:
 
-2. Run the following command to set your environment endpoint:
-
-    ```powershell
-    azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
-    ```
-
-    Change the endpoint value in the command above to the same value as **PROJECT_ENDPOINT** in the **.env** file.
-
-3. Then run the full deployment process with azd. This will provision Azure resources, build the container image in ACR and deploy the agent to Foundry:
-
-    ```powershell
-    azd up
-    ```
-
-    **Note** You may get a 404 error when deploying the agent through azd up. You can ignore that error, as long as the output console shows the following:
-    !IMAGE[deploysuccess.png](instructions343795/deploysuccess.png)
-
-**Troubleshooting tips**
-
-- If you get the error: "ERROR: FOUNDRY_PROJECT_ENDPOINT is required: environment variable was not found in the current azd environment", ensure that you have run:
-
-    ```powershell
-    azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
-    ```
-- If requested to "Select recommended tools to install", simply deselect all the tools or press **Ctrl+C**, and then run the **azd config set** command above.
-
-- If requested to "Select recommended tools to install", simply deselect all the tools or ctrl+c, and then run the **azd config set** command above.
-
-### The azd up process
-
-The command executes a multi-step process based on the files in your project:
-
-1. **Provisions** — Creates/updates infrastructure (ACR, capability host, RBAC)
-2. **Builds** — Sends src/agent/ to ACR for a remote Docker build
-3. **Deploys** — Registers a hosted agent version on Foundry Agent Service
-4. **Starts** — Launches the container and waits for it to be ready
-
-### Expected output
-
-Typically, you would see a list of the Azure and Foundry resources that were provisioned, but since this lab environment has already provisioned all the resources, the CLI skips the provisioning step.
-
-```output
-Provisioning and deploying (azd up)
-
-  (-) Skipped: Didn't find new changes.
-
-  Service                                    Status        Duration
-  ─────────────────────────────────────────  ────────────  ──────────
-  ● get-started-with-models-microsoft-foundry  Done          1m33s
+```powershell
+azd env set FOUNDRY_PROJECT_ENDPOINT "https://<your-foundry-project-endpoint>"
 ```
 
-> The first deployment takes 3-5 minutes. Subsequent deployments are faster.
+Replace the endpoint value with the same value as **PROJECT_ENDPOINT** in the **.env** file.
 
 ---
 
