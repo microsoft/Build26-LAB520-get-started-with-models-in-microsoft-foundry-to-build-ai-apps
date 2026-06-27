@@ -168,6 +168,7 @@ if (-not $SkipProvision) {
 
     azd init --no-prompt -e $EnvironmentName 2>$null
     azd env set AZURE_LOCATION $Location
+    azd env set AZURE_SUBSCRIPTION_ID $account.id
     if ($principalId) {
         azd env set AZURE_PRINCIPAL_ID $principalId
     }
