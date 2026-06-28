@@ -833,7 +833,7 @@ If you only have one model deployed, deploy a second one from the Foundry portal
 
 1. Go to +++https://ai.azure.com+++
 2. Open your **Project**
-3. Select **Models** from the left-hand menu
+3. Select **View Deployments** or **Models** from the left-hand menu
 4. Click **Deploy** > **Deploy a base model**
 5. Search for **gpt-5.4** and select it
 6. Select **Deploy** > **Default settings**
