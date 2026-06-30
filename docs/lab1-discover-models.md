@@ -1,7 +1,3 @@
-## Welcome to Your Lab Environment
-
-To begin, log into the virtual machine using the following credentials: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
-
 # Lab 1: Discover Models in Microsoft Foundry
 
 > **Duration:** ~10 minutes | **Phase:** Orientation (UI)
@@ -20,42 +16,46 @@ Explore the Microsoft Foundry portal to discover available hosted models, unders
 
 ## Step 1: Open Microsoft Foundry Portal
 
-Open, Microsoft Foundry Portal https://ai.azure.com and sign in with the following Azure credentials:
+Open the Microsoft Foundry portal at https://ai.azure.com.
 
-Login with your Microsoft Foundry Username and password
+Select the **Start building** button and sign in with your Azure credentials.
 
+You will land on the Foundry **resources** page. This is the central hub for managing AI resources.
 
-You will land on the Foundry home page. This is the central hub for managing AI projects, models, and deployments.
-
-Ensure the new foundry switch at the top of the screen is turned on. 
+Ensure the **New Foundry** switch at the top of the screen is turned on.
 
 ![newfoundry.png](./images/newfoundry.png)
 
-You will also have to update the current project to the latest Foundry version. Select the project listed to update.
-![selectproject.png](./images/selectproject.png) 
+Now click the linked project name from the **All resources** listing to open it in Foundry. If a dialog opens asking what you would like to do next, you can close it.
+
+![selectproject.png](./images/selectproject.png)
+
+> **If you are unable to view the project:**
+>
+> 1. Switch to the old Foundry portal by toggling the **New Foundry** switch off at the top of the page.
+> 2. Click **Continue without feedback**.
+> 3. The project will be visible in the old Foundry portal -- click on the project.
+> 4. Once in the project, click the **New Foundry** toggle again to return to the new Foundry with the project retained.
 
 
 ---
 
 ## Step 2: Explore the Model Catalog
 
-1. In the main windows, click **Find models** or select **discover** from the top menu.
-2. In the top menu navigation you will now be in **discover**
-3. In the main window browse the available models -- these are production-ready, hosted models you can use without fine-tuning
-4. You can use the filters models within the model select page, filter for model types **capabilities**, **Inference task**, **Chat Completition**, **Image Analysis** etc This allow you to quickly filter models based on a specific task or requirement.
+1. In the main window, click **Discover** from the top menu.
+2. In the **Discover** section, browse the available models by clicking **Models**. These are production-ready, hosted models that you can use without fine-tuning.
+3. You can use the filters within the **Models** page to narrow down the list. For example, you can filter by Supported features (Agent service, Fine-tuning, etc.), Source (Azure OpenAI, Microsoft, Meta, Mistral, etc.), or Inference Task (Chat Completion, Image Analysis, etc.). This lets you quickly filter models based on a specific task or requirement.
 
-Select a Model to view the Model Card
+Select a model to view the details page. Take note of the following properties in the side box.
 
-Take note of the following for each model:
-
-| Property | What to Look For |
+| Property | Common values |
 |----------|-----------------|
-| **Publisher** | OpenAI, Microsoft, Meta, Mistral, etc. |
-| **Task type** | Chat completion, text generation, embeddings |
-| **Deployment options** | Serverless API, managed compute |
-| **Pricing tier** | Pay-as-you-go, free playground |
-| **Benchmarks** | Model performance and stats|
-| **Responsible AI** | Prompts and completions are passed through a default configuration of Azure AI Content Safety classification models |
+| **Model provider** | Azure OpenAI, Microsoft AI, Meta, Mistral, etc. |
+| **Task type** | Chat completion, Responses, Text to image |
+| **Input type** | text, image |
+| **Output type** | text, image |
+| **Context window** | Varies by model (see model card) |
+| **Token limits** | Varies by model (see model card) |
 
 ---
 
@@ -77,35 +77,37 @@ For this workshop, you need a model that supports **chat completion** -- the abi
 
 ## Step 4: Check Model Details
 
-Click on your chosen model (e.g., **gpt-5.4-mini**) to view its detail page:
+For this workshop, you need a model that supports **chat completion** -- the ability to accept a system prompt and user messages and return a structured response. The **gpt-5.4-mini** model from Azure OpenAI is high quality, fast, and cost-efficient, which makes it ideal for Zava's review moderation pipeline.
 
-1. **Details** Read the model description and capabilities
-2. **Deployments** -- Deployment options
-2. **Benchmarks** -- Review performance metrics
-3. **License** -- The Model License
+Find **gpt-5.4-mini** in the catalog and open its detail page. Explore the tabs at the top:
 
-> You will deploy this model programmatically in Lab 2. For now, just confirm it is available in the catalog and you can see the model card details.
+1. **Details** -- Model description and capabilities
+2. **Deployments** -- A list of current deployments of this model
+3. **Benchmarks** -- Scores and performance metrics
+4. **Responsible AI** -- Guardrails imposed on the model from Azure AI Content Safety
+5. **License** -- Links to applicable licensing terms
+
+> You will deploy this model programmatically in Lab 2. For now, just confirm it is available in the catalog and you can review the model card details.
 
 ---
 
 
 ## Step 5: Explore the Playground (Optional)
 
-1. Return to the model detail page
-2. Select **Deploy** → Select "gpt-5.4-mini" under Use an existing deployment, which then brings you to the **playground** for the model deployment.
-3. In the **instructions**, enter:
+1. From the **gpt-5.4-mini** model's **Deployments** tab, select the existing deployment. This brings you to the **playground** for the model deployment.
+2. In the **Instructions** field, enter:
 
 ```
 You are a product review moderator for Zava, a home-improvement retailer. Classify the following customer review as SAFE, NEEDS_REVIEW, or UNSAFE. Respond with only the classification label.
 ```
 
-4. In the chat with model window, enter:
+3. In the **Chat with the model** field, enter:
 
 ```
 This paint is garbage and whoever designed it should be fired
 ```
 
-5. Click **Send** and observe the response
+4. Click **Send** and observe the response
 
 This is a preview of the inference pattern you will implement in code during Labs 3 and 4 to moderate Zava product reviews.
 
@@ -116,7 +118,6 @@ This is a preview of the inference pattern you will implement in code during Lab
 - ✅ How to navigate the Microsoft Foundry portal
 - ✅ How to browse the model catalog
 - ✅ How to identify models suitable for chat completion tasks
-- ✅ How to check quota and region availability
 - ✅ How a model responds to a Zava review moderation prompt
 
 ---

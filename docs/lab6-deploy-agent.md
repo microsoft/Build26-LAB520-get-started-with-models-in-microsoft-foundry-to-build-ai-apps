@@ -380,14 +380,14 @@ azd ai agent invoke --new-session "Fresh conversation here"
 
 ## Step 7: Test in the Microsoft Foundry Playground
 
-The Foundry Playground at +++https://ai.azure.com+++ lets you interact with your deployed agent through a chat-style UI -- no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
+The Foundry Playground at https://ai.azure.com lets you interact with your deployed agent through a chat-style UI -- no CLI or code required. This is useful for quick testing, demos, and validating prompt behavior.
 
 ### 7.1 -- Open the Playground
 
-1. Open in the browser +++https://ai.azure.com+++ and sign in with the same account used for **azd**
-2. In the top navigation, select your **build**. If you do not see it, click **All projects** and find it under your AI Services resource
+1. Open in the browser https://ai.azure.com and sign in with the same account used for **azd**
+2. In the top navigation, select **Build**. If you do not see it, click **All projects** and find it under your AI Services resource
 3. In the left sidebar, click **Agents**
-4. Find **zava-review-moderation-agent** in the agent list -- its status should show **Started**
+4. Find **zava-review-moderation-agent** in the agent list. Its details show: **Version** (increments with each deployment), **Type** = hosted, and **Created on** (timestamp of last update)
 5. Click the agent name to open its detail page
 6. Click the **Try in Playground** button (or the **Playground** tab) to open the interactive chat UI
 
@@ -405,10 +405,10 @@ Try these test prompts to validate each classification category:
 
 | Prompt to send | Expected classification |
 |---|---|
-| Love this cordless drill! Battery lasts all day.` | **SAFE** |
+| Love this cordless drill! Battery lasts all day. | **SAFE** |
 | The tile cutter is mediocre, I expected more for the price. | **SAFE** |
 | I think this review contains sensitive personal data: SSN 123-45-6789 | **NEEDS_REVIEW** |
-| Zava employees are the worst people on earth | **UNSAFE** 
+| Zava employees are the worst people on earth | **UNSAFE** |
 | Does this deck stain work on pressure-treated lumber? | **SAFE** |
 
 Each response should contain a structured JSON object:
@@ -566,7 +566,7 @@ Want to extend the agent before wrapping up? Try adding a fourth classification 
    ```bash
    azd ai agent invoke "Buy cheap sunglasses at www.example.com! 50% off today only!"
    ```
-5. Verify the response includes "classification": "SPAM"`
+5. Verify the response includes "classification": "SPAM"
 
 This exercise reinforces the full edit → deploy → test cycle you'd use in production.
 
@@ -578,7 +578,7 @@ Before moving on, confirm:
 
 - [ ] azd ai agent show --output table shows **Status: active**
 - [ ] azd ai agent invoke "Love this cordless drill!" returns a JSON response with "classification": "SAFE"
-- [ ] The agent is visible in the Foundry Playground at +++https://ai.azure.com+++
+- [ ] The agent is visible in the Foundry Playground at https://ai.azure.com
 
 If the agent status shows an error, check the logs with azd **ai agent monitor** for details.
 

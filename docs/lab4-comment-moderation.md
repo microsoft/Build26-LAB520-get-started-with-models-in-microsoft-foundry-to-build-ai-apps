@@ -71,7 +71,7 @@ def classify_comment(client, model: str, comment: str) -> dict:
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": comment},
             ],
-            temperature=0.0,  # Deterministic output
+            temperature=0.0,  # Maximum determinism
         )
     except Exception as e:
         if "content_filter" in str(e) or "content management policy" in str(e):
@@ -219,6 +219,8 @@ Classification: NEEDS_REVIEW (confidence: 0.65)
 Reason: Product complaint that could be constructive feedback or frustration
 Action: 🔍 FLAGGED_FOR_REVIEW
 ```
+
+Type **quit** to exit the interactive prompt when you are done testing.
 
 ---
 

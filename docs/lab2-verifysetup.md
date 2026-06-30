@@ -3,9 +3,9 @@
 ## Step 1: Verify in Foundry Portal
 
 1. Open https://ai.azure.com in the browser
-2. Login with username and password: 
-2. You should see your new project listed
-3. Click into the project and verify:
+2. Sign in with your Azure credentials
+3. You should see your project listed
+4. Click into the project and verify:
    - The project endpoint matches your .env
    - Your model deployment appears under **Deployments**
 
@@ -40,7 +40,7 @@ Right-click in the folder and choose Open with Code (if installed)
 
 ## Step 3: Trust the workspace
 
-![trust.png](.images/trust.png)
+![trust.png](./images/trust.png)
 
 When prompted with "Do you trust the authors of the files in this folder?"
 Click Yes, I trust the authors

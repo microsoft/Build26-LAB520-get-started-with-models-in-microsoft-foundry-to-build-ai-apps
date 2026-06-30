@@ -24,45 +24,32 @@ Comparing models on your **actual Zava review data** helps Serena make informed 
 
 ## Prerequisites
 
-Login to your Azure Subscription 
-
-```Powershell
-az login 
-```
-This will open a login screen 'login with a work or school account'
-
-Ensure your subscription is set to your subscription by running add your Azure Subscription ID
-
-# Replace <@lab.CloudSubscription.Id> with your own subscription ID find it with: 
-
-```Powershell
-az account show --query id -o tsv)
-```
-
-Then run the command 
-
-```Powershell
-az account set --subscription "<@lab.CloudSubscription.Id>"
-```
-
-This step is important to make sure all deployments and commands are executed against the correct Azure subscription where your Foundry resource is provisioned.
-
-To complete this lab, you need **two model deployments** in your Foundry project. Update your .env:
+To complete this lab, you need **two model deployments** in your Foundry project. Update your .env to add a new variable:
 
 ```ini
 MODEL_DEPLOYMENT_NAME=gpt-5.4-mini
 MODEL_DEPLOYMENT_NAME_2=gpt-5.4
 ```
 
-You need your **Foundry resource name** and **resource group name** for the deployment command below. To find them:
+### Deploying a New Model
 
-- Go to +++https://ai.azure.com+++
-- Open the **Operate** menu at the top
-- Select **Admin** in the left-hand menu
-- Select your **Project**
-- The resource group and Foundry resource name are shown on this screen
+If you only have one model deployed, deploy a second one from the Foundry portal:
 
-If you only have one model deployed, deploy a second one using:
+1. Go to https://ai.azure.com
+2. Open your **Project**
+3. Select **View Deployments** or **Models** from the left-hand menu
+4. Click **Deploy** > **Deploy a base model**
+5. Search for **gpt-5.4** and select it
+6. Select **Deploy** > **Default settings**
+
+Wait for the deployment to complete before proceeding. You should see the playground once complete.
+
+> **Note:** If you are unable to deploy a second model, skip this lab and proceed to [Lab 6](./lab6-deploy-agent.md).
+
+<details>
+<summary><strong>Alternative: Deploy via the Azure CLI</strong> (click to expand)</summary>
+
+You need your **Foundry resource name** and **resource group name**. Find them at https://ai.azure.com under **Operate** > **Admin** > your **Project**.
 
 **Bash (Mac/Linux):**
 
@@ -91,6 +78,8 @@ az cognitiveservices account deployment create `
   --sku-capacity 10 `
   --sku-name "GlobalStandard"
 ```
+
+</details>
 
 ### Single-Model Alternative
 

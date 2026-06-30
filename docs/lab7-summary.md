@@ -137,7 +137,7 @@ By completing this workshop, you gained hands-on experience with:
 
 The final system you built spans local development and Azure cloud services:
 
-![mermaid_diagram4.png](.images/mermaid_diagram4.png)
+![mermaid_diagram4.png](./images/mermaid_diagram4.png)
 ---
 
 ## Key Files You Created or Modified
@@ -195,7 +195,7 @@ A complete reference of every CLI command used across the workshop:
 | python src/01_first_inference.py | 3 | Run first inference script |
 | python src/02_comment_moderation.py | 4 | Run moderation pipeline |
 | python src/03_model_comparison.py | 5 | Run model comparison |
-| python src/agent/app.py` | 6 | Run agent locally |
+| python src/agent/app.py | 6 | Run agent locally |
 | azd up | 6 | Provision + build + deploy |
 | azd deploy | 6 | Rebuild and redeploy |
 | azd ai agent show | 6 | Check agent status |
@@ -325,6 +325,6 @@ Please leave feedback for the lab experience.
 ![feedback.png](./images/feedback.png)
 
 If you encountered any issues during this lab or would like to try it self paced see 
-![issues.png](./images//issues.png)
+![issues.png](./images/issues.png)
 
 **Happy building!**
